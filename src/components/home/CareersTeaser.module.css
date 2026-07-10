@@ -1,0 +1,91 @@
+.section {
+  padding-block: clamp(70px, 10vw, 140px);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.title {
+  font-size: var(--fs-h2);
+  margin-top: 0.5rem;
+}
+.seeAll {
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Role cards (handoff §6.5/§7): bordered, hover = lift + red border */
+.list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  height: 100%;
+  padding: clamp(20px, 3vw, 32px);
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-card);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 59, 48, 0.5);
+}
+
+.role {
+  font-size: var(--fs-h3);
+}
+.meta {
+  margin-top: 0.4rem;
+  color: var(--color-on-surface-muted);
+  font-size: 14px;
+}
+
+.cardFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.locPill {
+  padding: 0.4em 0.9em;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-line-dark);
+  font-family: var(--font-subhead);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-muted);
+}
+.arrow {
+  font-size: 20px;
+  color: var(--color-accent);
+  transition: transform 0.3s var(--ease);
+}
+.card:hover .arrow {
+  transform: translateX(4px);
+}
+
+@media (max-width: 640px) {
+  .list {
+    grid-template-columns: 1fr;
+  }
+  .card:hover {
+    transform: none;
+  }
+}

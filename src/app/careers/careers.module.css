@@ -1,0 +1,104 @@
+.page {
+  padding-top: calc(var(--header-h) + clamp(40px, 8vw, 96px));
+  padding-bottom: clamp(80px, 12vw, 160px);
+  min-height: 84svh;
+}
+.title {
+  font-size: var(--fs-h1);
+  margin: 0.5rem 0 1.4rem;
+}
+.intro {
+  max-width: 56ch;
+  color: var(--color-ink-muted);
+  font-size: clamp(16px, 1.7vw, 21px);
+  line-height: 1.55;
+  margin-bottom: clamp(36px, 5vw, 64px);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: clamp(22px, 3vw, 36px);
+  background: var(--color-surface);
+  color: var(--color-on-surface);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-card);
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 59, 48, 0.5);
+}
+.dept {
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.role {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.95;
+  font-size: clamp(24px, 3.4vw, 40px);
+  margin: 0.4rem 0 0.3rem;
+}
+.meta {
+  color: var(--color-on-surface-muted);
+  font-family: var(--font-subhead);
+  font-size: 14px;
+}
+.apply {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+.apply span {
+  transition: transform 0.3s var(--ease);
+}
+.card:hover .apply span {
+  transform: translateX(4px);
+}
+
+.openApp {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  margin-top: clamp(36px, 5vw, 64px);
+  padding-top: clamp(28px, 4vw, 48px);
+  border-top: 1px solid var(--color-line);
+}
+.openText {
+  color: var(--color-ink-muted);
+  font-size: clamp(16px, 1.6vw, 19px);
+}
+
+@media (max-width: 620px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+  }
+}

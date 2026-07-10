@@ -1,0 +1,52 @@
+/* Marquee ticker (§8.2) */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  background: var(--color-ink);
+  color: var(--color-primary);
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  padding-block: 0.75rem;
+  animation: scroll linear infinite;
+}
+
+.dup {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2rem;
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.sep {
+  color: rgba(255, 59, 48, 0.45);
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+}

@@ -1,0 +1,91 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.field label {
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-muted);
+}
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.9em 1em;
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-line-dark);
+  border-radius: 12px;
+  color: var(--color-on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  transition: border-color 0.3s var(--ease);
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+.field textarea {
+  resize: vertical;
+}
+.field select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.submit {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* Success state */
+.success {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  animation: rise 0.5s var(--ease);
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-ink);
+  font-size: 26px;
+}
+.successTitle {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: var(--fs-h3);
+}
+.successNote {
+  color: var(--color-on-surface-muted);
+  max-width: 40ch;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .success {
+    animation: none;
+  }
+}

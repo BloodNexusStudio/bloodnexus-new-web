@@ -1,0 +1,29 @@
+.pre {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: var(--color-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+}
+
+.word {
+  display: flex;
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: clamp(44px, 10vw, 150px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.letter {
+  display: block;
+  overflow: hidden;
+}
+.letter > span {
+  display: block;
+  will-change: transform;
+}

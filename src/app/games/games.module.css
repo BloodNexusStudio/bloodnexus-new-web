@@ -1,0 +1,9 @@
+.page {
+  padding-top: calc(var(--header-h) + clamp(40px, 8vw, 96px));
+  padding-bottom: clamp(80px, 12vw, 160px);
+  min-height: 80svh;
+}
+.heading {
+  font-size: var(--fs-h1);
+  margin: 0.5rem 0 clamp(28px, 4vw, 48px);
+}

@@ -1,0 +1,47 @@
+/* Text-roll link hover (§8.1).
+   The wrapper must be exactly one line tall so overflow clips the duplicate.
+   The second span is absolutely positioned directly below the first (top:100%),
+   so it doesn't grow the wrapper; on hover the inner slides up one line. */
+.roll {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1;
+  vertical-align: bottom;
+}
+
+.inner {
+  position: relative;
+  display: block;
+  transition: transform 0.35s var(--ease);
+}
+
+.inner > span {
+  display: block;
+}
+.inner > span:last-child {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.roll:hover .inner,
+.roll:focus-visible .inner {
+  transform: translateY(-100%);
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner {
+    transition: none;
+  }
+  .roll:hover .inner,
+  .roll:focus-visible .inner {
+    transform: none;
+  }
+}

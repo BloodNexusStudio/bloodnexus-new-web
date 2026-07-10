@@ -1,0 +1,25 @@
+.wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: var(--color-bg);
+  border-bottom: 3px solid var(--color-accent);
+  transform: translateY(0);
+  animation: wipeOff 0.7s var(--ease) forwards;
+  pointer-events: none;
+}
+
+@keyframes wipeOff {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-101%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wipe {
+    display: none;
+  }
+}

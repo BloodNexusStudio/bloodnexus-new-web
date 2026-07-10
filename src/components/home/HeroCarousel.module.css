@@ -1,0 +1,204 @@
+.section {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Per-slide blurred background tint */
+.bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.bgLayer {
+  position: absolute;
+  inset: -8%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(28px) saturate(1.1);
+  transform: scale(1.1);
+  transition: opacity 0.9s var(--ease);
+}
+.bgTint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(90, 6, 12, 0.55), rgba(8, 4, 5, 0.85)),
+    radial-gradient(120% 90% at 30% 20%, rgba(193, 18, 31, 0.48), transparent 60%);
+}
+
+/* Warped topographic contour rings */
+.rings {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(circle at 50% 54%, black 30%, transparent 82%);
+  mask-image: radial-gradient(circle at 50% 54%, black 30%, transparent 82%);
+}
+
+/* WebGL stage — fills entire section */
+.stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  touch-action: pan-y;
+}
+.canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Top label */
+.topLabel {
+  position: absolute;
+  top: calc(var(--header-h) + clamp(12px, 3vw, 40px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Text overlay — bottom-left, synchronized staggered reveal */
+.overlay {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: clamp(120px, 16vh, 200px);
+  z-index: 6;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  color: var(--color-ink);
+  pointer-events: none;
+}
+.overlay > * { pointer-events: auto; }
+
+.badges {
+  display: flex;
+  gap: 8px;
+}
+.status,
+.category {
+  padding: 0.5em 1em;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-subhead);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.status {
+  background: var(--color-ink);
+  color: var(--color-primary);
+}
+.category {
+  border: 1px solid rgba(242, 239, 233, 0.55);
+  color: var(--color-ink);
+  backdrop-filter: blur(4px);
+}
+.cardTitle {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.88;
+  font-size: clamp(40px, 8vw, 128px);
+  max-width: 12ch;
+}
+.hook {
+  color: rgba(242, 239, 233, 0.85);
+  font-size: clamp(15px, 1.5vw, 20px);
+  max-width: 40ch;
+  margin-bottom: 0.3rem;
+}
+
+/* Detached right-side arrows + see-all */
+.side {
+  position: absolute;
+  right: clamp(16px, 4vw, 64px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.arrow {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+  font-size: 20px;
+  background: rgba(4, 8, 30, 0.35);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.arrow:hover {
+  background: var(--color-ink);
+  color: var(--color-primary);
+  border-color: var(--color-ink);
+}
+.seeAll {
+  writing-mode: vertical-rl;
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Thumbnail strip — bottom-right */
+.thumbs {
+  position: absolute;
+  right: clamp(16px, 4vw, 64px);
+  bottom: clamp(24px, 4vh, 48px);
+  z-index: 6;
+  display: flex;
+  gap: 10px;
+}
+.thumb {
+  width: clamp(64px, 7vw, 104px);
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  opacity: 0.5;
+  transition: opacity 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.thumb:hover { opacity: 0.85; }
+.thumb[data-active="true"] {
+  opacity: 1;
+  border-color: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+  .overlay { bottom: clamp(150px, 22vh, 240px); }
+  .side    { right: clamp(10px, 3vw, 24px); }
+}
+@media (max-width: 620px) {
+  .thumbs  { left: 50%; right: auto; transform: translateX(-50%); }
+  .seeAll  { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bgLayer { transition: none; }
+}

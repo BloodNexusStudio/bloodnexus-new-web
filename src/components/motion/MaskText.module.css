@@ -1,0 +1,10 @@
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  white-space: pre;
+}
+.inner {
+  display: inline-block;
+  will-change: transform;
+}

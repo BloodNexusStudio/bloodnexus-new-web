@@ -1,0 +1,31 @@
+.section {
+  padding-block: clamp(56px, 8vw, 100px);
+  border-block: 1px solid var(--color-line);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 4vw, 48px);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.number {
+  font-family: var(--font-display);
+  font-size: var(--fs-h1);
+  line-height: 0.9;
+  color: var(--color-ink);
+}
+.number span {
+  color: var(--color-accent);
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

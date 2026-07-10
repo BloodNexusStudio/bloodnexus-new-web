@@ -1,0 +1,57 @@
+.section {
+  overflow: hidden;
+  border-block: 1px solid var(--color-line);
+  padding-block: clamp(18px, 2.4vw, 30px);
+}
+
+.track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: scrollX 34s linear infinite;
+}
+.section:hover .track {
+  animation-play-state: paused;
+}
+
+.row {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(12px, 1.4vw, 22px);
+  padding-inline: clamp(6px, 0.7vw, 11px);
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6em 1.2em;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: clamp(12px, 1.1vw, 15px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease),
+    border-color 0.3s var(--ease);
+}
+.pill:hover {
+  background: var(--color-ink);
+  border-color: var(--color-ink);
+  color: var(--color-primary);
+}
+
+@keyframes scrollX {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+  .section {
+    overflow-x: auto;
+  }
+}
