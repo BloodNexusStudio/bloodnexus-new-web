@@ -1,0 +1,82 @@
+.section {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vw, 20px);
+  padding-block: clamp(28px, 4.5vw, 48px);
+}
+
+.row {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  align-items: center;
+  animation: scrollLeft 30s linear infinite;
+}
+.row.reverse .track {
+  animation-name: scrollRight;
+  animation-duration: 36s;
+}
+
+.dup {
+  display: inline-flex;
+  align-items: center;
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(14px, 1.8vw, 24px);
+  padding-inline: clamp(14px, 1.8vw, 24px);
+}
+
+.label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.88;
+  font-size: clamp(30px, 4.6vw, 68px);
+  color: var(--color-ink);
+}
+
+.icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(36px, 3.4vw, 56px);
+  height: clamp(36px, 3.4vw, 56px);
+  border-radius: 14px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-dark);
+  color: var(--color-accent);
+}
+.icon svg {
+  width: 56%;
+  height: 56%;
+}
+
+@keyframes scrollLeft {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes scrollRight {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    animation: none;
+  }
+  .row {
+    overflow-x: auto;
+  }
+}

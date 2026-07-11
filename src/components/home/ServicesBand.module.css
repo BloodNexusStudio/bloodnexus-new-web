@@ -10,13 +10,39 @@
   margin-top: 0.5rem;
 }
 
-/* Full-width charcoal band (handoff §6.3) — edge-to-edge fill, not a boxed card */
+/* Full-width charcoal band (handoff §6.3) — edge-to-edge fill, not a boxed card.
+   Dividers fade out toward the edges instead of a hard full-width rule. */
 .band {
+  position: relative;
   background: var(--color-surface);
-  border-top: 1px solid var(--color-line-dark);
 }
-.band:last-child {
-  border-bottom: 1px solid var(--color-line-dark);
+.band::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-dark) 50%,
+    transparent
+  );
+}
+.band:last-child::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-line-dark) 50%,
+    transparent
+  );
 }
 
 .inner {
@@ -35,8 +61,21 @@
 
 .media {
   aspect-ratio: 4 / 3;
-  border-radius: var(--radius-card);
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 14%,
+    #000 86%,
+    transparent 100%
+  );
 }
 .media img {
   width: 100%;

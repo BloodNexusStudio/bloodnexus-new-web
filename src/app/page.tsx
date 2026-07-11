@@ -1,5 +1,8 @@
-import HeroCarousel from "@/components/home/HeroCarousel";
+import OrbitCarousel from "@/components/home/OrbitCarousel";
+import Spotlight from "@/components/home/Spotlight";
 import CategoryMarquee from "@/components/home/CategoryMarquee";
+import GamesCarousel from "@/components/home/GamesCarousel";
+import ServicesTicker from "@/components/home/ServicesTicker";
 import ServicesBand from "@/components/home/ServicesBand";
 import StatsStrip from "@/components/home/StatsStrip";
 import CareersTeaser from "@/components/home/CareersTeaser";
@@ -8,8 +11,11 @@ import CareersTeaser from "@/components/home/CareersTeaser";
 export default function Home() {
   return (
     <>
-      <HeroCarousel />
+      <OrbitCarousel />
+      <Spotlight />
       <CategoryMarquee />
+      <GamesCarousel />
+      <ServicesTicker />
       <ServicesBand />
       <StatsStrip />
       <CareersTeaser />

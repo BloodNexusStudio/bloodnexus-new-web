@@ -126,7 +126,7 @@ export default async function GameDetail({
         ) : (
           <section className={styles.trailer}>
             <div className={`${styles.trailerFrame} ${styles.trailerEmpty}`}>
-              <span className="label">[CONTENT: embed YouTube trailer]</span>
+              <span className="label">Trailer coming soon</span>
             </div>
           </section>
         )}

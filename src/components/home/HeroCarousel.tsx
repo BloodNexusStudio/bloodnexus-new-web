@@ -215,15 +215,20 @@ export default function HeroCarousel() {
       imgs.forEach((img) => { img.onload = null; img.onerror = null; });
       cancelAnimationFrame(raf);
       ro.disconnect();
-      // renderer.dispose() intentionally omitted: it calls WEBGL_lose_context which
-      // destroys the canvas's WebGL context and breaks React StrictMode's second mount.
-      // GPU memory is reclaimed when the page unloads.
       geo.dispose();
       meshes.forEach((m) => {
         const mat = m.material as THREE.ShaderMaterial;
         (mat.uniforms.uTex.value as THREE.Texture | null)?.dispose();
         mat.dispose();
       });
+      // Must dispose on real unmount (e.g. navigating away and back) or the
+      // old WebGL context leaks and corrupts compositing for the rest of the
+      // page on remount — content after the hero renders as solid black
+      // despite fully correct DOM/CSS. React StrictMode's dev-only synthetic
+      // double-invoke re-triggers this same cleanup on the same canvas node;
+      // that's a harmless dev-mode blip and production never runs StrictMode,
+      // so correctness on real navigation wins over avoiding it.
+      renderer.dispose();
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 

@@ -8,11 +8,14 @@
   justify-content: center;
 }
 
-/* Per-slide blurred background tint */
+/* Per-slide blurred background tint — fades out over the bottom edge so the
+   hero doesn't cut off into the next section with a hard seam. */
 .bg {
   position: absolute;
   inset: 0;
   z-index: 0;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 78%, transparent 100%);
 }
 .bgLayer {
   position: absolute;

@@ -59,7 +59,14 @@ export default function Reveal({
 
     return () => {
       tween.scrollTrigger?.kill();
-      tween.kill();
+      // .revert() (not .kill()) — kill() leaves the inline styles gsap.from()
+      // applied (e.g. opacity:0) in place. React 18 StrictMode double-invokes
+      // this effect (mount→cleanup→mount) on every mount, including remounts
+      // from client-side navigation: the second gsap.from() call then reads
+      // that leftover opacity:0 as its own implicit "to" target, producing a
+      // degenerate 0→0 tween that reports complete while staying invisible
+      // forever. revert() actually undoes the inline styles first.
+      tween.revert();
     };
   }, [y, stagger, staggerChildren, delay]);
 

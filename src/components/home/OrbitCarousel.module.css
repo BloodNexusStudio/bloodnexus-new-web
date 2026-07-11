@@ -1,0 +1,192 @@
+.section {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bgTint {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgba(90, 6, 12, 0.45), rgba(8, 4, 5, 0.9)),
+    radial-gradient(120% 90% at 50% 30%, rgba(193, 18, 31, 0.35), transparent 60%);
+}
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(to right, var(--color-ink) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-ink) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+
+.topLabel {
+  position: absolute;
+  top: calc(var(--header-h) + clamp(12px, 3vw, 40px));
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+}
+
+/* ── Orbit stage ─────────────────────────────────────────────────────── */
+.stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  perspective: 2800px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.group {
+  position: relative;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+  /* Base tilt — GSAP only ever animates rotateY on this element, so it
+     reads and preserves this rotateZ from the computed style on first use. */
+  transform: rotateZ(-5deg);
+}
+/* Positioned by its own static rotateY(itemAngle) translateZ(radius) — set
+   once in JSX — never counter-rotated. That's what makes side cards visibly
+   angle away instead of always facing the viewer (the coverflow/fan look). */
+.slot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(340px, 46vw, 700px);
+  aspect-ratio: 3 / 2;
+  margin-left: clamp(-350px, -23vw, -170px);
+  margin-top: clamp(-233.33px, -15.333vw, -113.33px);
+  transform-style: preserve-3d;
+}
+
+.card {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.35s var(--ease);
+}
+/* JS-driven, not backface-visibility: verified that native backface
+   calculation doesn't accumulate reliably across this many nested rotated
+   ancestors (group + slot + card), so a "pre-flipped back face" approach
+   just silently failed to render. Instead the render loop computes each
+   frame whether a card is past 90°/270° and toggles this class, which
+   un-mirrors its single face directly — content is always on-screen. */
+.flipped {
+  transform: scaleX(-1);
+}
+
+/* Elliptical corners (large horizontal radius, small vertical) bend just the
+   left/right edges inward — top/bottom stay near-straight — so each card
+   reads as a curved slice of the ring instead of a flat rotated rectangle,
+   which is what makes the whole thing look properly cylindrical/circular. */
+.face {
+  position: absolute;
+  inset: 0;
+  border-radius: 42% / 7%;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  box-shadow:
+    inset 50px 0 50px -38px rgba(0, 0, 0, 0.65),
+    inset -50px 0 50px -38px rgba(0, 0, 0, 0.65),
+    0 20px 60px rgba(0, 0, 0, 0.55);
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+.card:hover .face {
+  transform: scale(1.06);
+  border-color: rgba(255, 59, 48, 0.5);
+}
+.cardActive .face {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardTag {
+  position: absolute;
+  right: clamp(12px, 1.4vw, 24px);
+  top: clamp(12px, 1.4vw, 24px);
+  padding: 0.5em 0.9em;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 20, 24, 0.75);
+  backdrop-filter: blur(4px);
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: clamp(10px, 0.8vw, 13px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+/* Persistent per-card caption — burned onto every card, not hover-gated,
+   so the ring reads at a glance regardless of which card is at front. */
+.caption {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.4em;
+  padding: clamp(14px, 2vw, 30px);
+  background: linear-gradient(to top, rgba(8, 4, 5, 0.88), transparent 65%);
+  pointer-events: none;
+}
+.captionTitle {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 1;
+  font-size: clamp(20px, 3vw, 42px);
+  color: var(--color-ink);
+}
+.captionHook {
+  font-size: clamp(12px, 1vw, 16px);
+  color: rgba(242, 239, 233, 0.75);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.side {
+  position: absolute;
+  right: clamp(16px, 4vw, 64px);
+  bottom: clamp(80px, 12vh, 140px);
+  z-index: 6;
+}
+.seeAll {
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+@media (max-width: 720px) {
+  .slot {
+    width: clamp(230px, 62vw, 300px);
+    margin-left: clamp(-150px, -31vw, -115px);
+    margin-top: clamp(-100px, -20.667vw, -76.667px);
+  }
+  .side {
+    display: none;
+  }
+}

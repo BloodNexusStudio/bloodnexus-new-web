@@ -1,0 +1,172 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  padding-block: clamp(70px, 10vw, 140px);
+}
+
+/* Giant faint background word behind the cards (handoff §6.2) */
+.bgWord {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  z-index: 0;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: var(--fs-hero);
+  line-height: 0.8;
+  color: var(--color-ink);
+  opacity: 0.045;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.heading {
+  font-size: var(--fs-h2);
+  margin-top: 0.5rem;
+}
+.seeAll {
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Full-bleed drag viewport — cards peek off the right edge (handoff: 15% peek) */
+.viewport {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  cursor: grab;
+}
+.viewport:active {
+  cursor: grabbing;
+}
+
+/* Fixed "two-row" height — stack columns split it, large columns fill it */
+.track {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(16px, 2vw, 24px);
+  height: clamp(440px, 52vw, 620px);
+  padding-left: var(--pad-x);
+  padding-right: var(--pad-x);
+}
+
+.slideStack {
+  flex: 0 0 auto;
+  width: min(320px, 62vw);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2vw, 24px);
+}
+.slideStack > * {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.slideLarge {
+  flex: 0 0 auto;
+  width: min(660px, 86vw);
+}
+
+/* --- Tile: full-bleed image, tag + title + hook overlaid on top --- */
+.tile {
+  display: block;
+  position: relative;
+  height: 100%;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
+    border-color 0.35s var(--ease);
+}
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(255, 59, 48, 0.45);
+}
+
+.tileArt {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+.tile:hover .tileArt {
+  transform: scale(1.06);
+}
+
+.tileScrim {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay);
+}
+
+.tileBody {
+  position: absolute;
+  left: clamp(16px, 2vw, 24px);
+  right: clamp(16px, 2vw, 24px);
+  bottom: clamp(16px, 2vw, 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.tileTag {
+  padding: 0.4em 0.9em;
+  border-radius: var(--radius-pill);
+  background: rgba(20, 20, 24, 0.72);
+  backdrop-filter: blur(4px);
+  border: 1px solid var(--color-line);
+  font-family: var(--font-subhead);
+  font-weight: 500;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.tileTitle {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.92;
+  font-size: clamp(18px, 1.7vw, 30px);
+  color: var(--color-ink);
+}
+.tileHook {
+  color: rgba(242, 239, 233, 0.85);
+  font-size: 13px;
+  max-width: 34ch;
+}
+
+.slideLarge .tileTitle {
+  font-size: clamp(26px, 2.6vw, 44px);
+}
+.slideLarge .tileHook {
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .track {
+    height: clamp(360px, 120vw, 480px);
+  }
+  .slideStack {
+    width: 68vw;
+  }
+  .slideLarge {
+    width: 88vw;
+  }
+}

@@ -44,7 +44,11 @@ export default function MaskText({
       delay,
     });
     return () => {
-      tween.kill();
+      // .revert() not .kill() — see Reveal.tsx for why: kill() leaves the
+      // inline yPercent:115 in place, and StrictMode's double-invoke (or a
+      // remount from client-side navigation) then reads that leftover value
+      // as the next tween's implicit "to", permanently hiding the text.
+      tween.revert();
     };
   }, [delay]);
 

@@ -1,4 +1,5 @@
 import RollLink from "@/components/motion/RollLink";
+import FooterWordmark from "./FooterWordmark";
 import { SOCIAL_LINKS } from "@/data/site";
 import styles from "./Footer.module.css";
 
@@ -21,8 +22,9 @@ const COLUMNS = [
 ];
 
 /**
- * Footer (§6.6): dark game-art band + overlay, 3 columns, legal line,
- * and the signature gigantic BLOODNEXUS wordmark clipped by the bottom edge.
+ * Footer (§6.6): dark game-art band + overlay, 3 columns, the signature
+ * gigantic BLOODNEXUS wordmark in its own dedicated band, then the legal
+ * line — stacked in normal flow so nothing overlaps.
  */
 export default function Footer() {
   return (
@@ -60,21 +62,19 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-
-        <div className={styles.legal}>
-          <span>
-            © {new Date().getFullYear()} BloodNexus Studio · Thane, India
-          </span>
-          <span className={styles.legalLinks}>
-            <RollLink href="/privacy">Privacy</RollLink>
-            <RollLink href="/terms">Terms</RollLink>
-          </span>
-        </div>
       </div>
 
-      {/* Signature: giant wordmark clipped by bottom viewport edge */}
-      <div className={styles.wordmarkWrap} aria-hidden="true">
-        <span className={styles.wordmark}>BLOODNEXUS</span>
+      {/* Signature: WebGL giant wordmark — its own band, clipped within it */}
+      <FooterWordmark />
+
+      <div className={`container ${styles.legal}`}>
+        <span>
+          © {new Date().getFullYear()} BloodNexus Studio · Thane, India
+        </span>
+        <span className={styles.legalLinks}>
+          <RollLink href="/privacy">Privacy</RollLink>
+          <RollLink href="/terms">Terms</RollLink>
+        </span>
       </div>
     </footer>
   );

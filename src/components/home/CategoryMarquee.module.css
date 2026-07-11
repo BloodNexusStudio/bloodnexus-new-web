@@ -9,9 +9,6 @@
   white-space: nowrap;
   animation: scrollX 34s linear infinite;
 }
-.section:hover .track {
-  animation-play-state: paused;
-}
 
 .row {
   display: inline-flex;
