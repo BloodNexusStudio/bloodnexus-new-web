@@ -32,6 +32,7 @@ export default function Footer() {
       <div className={styles.overlay} aria-hidden="true" />
       <div className={`container ${styles.inner}`}>
         <div className={styles.columns}>
+          <div className={styles.spacerCol} />
           {COLUMNS.map((col) => (
             <div key={col.heading} className={styles.col}>
               <p className="label">{col.heading}</p>
@@ -67,13 +68,13 @@ export default function Footer() {
       {/* Signature: WebGL giant wordmark — its own band, clipped within it */}
       <FooterWordmark />
 
-      <div className={`container ${styles.legal}`}>
+      <div className={styles.legal}>
         <span>
-          © {new Date().getFullYear()} BloodNexus Studio · Thane, India
+          © {new Date().getFullYear()} BLOODNEXUS STUDIO · THANE, INDIA
         </span>
         <span className={styles.legalLinks}>
-          <RollLink href="/privacy">Privacy</RollLink>
-          <RollLink href="/terms">Terms</RollLink>
+          <RollLink href="/privacy">PRIVACY</RollLink>
+          <RollLink href="/terms">TERMS</RollLink>
         </span>
       </div>
     </footer>

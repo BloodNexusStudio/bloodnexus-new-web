@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type PointerEvent, type MouseEvent } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import { GAMES } from "@/data/games";
@@ -11,15 +11,17 @@ import styles from "./OrbitCarousel.module.css";
 const FEATURED = GAMES.slice(0, 5);
 const N = FEATURED.length;
 const ANGLE_SLICE = 360 / N;
-// Wide enough that adjacent cards don't crowd each other at the card's max
-// width (~700px) — the .stage perspective is raised alongside this so a
-// bigger radius doesn't reintroduce the off-center wobble a too-large
-// radius causes (world-space offset ≈ radius × sin(angle), amplified by the
-// perspective projection; raising perspective tames that amplification).
-const RADIUS = 650; // px — orbit depth
-const ROTATION_PER_SCROLL_THROUGH = 200; // deg of spin across one section-height of scroll
+// Tight enough that neighboring cards sit close with only a small gap, but
+// still wide enough not to overlap at the card's max width (~700px) — the
+// .stage perspective is raised alongside this so the radius doesn't
+// reintroduce the off-center wobble a too-large radius causes (world-space
+// offset ≈ radius × sin(angle), amplified by the perspective projection).
+const RADIUS = 520; // px — orbit depth
+const ROTATION_PER_SCROLL_THROUGH = 70; // deg of spin across one section-height of scroll
 const IDLE_ROTATE_DEG_PER_FRAME = 0.035;
 const SCROLL_IDLE_DEBOUNCE = 150; // ms
+const DRAG_DEG_PER_PIXEL = 0.35;
+const DRAG_CLICK_THRESHOLD = 5; // px — below this, a pointer-up still counts as a card click
 
 /**
  * Hero orbit carousel — cards arranged in a circle (CSS 3D transforms,
@@ -54,6 +56,10 @@ export default function OrbitCarousel() {
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reducedRef = useRef(false);
   const frontIndexRef = useRef(-1);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const dragStartRotationRef = useRef(0);
+  const dragMovedRef = useRef(0);
 
   useEffect(() => {
     reducedRef.current = window.matchMedia(
@@ -95,7 +101,9 @@ export default function OrbitCarousel() {
     let raf = 0;
 
     const tick = () => {
-      if (isScrollingRef.current) {
+      if (isDraggingRef.current) {
+        // rotationRef is being written directly by the pointermove handler.
+      } else if (isScrollingRef.current) {
         rotationRef.current = scrollTargetRef.current;
       } else if (!reducedRef.current) {
         rotationRef.current += IDLE_ROTATE_DEG_PER_FRAME;
@@ -135,6 +143,46 @@ export default function OrbitCarousel() {
     return () => cancelAnimationFrame(raf);
   }, []);
 
+  // Drag-to-rotate — grabbing the ring and moving the pointer spins it
+  // directly; scroll/idle rotation both stand down for the duration (the
+  // tick loop checks isDraggingRef first). A drag past DRAG_CLICK_THRESHOLD
+  // suppresses the click that would otherwise follow pointerup, so dragging
+  // across a card doesn't accidentally navigate to it.
+  const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+    if (e.button !== 0) return;
+    isDraggingRef.current = true;
+    dragStartXRef.current = e.clientX;
+    dragStartRotationRef.current = rotationRef.current;
+    dragMovedRef.current = 0;
+    // Pointer capture can throw (e.g. the pointer already released, or no
+    // OS-level pointer was ever registered for this id) — that's cosmetic,
+    // not fatal, so don't let it break the drag.
+    try {
+      e.currentTarget.setPointerCapture(e.pointerId);
+    } catch {}
+  };
+
+  const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+    if (!isDraggingRef.current) return;
+    const deltaX = e.clientX - dragStartXRef.current;
+    dragMovedRef.current = Math.max(dragMovedRef.current, Math.abs(deltaX));
+    rotationRef.current = dragStartRotationRef.current + deltaX * DRAG_DEG_PER_PIXEL;
+  };
+
+  const handlePointerUp = (e: PointerEvent<HTMLDivElement>) => {
+    isDraggingRef.current = false;
+    try {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    } catch {}
+  };
+
+  const handleClickCapture = (e: MouseEvent) => {
+    if (dragMovedRef.current > DRAG_CLICK_THRESHOLD) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -149,7 +197,14 @@ export default function OrbitCarousel() {
         <p className="label">Featured Games</p>
       </div>
 
-      <div className={styles.stage}>
+      <div
+        className={styles.stage}
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        onClickCapture={handleClickCapture}
+      >
         <div className={styles.group} ref={groupRef}>
           {FEATURED.map((game, i) => {
             const itemAngle = i * ANGLE_SLICE;
@@ -175,6 +230,7 @@ export default function OrbitCarousel() {
                       alt=""
                       aria-hidden="true"
                       className={styles.art}
+                      draggable={false}
                     />
                     <span className={styles.cardTag}>{game.status}</span>
                     <span className={styles.caption}>

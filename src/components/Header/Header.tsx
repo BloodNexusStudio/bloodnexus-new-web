@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import RollLink from "@/components/motion/RollLink";
-import { NAV_LINKS, SOCIAL_LINKS, SITE_NAME } from "@/data/site";
+import { CAPSULE_LINKS, SOCIAL_LINKS, SITE_NAME } from "@/data/site";
 import styles from "./Header.module.css";
 
 /**
@@ -13,6 +14,12 @@ import styles from "./Header.module.css";
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -40,13 +47,29 @@ export default function Header() {
           <span className={styles.logoDot}>.</span>
         </Link>
 
+        {/* Desktop navigation */}
         <nav className={styles.nav} aria-label="Primary">
-          {NAV_LINKS.map((link) => (
-            <RollLink key={link.href} href={link.href} accent>
+          {CAPSULE_LINKS.map((link) => (
+            <RollLink
+              key={link.href}
+              href={link.href}
+              accent
+              active={isActive(link.href)}
+            >
               {link.label}
             </RollLink>
           ))}
-          <Link href="/contact" className="pill pill--primary">
+          <RollLink
+            href="/about"
+            accent
+            active={isActive("/about")}
+          >
+            About
+          </RollLink>
+          <Link
+            href="/contact"
+            className={`pill ${isActive("/contact") ? "pill--primary" : "pill--outline"}`}
+          >
             Contact Us
           </Link>
         </nav>
@@ -65,11 +88,13 @@ export default function Header() {
       {/* Mobile full-screen overlay */}
       <div className={styles.overlay} aria-hidden={!open}>
         <nav className={styles.overlayNav} aria-label="Mobile">
-          {NAV_LINKS.map((link, i) => (
+          {CAPSULE_LINKS.map((link, i) => (
             <Link
               key={link.href}
               href={link.href}
-              className={styles.overlayLink}
+              className={`${styles.overlayLink} ${
+                isActive(link.href) ? styles.overlayLinkActive : ""
+              }`}
               style={{ transitionDelay: `${0.07 * (i + 1)}s` }}
               onClick={() => setOpen(false)}
             >
@@ -77,12 +102,24 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/contact"
-            className={styles.overlayLink}
-            style={{ transitionDelay: `${0.07 * (NAV_LINKS.length + 1)}s` }}
+            href="/about"
+            className={`${styles.overlayLink} ${
+              isActive("/about") ? styles.overlayLinkActive : ""
+            }`}
+            style={{ transitionDelay: `${0.07 * (CAPSULE_LINKS.length + 1)}s` }}
             onClick={() => setOpen(false)}
           >
-            Contact
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className={`${styles.overlayLink} ${
+              isActive("/contact") ? styles.overlayLinkActive : ""
+            }`}
+            style={{ transitionDelay: `${0.07 * (CAPSULE_LINKS.length + 2)}s` }}
+            onClick={() => setOpen(false)}
+          >
+            Contact Us
           </Link>
         </nav>
         <div className={styles.overlaySocial}>

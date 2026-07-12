@@ -7,6 +7,7 @@ type RollLinkProps = {
   className?: string;
   /** color the duplicate line with --color-accent for a red swap */
   accent?: boolean;
+  active?: boolean;
   ariaLabel?: string;
 };
 
@@ -19,16 +20,17 @@ export default function RollLink({
   href,
   className,
   accent = false,
+  active = false,
   ariaLabel,
 }: RollLinkProps) {
   return (
     <Link
       href={href}
       aria-label={ariaLabel ?? children}
-      className={`${styles.roll} ${className ?? ""}`}
+      className={`${styles.roll} ${active ? styles.active : ""} ${className ?? ""}`}
     >
       <span className={styles.inner}>
-        <span>{children}</span>
+        <span className={active ? styles.accent : undefined}>{children}</span>
         <span aria-hidden="true" className={accent ? styles.accent : undefined}>
           {children}
         </span>
@@ -36,3 +38,4 @@ export default function RollLink({
     </Link>
   );
 }
+

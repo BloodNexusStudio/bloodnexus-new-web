@@ -7,6 +7,16 @@ export const NAV_LINKS = [
   { label: "About", href: "/about" },
 ] as const;
 
+export const CAPSULE_LINKS = [
+  { label: "Game Dev", href: "/" },
+  { label: "Arch Viz", href: "/arch-viz" },
+  { label: "VR", href: "/vr" },
+  { label: "Web & Apps", href: "/web-apps" },
+  { label: "3D Art", href: "/3d-art" },
+] as const;
+
+
+
 export const SOCIAL_LINKS = [
   // [CONTENT] confirm handles/URLs from current site
   { label: "Instagram", href: "https://instagram.com/bloodnexusstudio" },

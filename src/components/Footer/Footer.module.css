@@ -5,6 +5,7 @@
     radial-gradient(120% 80% at 50% 0%, #7a0d17 0%, transparent 60%),
     var(--color-bg-deep);
   padding-top: clamp(60px, 8vw, 120px);
+  padding-bottom: 0;
 }
 
 .overlay {
@@ -21,9 +22,18 @@
 
 .columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 2fr 1fr 1fr 1fr; /* Push links grid to the right side */
   gap: clamp(24px, 4vw, 64px);
   padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.col p {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
 }
 
 .col ul {
@@ -32,8 +42,11 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
-  font-family: var(--font-subhead);
-  font-size: 15px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase; /* Force uppercase link texts */
+  letter-spacing: 0.05em;
 }
 
 .social {
@@ -46,16 +59,21 @@
 
 .legal {
   position: relative;
-  z-index: 2;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 1.5rem var(--pad-x) clamp(28px, 4vw, 48px);
+  z-index: 10;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 0 clamp(28px, 4vw, 48px);
-  border-top: 1px solid var(--color-line);
-  font-size: 13px;
+  font-family: var(--font-subhead);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-ink-muted);
+  border-top: none;
+  pointer-events: auto;
 }
 .legalLinks {
   display: flex;
@@ -64,6 +82,28 @@
 
 @media (max-width: 700px) {
   .columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .spacerCol {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .columns {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .legal {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    padding-inline: var(--pad-x);
+    padding-bottom: 24px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    border-top: 1px solid rgba(242, 239, 233, 0.05);
+    margin-top: 20px;
   }
 }

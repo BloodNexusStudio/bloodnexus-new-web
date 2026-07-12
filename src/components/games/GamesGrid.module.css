@@ -26,6 +26,10 @@
   border-color: var(--color-ink);
   color: var(--color-primary);
 }
+.filter.active:hover {
+  color: var(--color-primary);
+}
+
 
 .grid {
   display: grid;
