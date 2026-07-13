@@ -3,10 +3,10 @@
    crops the mesh cleanly at this band's own edges. */
 .zone {
   position: relative;
-  z-index: 3; /* Overlay smoke on top of navigation links */
-  height: clamp(300px, 26vw, 480px);
-  overflow: visible; /* Let smoke float up into the links section */
-  pointer-events: none; /* Do not block clicks on links */
+  z-index: 3;
+  height: clamp(280px, 28vw, 440px);
+  overflow: visible;
+  pointer-events: none;
 }
 .canvas {
   position: absolute;
@@ -63,6 +63,6 @@
 
 @media (max-width: 640px) {
   .zone {
-    height: clamp(200px, 50vw, 320px);
+    height: clamp(180px, 44vw, 300px);
   }
 }

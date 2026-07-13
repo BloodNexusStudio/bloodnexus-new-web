@@ -23,48 +23,50 @@ const DELIVERABLES = [
   {
     index: "01",
     title: "Exterior Rendering",
-    desc: "Photorealistic facades and environments that sell the vision.",
-    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+    desc: "Photorealistic structural facades, architectural contours, and natural landscape integration.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-1_hsyoti.jpg",
   },
   {
     index: "02",
-    title: "Interior Rendering",
-    desc: "Detailed spaces with mood, lighting, and realistic decor.",
-    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80",
+    title: "Interior Design & Mood",
+    desc: "Hyper-detailed indoor environments capturing authentic lighting, furniture arrangement, and physical materials.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-2_mrptom.jpg",
   },
   {
     index: "03",
-    title: "4K/8K Walkthroughs",
-    desc: "Cinematic video tours that showcase property flow.",
-    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
+    title: "Interactive Property Walkthroughs",
+    desc: "Cinematic fluid tours designed in real-time engine to show property layouts and room flow.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-3_mf7hgz.jpg",
   },
   {
     index: "04",
-    title: "VR Property Tours",
-    desc: "Immersive interactive walkthroughs for pre-sales.",
-    image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=800&q=80",
+    title: "Commercial & Office Spaces",
+    desc: "Spacious commercial complex designs customized for retail, enterprise offices, and modern working hubs.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-5_ncybew.jpg",
   },
   {
     index: "05",
-    title: "Township Visualization",
-    desc: "Large-scale masterplans and aerial views.",
-    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80",
+    title: "Township & High-Rise Renders",
+    desc: "Stunning masterplans and realistic aerial captures designed for massive cityscapes and apartments.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-6_zzem07.jpg",
   },
   {
     index: "06",
-    title: "Lighting & Materials",
-    desc: "Material selection and lighting studies.",
-    image: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80",
+    title: "Dynamic Ambient Lighting",
+    desc: "Accurate daylight simulation, architectural mood lighting, and shadow studies to capture dawn to dusk vibes.",
+    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-7_gewhjs.jpg",
   },
 ];
 
 const WORKS = [
-  "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600210492493-0946911123ea?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-1_hsyoti.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-2_mrptom.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-3_mf7hgz.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934511/archviz-4_pjsj9p.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-5_ncybew.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-6_zzem07.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-7_gewhjs.jpg",
+  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-8_wqhnsu.jpg",
 ];
 
 export default function ArchVizPage() {
@@ -73,9 +75,13 @@ export default function ArchVizPage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          <img
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80"
-            alt="Arch Viz banner"
+          <video
+            src="https://res.cloudinary.com/oglqwvqq/video/upload/v1783934528/archviz-9_jkk6cl.mp4"
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={styles.heroVideo}
           />
           <div className={styles.heroOverlay} />
         </div>
@@ -136,8 +142,8 @@ export default function ArchVizPage() {
             <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
             <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
             <img
-              src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&h=900&q=80"
-              alt="Luxury bedroom render"
+              src="https://res.cloudinary.com/oglqwvqq/image/upload/v1783934511/archviz-4_pjsj9p.jpg"
+              alt="Luxury interior architecture render"
             />
           </div>
         </div>

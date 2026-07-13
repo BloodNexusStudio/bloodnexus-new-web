@@ -129,22 +129,26 @@ export default function FooterWordmark() {
     const drawText = () => {
       ctx.clearRect(0, 0, TEX_W, TEX_H);
       const fontFamily = getComputedStyle(document.documentElement)
-        .getPropertyValue("--font-display") // Use display font Anton
+        .getPropertyValue("--font-display")
         .trim();
       ctx.fillStyle = "#ffffff";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      if ("letterSpacing" in ctx) {
-        (ctx as unknown as { letterSpacing: string }).letterSpacing = "0.08em";
-      }
-      const fontSize = TEX_H * 0.65; // safe font size with generous padding margins
+
+      // 80% of TEX_H — leaves safe room for capital ascenders at top/bottom of canvas
+      const fontSize = TEX_H * 0.80;
       const family = `${fontFamily || ""}, "Arial Black", sans-serif`;
       ctx.font = `900 ${fontSize}px ${family}`;
 
+      // Measure actual text width and compute scale to fill full canvas width
+      const measured = ctx.measureText(WORD);
+      const textW = measured.width;
+      const scaleX = (TEX_W * 0.92) / textW; // 92% fill — breathing room on left/right
+
       ctx.save();
       ctx.translate(TEX_W / 2, TEX_H / 2);
-      ctx.scale(0.96, 1.0); // Spans closer to the horizontal edges
-      ctx.fillText(WORD, 0, fontSize * 0.02);
+      ctx.scale(scaleX, 1.0);
+      ctx.fillText(WORD, 0, 0);
       ctx.restore();
     };
     drawText();
@@ -227,8 +231,9 @@ export default function FooterWordmark() {
       baseWidth * (TEX_H / TEX_W)
     );
     const mesh = new THREE.Mesh(textGeo, textMat);
-    const BASE_Y = 0;
-    mesh.position.y = BASE_Y;
+    // Shift letters down in the zone — negative Y = down in THREE.js
+    const SHIFT_Y = -0.10;
+    mesh.position.y = SHIFT_Y;
     scene.add(mesh);
 
     // ── Resize handler ────────────────────────────────────────────────────
@@ -239,14 +244,27 @@ export default function FooterWordmark() {
       if (w < 10 || h < 10) return;
       renderer.setSize(w, h, false);
       const aspect = w / h;
+
+      // Width: fill full canvas width edge-to-edge
+      const targetWidth = aspect * 2;
+      const currentScale = targetWidth / baseWidth;
+
+      // Height: scale so mesh fills the zone height completely
+      // meshBaseH = 0.65 (baseWidth * TEX_H/TEX_W), camera height = 2 (top=1 to bottom=-1)
+      // We want mesh.scale.y * 0.65 = camera height
+      const scaleY = 2.0 / 0.65;
+
       camera.left = -aspect;
       camera.right = aspect;
-      camera.top = 1;
-      camera.bottom = -1;
+      // Camera tracks the shifted mesh exactly — no clipping on any edge
+      // Mesh center at SHIFT_Y=-0.18, half-height=1.0 → spans [-1.18, +0.82]
+      const halfH = 1.0;
+      const PAD = 0.03; // tiny breathing room so edges don't hard-clip
+      camera.top    =  halfH + SHIFT_Y + PAD;   //  0.85
+      camera.bottom = -halfH + SHIFT_Y - PAD;   // -1.21
       camera.updateProjectionMatrix();
-      const targetWidth = aspect * 2 * 0.96;
-      const currentScale = targetWidth / baseWidth;
-      mesh.scale.set(currentScale, currentScale * 1.48, 1.0);
+
+      mesh.scale.set(currentScale, scaleY, 1.0);
     };
     const ro = new ResizeObserver(doResize);
     ro.observe(zone);
@@ -350,7 +368,7 @@ export default function FooterWordmark() {
       end: "bottom top",
       scrub: 0.6,
       onUpdate: (self) => {
-        mesh.position.y = BASE_Y + (self.progress - 0.5) * 0.3;
+        mesh.position.y = SHIFT_Y + (self.progress - 0.5) * 0.3;
       },
     });
 

@@ -4,7 +4,7 @@
   background:
     radial-gradient(120% 80% at 50% 0%, #7a0d17 0%, transparent 60%),
     var(--color-bg-deep);
-  padding-top: clamp(60px, 8vw, 120px);
+  padding-top: clamp(32px, 4vw, 56px);
   padding-bottom: 0;
 }
 
@@ -22,9 +22,9 @@
 
 .columns {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr; /* Push links grid to the right side */
+  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: clamp(24px, 4vw, 64px);
-  padding-bottom: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(20px, 3vw, 40px);
 }
 
 .col p {
