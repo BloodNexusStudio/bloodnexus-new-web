@@ -39,7 +39,7 @@ export default function VRPage() {
             We design VR experiences that are comfortable, intuitive, and realistic—built for Quest, SteamVR, and Vision Pro.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/contact" className="pill pill--primary">
+            <Link href="/#contact" className="pill pill--primary">
               START YOUR VR EXPERIENCE
             </Link>
           </div>
@@ -158,7 +158,7 @@ export default function VRPage() {
               <p className={styles.arDesc}>
                 Let customers scan a product package to see it come to life.
               </p>
-              <Link href="/contact" className="pill pill--primary">
+              <Link href="/#contact" className="pill pill--primary">
                 LETS INNOVATE
               </Link>
             </div>

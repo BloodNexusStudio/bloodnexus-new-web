@@ -6,7 +6,11 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  border-bottom: 1px solid rgba(242, 239, 233, 0.05);
+  border-bottom: none;
+  background-image: linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%);
+  background-position: bottom;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
 }
 
 .heroBg {
@@ -190,12 +194,10 @@
 /* 3D Modeling & Animation */
 .threeDSection {
   padding-block: clamp(60px, 9vw, 120px);
-  background: linear-gradient(
-    180deg,
-    var(--color-bg) 0%,
-    var(--color-bg-deep) 100%
-  );
-  border-top: 1px solid rgba(242, 239, 233, 0.05);
+  background: 
+    linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%) top / 100% 1px no-repeat,
+    linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-deep) 100%);
+  border-top: none;
 }
 
 .centerHead {
@@ -284,8 +286,10 @@
 /* Direction Section */
 .directionSection {
   padding-block: clamp(60px, 9vw, 120px);
-  background: #060606;
-  border-top: 1px solid rgba(242, 239, 233, 0.05);
+  background: 
+    linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%) top / 100% 1px no-repeat,
+    #060606;
+  border-top: none;
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -331,8 +335,10 @@
 /* Vision Section */
 .visionSection {
   padding-block: clamp(60px, 9vw, 120px);
-  background: var(--color-primary-deep);
-  border-top: 1px solid rgba(242, 239, 233, 0.05);
+  background: 
+    linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%) top / 100% 1px no-repeat,
+    var(--color-primary-deep);
+  border-top: none;
 }
 
 .visionGrid {
@@ -384,8 +390,14 @@
 /* Build Section */
 .buildSection {
   padding-block: clamp(60px, 9vw, 120px);
-  background: #a3a3a3;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    180deg,
+    var(--color-bg) 0%,
+    #a3a3a3 15%,
+    #a3a3a3 85%,
+    var(--color-bg) 100%
+  );
+  border-top: none;
 }
 
 .buildGrid {

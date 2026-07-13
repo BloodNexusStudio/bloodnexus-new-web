@@ -73,7 +73,8 @@
 
 /* --- Info bar --- */
 .infoBarWrap {
-  border-bottom: 1px solid var(--color-line);
+  background: linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%) bottom / 100% 1px no-repeat;
+  border-bottom: none;
 }
 .infoBar {
   display: grid;
@@ -146,7 +147,8 @@
   align-items: center;
   min-height: 46svh;
   overflow: hidden;
-  border-top: 1px solid var(--color-line);
+  background: linear-gradient(90deg, transparent, rgba(242, 239, 233, 0.08) 50%, transparent 100%) top / 100% 1px no-repeat;
+  border-top: none;
 }
 .nextArt {
   position: absolute;

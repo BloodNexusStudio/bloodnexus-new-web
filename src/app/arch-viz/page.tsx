@@ -88,7 +88,7 @@ export default function ArchVizPage() {
             renders, walkthrough videos, and VR experiences powered by real-time engines.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/contact" className="pill pill--primary">
+            <Link href="/#contact" className="pill pill--primary">
               INITIATE INQUIRY
             </Link>
           </div>

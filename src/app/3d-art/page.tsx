@@ -34,7 +34,7 @@ export default function ThreeDArtPage() {
             and ready for gameplay.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/contact" className="pill pill--primary">
+            <Link href="/#contact" className="pill pill--primary">
               COUNT ME IN!
             </Link>
           </div>
@@ -210,7 +210,7 @@ export default function ThreeDArtPage() {
             <p className={styles.buildDesc}>
               Have an idea that needs AAA level execution? Let&apos;s team up to shape concept art, character models, environment art, and fluid animations for your next big title.
             </p>
-            <Link href="/contact" className="pill pill--primary">
+            <Link href="/#contact" className="pill pill--primary">
               ESTABLISH PORTAL CONNECTION
             </Link>
           </div>

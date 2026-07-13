@@ -10,16 +10,16 @@ const WORD = "BLOODNEXUS";
 const TEX_W = 2048;
 const TEX_H = 512;
 const TRAIL_SIZE = 512;
-const TRAIL_FADE = 0.038; // makes trail fade out cleanly
-const DOT_RADIUS = 0.05; // Smaller Gaussian cursor radius (5% of height)
+const TRAIL_FADE = 0.045; // per-frame darken amount — controls trail length
+const DOT_RADIUS = 0.022;
 
-// ── Trail buffer shaders (Aspect ratio corrected to render a perfect circle) ──
+// ── Trail buffer shaders ─────────────────────────────────────────────────────
 const DOT_FRAG = /* glsl */ `
   uniform vec2 uPos;
   uniform float uRadius;
   varying vec2 vUv;
   void main() {
-    // Scale X by 4.0 to account for the 4:1 width ratio of the text plane
+    // Scale X by 4.0 to correct the 4:1 width-to-height ratio of the text plane and render a perfect circle
     float d = distance(vec2(vUv.x * 4.0, vUv.y), vec2(uPos.x * 4.0, uPos.y));
     float a = exp(-(d * d) / (uRadius * uRadius * 0.5));
     gl_FragColor = vec4(1.0, 1.0, 1.0, a);
@@ -33,64 +33,50 @@ const PASSTHROUGH_VERT = /* glsl */ `
   }
 `;
 
-// ── Wordmark fragment-displacement shaders (Aspect ratio corrected circle) ──
-const FRAG_SHADER = /* glsl */ `
+// ── Text plane shader ────────────────────────────────────────────────────────
+const TEXT_FRAG = /* glsl */ `
   uniform sampler2D uTex;
   uniform sampler2D uTrail;
-  uniform vec2 uMouse; // cursor coordinates in [0, 1] UV space
-  uniform float uChroma;
+  uniform vec2 uMouse;
+  uniform vec2 uVelocity;
   uniform float uOpacity;
   varying vec2 vUv;
 
   void main() {
-    // Sample the fading trail buffer
-    float trail = texture2D(uTrail, vUv).r;
+    float amt = texture2D(uTrail, vUv).r;
     
-    // Wavy liquid displacement: smooth sine/cosine warp modulated by trail intensity
-    vec2 waveWarp = vec2(
-      sin(vUv.y * 10.0 + trail * 4.0),
-      cos(vUv.x * 40.0 + trail * 4.0)
-    ) * trail * 0.006;
-    
-    // Rubbery elastic stretch: pull/squish UV coordinates centered on the mouse position
-    vec2 toMouse = vUv - uMouse;
-    vec2 toMouseAspect = vec2(toMouse.x * 4.0, toMouse.y);
-    float distToMouse = length(toMouseAspect);
-    float rubberForce = smoothstep(0.28, 0.0, distToMouse); // expanded rubbery influence radius
-    
-    // Safe normalization using a tiny epsilon to prevent division-by-zero on any GPU
-    float safeDist = max(distToMouse, 0.001);
-    // Pull/stretch coordinates towards cursor (elastic gum/rubber effect)
-    vec2 rubberWarp = (toMouseAspect / safeDist) * rubberForce * 0.048;
-    rubberWarp.x /= 4.0; // scale X back to UV space
-    
-    // Combine wave motion and rubber squish (subtracting pulls text towards mouse smoothly)
-    vec2 uvWarped = vUv + waveWarp - rubberWarp;
-    
-    // Chromatic aberration splits colors ONLY near the active cursor position
-    // Scale X by 4.0 to calculate distance in a uniform circular space on screen
+    // Aspect-ratio corrected circular distance to mouse
     float dist = distance(vec2(vUv.x * 4.0, vUv.y), vec2(uMouse.x * 4.0, uMouse.y));
-    float chromaForce = smoothstep(0.06, 0.0, dist); // Fades completely outside a tiny cursor radius
-    float shift = chromaForce * uChroma;
     
-    // Sample alphas to split channels
-    float ra = texture2D(uTex, uvWarped + vec2(shift, 0.0)).a;
+    // Smooth Gaussian influence envelope (radius 0.13 in screen space)
+    float influence = exp(-(dist * dist) / (0.13 * 0.13 * 0.5));
+    
+    // Drag warp: pull coordinates along the velocity vector modulated by influence (increased stretch)
+    vec2 dragWarp = uVelocity * influence * 5.2;
+    
+    // Clamp warp to prevent extreme stretching
+    float dragLen = length(dragWarp);
+    float maxDrag = 0.048; // increased maximum stretch
+    if (dragLen > maxDrag) {
+      dragWarp *= maxDrag / dragLen;
+    }
+    vec2 uvWarped = vUv - dragWarp;
+
+    float hot = smoothstep(0.6, 0.95, amt);
+    vec2 dir = vec2(0.0016, 0.0006) * hot;
+    float ra = texture2D(uTex, uvWarped + dir).a;
     float ga = texture2D(uTex, uvWarped).a;
-    float ba = texture2D(uTex, uvWarped - vec2(shift, 0.0)).a;
-    float textAlpha = ga;
+    float ba = texture2D(uTex, uvWarped - dir).a;
+    float textAlpha = max(ra, max(ga, ba));
+
+    vec3 glow = vec3(1.0) * amt * 0.1 * (1.0 - textAlpha);
+    vec3 color = vec3(ra, ga, ba) * textAlpha + glow;
     
-    // Blend: 88% solid white text, 12% color-split channel for a very soft, transparent colored fringe
-    vec3 baseColor = vec3(textAlpha);
-    vec3 splitColor = vec3(ra, ga, ba);
-    vec3 textRGB = mix(baseColor, splitColor, 0.12);
-    
-    // Soft, liquid glowing fringe on edges (almost invisible, highly premium)
-    vec3 glowColor = vec3(1.0) * trail * 0.005 * (1.0 - textAlpha);
-    vec3 color = textRGB * textAlpha + glowColor;
-    
-    float finalAlpha = max(textAlpha, trail * 0.02);
-    
-    gl_FragColor = vec4(color, finalAlpha * uOpacity);
+    // Mask out the trail dot completely outside the letters to ensure the circle doesn't appear
+    float alpha = textAlpha * uOpacity;
+
+    if (alpha < 0.02) discard;
+    gl_FragColor = vec4(min(color, vec3(1.0)), alpha);
   }
 `;
 
@@ -98,8 +84,9 @@ export default function FooterWordmark() {
   const zoneRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const smokeContainerRef = useRef<HTMLDivElement>(null);
-  const lastSpawnPos = useRef({ x: 0, y: 0 });
   const [useWebGL, setUseWebGL] = useState(false);
+  const lastSpawnPos = useRef({ x: 0, y: 0 });
+  const prevPos = useRef({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     const reduced = window.matchMedia(
@@ -107,9 +94,8 @@ export default function FooterWordmark() {
     ).matches;
     if (reduced) return;
     if (!window.WebGLRenderingContext) return;
-    requestAnimationFrame(() => {
-      setUseWebGL(true);
-    });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUseWebGL(true);
   }, []);
 
   useEffect(() => {
@@ -134,7 +120,7 @@ export default function FooterWordmark() {
     renderer.setClearColor(0x000000, 0);
     renderer.autoClear = false;
 
-    // ── Safe Canvas Drawing (Centered, no vertical scale to prevent cuts) ──
+    // ── Text → canvas texture ────────────────────────────────────────────
     const texCanvas = document.createElement("canvas");
     texCanvas.width = TEX_W;
     texCanvas.height = TEX_H;
@@ -143,7 +129,7 @@ export default function FooterWordmark() {
     const drawText = () => {
       ctx.clearRect(0, 0, TEX_W, TEX_H);
       const fontFamily = getComputedStyle(document.documentElement)
-        .getPropertyValue("--font-display")
+        .getPropertyValue("--font-display") // Use display font Anton
         .trim();
       ctx.fillStyle = "#ffffff";
       ctx.textAlign = "center";
@@ -174,7 +160,7 @@ export default function FooterWordmark() {
       });
     }
 
-    // ── Trail buffer setup ───────────────────────────────────────────────
+    // ── Trail buffer ─────────────────────────────────────────────────────
     const trailTarget = new THREE.WebGLRenderTarget(TRAIL_SIZE, TRAIL_SIZE, {
       format: THREE.RGBAFormat,
     });
@@ -216,7 +202,7 @@ export default function FooterWordmark() {
     dotMesh.position.set(0.5, 0.5, 0);
     dotScene.add(dotMesh);
 
-    // ── Main Scene Setup ──────────────────────────────────────────────────
+    // ── Main scene ────────────────────────────────────────────────────────
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 10);
     camera.position.z = 2;
@@ -225,26 +211,27 @@ export default function FooterWordmark() {
       uTex: { value: texture },
       uTrail: { value: trailTarget.texture },
       uMouse: { value: new THREE.Vector2(999, 999) },
-      uRadius: { value: DOT_RADIUS },
-      uChroma: { value: 0.001 }, // subtle color split
-      uOpacity: { value: 1.0 },
+      uVelocity: { value: new THREE.Vector2(0, 0) },
+      uOpacity: { value: 0.95 },
     };
-
-    const material = new THREE.ShaderMaterial({
+    const textMat = new THREE.ShaderMaterial({
       vertexShader: PASSTHROUGH_VERT,
-      fragmentShader: FRAG_SHADER,
+      fragmentShader: TEXT_FRAG,
       uniforms: textUniforms,
       transparent: true,
       depthWrite: false,
     });
-
     const baseWidth = 2.6;
-    const baseHeight = baseWidth * (TEX_H / TEX_W); // 2.6 * 0.25 = 0.65
-    const geometry = new THREE.PlaneGeometry(baseWidth, baseHeight);
-    const mesh = new THREE.Mesh(geometry, material);
+    const textGeo = new THREE.PlaneGeometry(
+      baseWidth,
+      baseWidth * (TEX_H / TEX_W)
+    );
+    const mesh = new THREE.Mesh(textGeo, textMat);
+    const BASE_Y = 0;
+    mesh.position.y = BASE_Y;
     scene.add(mesh);
 
-    // ── Resize handler (Fit aspect ratios and apply WebGL vertical stretch) ──
+    // ── Resize handler ────────────────────────────────────────────────────
     const doResize = () => {
       const r = zone.getBoundingClientRect();
       const w = Math.round(r.width);
@@ -257,28 +244,25 @@ export default function FooterWordmark() {
       camera.top = 1;
       camera.bottom = -1;
       camera.updateProjectionMatrix();
-
-      // Extend close to borders (0.96 matches original layout)
       const targetWidth = aspect * 2 * 0.96;
       const currentScale = targetWidth / baseWidth;
-      // Stretches height vertically by 1.48x natively in WebGL vector space
       mesh.scale.set(currentScale, currentScale * 1.48, 1.0);
     };
     const ro = new ResizeObserver(doResize);
     ro.observe(zone);
     doResize();
 
-    // ── Mouse/Pointer Tracker ─────────────────────────────────────────────
+    // ── Pointer tracking + GSAP Elastic QuickTo ───────────────────────────
     const trackEl = zone.closest("footer") ?? zone;
     const rawUV = new THREE.Vector2(0.5, 0.5);
     const smoothPos = { x: 0.5, y: 0.5 };
     const qx = gsap.quickTo(smoothPos, "x", {
-      duration: 0.9,
-      ease: "elastic.out(1, 0.4)",
+      duration: 1.4,
+      ease: "elastic.out(1.2, 0.75)",
     });
     const qy = gsap.quickTo(smoothPos, "y", {
-      duration: 0.9,
-      ease: "elastic.out(1, 0.4)",
+      duration: 1.4,
+      ease: "elastic.out(1.2, 0.75)",
     });
 
     const onMove = (e: PointerEvent) => {
@@ -286,14 +270,14 @@ export default function FooterWordmark() {
       const x = (e.clientX - r.left) / r.width;
       const y = 1 - (e.clientY - r.top) / r.height;
       rawUV.set(
-        THREE.MathUtils.clamp(x, 0, 1),
-        THREE.MathUtils.clamp(y, 0, 1)
+        THREE.MathUtils.clamp(x, -0.2, 1.2),
+        THREE.MathUtils.clamp(y, -0.8, 1.8)
       );
       qx(rawUV.x);
       qy(rawUV.y);
       pointerActive = true;
 
-      // ── Spawns GSAP Smoke Particles ─────────────────────────────────────
+      // ── Smoke Spawner ───────────────────────────────────────────────────
       const smokeContainer = smokeContainerRef.current;
       if (smokeContainer) {
         const rect = smokeContainer.getBoundingClientRect();
@@ -305,30 +289,43 @@ export default function FooterWordmark() {
           mouseY - lastSpawnPos.current.y
         );
 
-        if (dist > 5) {
+        if (dist > 8) {
           for (let i = 0; i < 2; i++) {
             const particle = document.createElement("div");
             particle.className = styles.smokeParticle;
+
+            const r1 = Math.floor(Math.random() * 30) + 35;
+            const r2 = 100 - r1;
+            const r3 = Math.floor(Math.random() * 30) + 35;
+            const r4 = 100 - r3;
+            const r5 = Math.floor(Math.random() * 30) + 35;
+            const r6 = 100 - r5;
+            const r7 = Math.floor(Math.random() * 30) + 35;
+            const r8 = 100 - r7;
+            particle.style.borderRadius = `${r1}% ${r2}% ${r3}% ${r4}% / ${r5}% ${r6}% ${r7}% ${r8}%`;
+            particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+
             const offsetX = (Math.random() - 0.5) * 8;
             const offsetY = (Math.random() - 0.5) * 8;
             particle.style.left = `${mouseX + offsetX}px`;
             particle.style.top = `${mouseY + offsetY}px`;
             smokeContainer.appendChild(particle);
 
-            // Animate particle floating upwards, expanding and dissolving (longer duration for volumetric effect)
-            gsap.to(particle, {
-              x: "random(-28, 28)",
-              y: "random(-75, -40)",
-              scale: "random(2.0, 4.0)",
-              opacity: 0,
-              duration: "random(1.0, 1.6)",
-              ease: "power1.out",
-              onComplete: () => {
-                particle.remove();
-              },
-            });
+            gsap.fromTo(particle,
+              { opacity: 0.16, scale: 0.5 },
+              {
+                x: "random(-24, 24)",
+                y: "random(-70, -40)",
+                scale: "random(1.1, 1.8)",
+                opacity: 0,
+                duration: "random(0.9, 1.4)",
+                ease: "power1.out",
+                onComplete: () => {
+                  particle.remove();
+                },
+              }
+            );
           }
-
           lastSpawnPos.current = { x: mouseX, y: mouseY };
         }
       }
@@ -336,17 +333,16 @@ export default function FooterWordmark() {
       window.clearTimeout(pointerIdleTimer);
       pointerIdleTimer = window.setTimeout(() => {
         pointerActive = false;
-      }, 60);
+      }, 80);
     };
 
     const onLeave = () => {
       pointerActive = false;
     };
-
     trackEl.addEventListener("pointermove", onMove);
     trackEl.addEventListener("pointerleave", onLeave);
 
-    // ── Scroll Parallax ──────────────────────────────────────────────────
+    // ── Scroll parallax ───────────────────────────────────────────────────
     gsap.registerPlugin(ScrollTrigger);
     const st = ScrollTrigger.create({
       trigger: zone,
@@ -354,11 +350,11 @@ export default function FooterWordmark() {
       end: "bottom top",
       scrub: 0.6,
       onUpdate: (self) => {
-        mesh.position.y = (self.progress - 0.5) * 0.35;
+        mesh.position.y = BASE_Y + (self.progress - 0.5) * 0.3;
       },
     });
 
-    // ── Intersection Observer ───────────────────────────────────────────
+    // ── Intersection Observer ─────────────────────────────────────────────
     const io = new IntersectionObserver(
       ([entry]) => {
         running = entry.isIntersecting;
@@ -374,6 +370,18 @@ export default function FooterWordmark() {
         return;
       }
 
+      let vx = 0;
+      let vy = 0;
+      if (pointerActive) {
+        vx = smoothPos.x - prevPos.current.x;
+        vy = smoothPos.y - prevPos.current.y;
+        prevPos.current.x = smoothPos.x;
+        prevPos.current.y = smoothPos.y;
+      } else {
+        prevPos.current.x = 0.5;
+        prevPos.current.y = 0.5;
+      }
+
       renderer.setRenderTarget(trailTarget);
       renderer.render(fadeScene, trailCamera);
       if (pointerActive) {
@@ -383,12 +391,14 @@ export default function FooterWordmark() {
 
       renderer.setRenderTarget(null);
       renderer.clear();
-
-      // Pass exact cursor coordinates in UV [0,1] space for local aberration
+      
+      // Update WebGL shader uniforms for the circular elastic drag
       if (pointerActive) {
         textUniforms.uMouse.value.set(smoothPos.x, smoothPos.y);
+        textUniforms.uVelocity.value.set(vx, vy);
       } else {
         textUniforms.uMouse.value.set(999.0, 999.0);
+        textUniforms.uVelocity.value.set(0.0, 0.0);
       }
 
       renderer.render(scene, camera);
@@ -408,8 +418,8 @@ export default function FooterWordmark() {
       quadGeo.dispose();
       fadeMat.dispose();
       dotMat.dispose();
-      geometry.dispose();
-      material.dispose();
+      textGeo.dispose();
+      textMat.dispose();
       texture.dispose();
       trailTarget.dispose();
       renderer.dispose();

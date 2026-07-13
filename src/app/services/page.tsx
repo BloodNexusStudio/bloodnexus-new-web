@@ -149,7 +149,7 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              <Link href="/contact" className={styles.actionBtn}>
+              <Link href="/#contact" className={styles.actionBtn}>
                 <span className={styles.actionBtnText}>INITIATE PROJECT</span>
                 <span className={styles.actionBtnArrow}>{"//"} &rarr;</span>
               </Link>

@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/services",
     "/careers",
     "/about",
-    "/contact",
   ].map((path) => ({
     url: `${BASE}${path}`,
     changeFrequency: "monthly" as const,

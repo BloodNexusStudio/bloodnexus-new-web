@@ -82,7 +82,7 @@ export default function Spotlight() {
             <Link href="/games" className="pill pill--primary">
               Our Games
             </Link>
-            <Link href="/contact" className="pill pill--outline">
+            <Link href="/#contact" className="pill pill--outline">
               Work With Us
             </Link>
           </div>

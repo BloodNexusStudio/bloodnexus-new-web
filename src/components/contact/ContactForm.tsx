@@ -11,21 +11,47 @@ const PROJECT_TYPES = [
   "Other",
 ];
 
-/**
- * Contact form (§7). Front-end only: on submit it validates natively and shows an
- * animated success state. [CONTENT/TODO] wire to a real endpoint (e.g. a Next.js
- * route handler / form service) before launch — nothing is sent yet.
- */
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [projectType, setProjectType] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: POST to a real endpoint here.
-    setSent(true);
+    if (!name || !email || !message) return;
+
+    setStatus("submitting");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: "N/A", // Not provided in this form
+          missionType: projectType || "General Contact Inquiry",
+          budget: "N/A", // Not provided in this form
+          briefing: message,
+        }),
+      });
+
+      if (res.ok) {
+        setStatus("success");
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error("Contact Form submission error:", err);
+      setStatus("error");
+    }
   };
 
-  if (sent) {
+  if (status === "success") {
     return (
       <div className={styles.success} role="status">
         <span className={styles.check} aria-hidden="true">
@@ -35,8 +61,37 @@ export default function ContactForm() {
         <p className={styles.successNote}>
           Thanks for reaching out — we&apos;ll get back to you soon.
         </p>
-        <button className="pill pill--outline-dark" onClick={() => setSent(false)}>
+        <button
+          className="pill pill--outline-dark"
+          onClick={() => {
+            setName("");
+            setEmail("");
+            setProjectType("");
+            setMessage("");
+            setStatus("idle");
+          }}
+        >
           Send Another
+        </button>
+      </div>
+    );
+  }
+
+  if (status === "error") {
+    return (
+      <div className={styles.success} role="status" style={{ borderColor: "#c1121f" }}>
+        <span className={styles.check} style={{ borderColor: "#c1121f", color: "#c1121f" }} aria-hidden="true">
+          ✕
+        </span>
+        <h3 className={styles.successTitle} style={{ color: "#ffffff" }}>Transmission Failed</h3>
+        <p className={styles.successNote}>
+          Could not establish server connection. Please retry.
+        </p>
+        <button
+          className="pill pill--outline-dark"
+          onClick={() => setStatus("idle")}
+        >
+          Retry
         </button>
       </div>
     );
@@ -46,7 +101,15 @@ export default function ContactForm() {
     <form className={styles.form} onSubmit={onSubmit}>
       <div className={styles.field}>
         <label htmlFor="name">Name</label>
-        <input id="name" name="name" type="text" required autoComplete="name" />
+        <input
+          id="name"
+          name="name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          autoComplete="name"
+        />
       </div>
       <div className={styles.field}>
         <label htmlFor="email">Email</label>
@@ -54,13 +117,20 @@ export default function ContactForm() {
           id="email"
           name="email"
           type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
           required
           autoComplete="email"
         />
       </div>
       <div className={styles.field}>
         <label htmlFor="projectType">Project Type</label>
-        <select id="projectType" name="projectType" defaultValue="">
+        <select
+          id="projectType"
+          name="projectType"
+          value={projectType}
+          onChange={(e) => setProjectType(e.target.value)}
+        >
           <option value="" disabled>
             Select one…
           </option>
@@ -73,10 +143,21 @@ export default function ContactForm() {
       </div>
       <div className={styles.field}>
         <label htmlFor="message">Message</label>
-        <textarea id="message" name="message" rows={5} required />
+        <textarea
+          id="message"
+          name="message"
+          rows={5}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          required
+        />
       </div>
-      <button type="submit" className={`pill pill--solid ${styles.submit}`}>
-        Send Message
+      <button
+        type="submit"
+        className={`pill pill--solid ${styles.submit}`}
+        disabled={status === "submitting"}
+      >
+        {status === "submitting" ? "Sending..." : "Send Message"}
       </button>
     </form>
   );

@@ -32,6 +32,8 @@ export default function OpengraphImage() {
         </div>
         <div
           style={{
+            display: "flex",
+            flexDirection: "row",
             fontSize: 180,
             fontWeight: 900,
             letterSpacing: -4,
@@ -39,7 +41,8 @@ export default function OpengraphImage() {
             color: "#f2efe9",
           }}
         >
-          BLOOD<span style={{ color: "#c1121f" }}>NEXUS</span>
+          <span>BLOOD</span>
+          <span style={{ color: "#c1121f" }}>NEXUS</span>
         </div>
         <div
           style={{

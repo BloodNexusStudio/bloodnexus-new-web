@@ -116,7 +116,7 @@ export default function WebAppsPage() {
             We engineer high-performance websites and native apps that look stunning, load instantly, and drive real business growth.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/contact" className="pill pill--primary">
+            <Link href="/#contact" className="pill pill--primary">
               START YOUR PROJECT
             </Link>
           </div>
