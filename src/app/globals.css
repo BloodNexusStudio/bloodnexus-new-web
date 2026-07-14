@@ -164,3 +164,24 @@ html.lenis body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Media Protection ─────────────────────────────────────────────────────
+   Prevents casual drag-to-desktop saves and right-click "Save Image As".
+   Note: determined users with DevTools can still access URLs — the real
+   protection is the pixel-level Cloudinary watermark on every asset.
+──────────────────────────────────────────────────────────────────────────── */
+img,
+video {
+  -webkit-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: none; /* blocks right-click menu on media elements */
+}
+
+/* Re-enable pointer events on links/buttons containing media so they still work */
+a img,
+button img,
+a video {
+  pointer-events: auto;
+}
