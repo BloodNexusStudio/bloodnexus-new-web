@@ -61,7 +61,7 @@
 .burger {
   display: none;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   width: 34px;
   height: 34px;
   align-items: center;
@@ -70,16 +70,16 @@
 }
 .burger span {
   display: block;
-  width: 24px;
-  height: 2px;
+  width: 20px; /* elegant, slightly shorter lines */
+  height: 1.5px; /* thinner, premium lines */
   background: var(--color-ink);
-  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
 }
 .header[data-open="true"] .burger span:first-child {
-  transform: translateY(4px) rotate(45deg);
+  transform: translateY(3.25px) rotate(45deg);
 }
 .header[data-open="true"] .burger span:last-child {
-  transform: translateY(-4px) rotate(-45deg);
+  transform: translateY(-3.25px) rotate(-45deg);
 }
 
 /* Mobile overlay */
@@ -89,11 +89,12 @@
   background: var(--color-bg-deep);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: var(--pad-x);
+  justify-content: space-between;
+  padding: calc(var(--header-h) + 40px) var(--pad-x) 40px; /* clear top space and bottom space */
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s var(--ease);
+  z-index: 99; /* overlays floating widgets */
 }
 .header[data-open="true"] .overlay {
   opacity: 1;
@@ -103,13 +104,15 @@
 .overlayNav {
   display: flex;
   flex-direction: column;
-  gap: 0.15em;
+  gap: 0.25em; /* slightly spacious gap */
 }
 .overlayLink {
-  font-family: var(--font-display);
+  font-family: var(--font-subhead); /* Space Grotesk */
+  font-weight: 700;
   text-transform: uppercase;
-  font-size: var(--fs-h2);
-  line-height: 1.05;
+  font-size: clamp(32px, 8vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   opacity: 0;
   transform: translateX(-24px);
   transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.3s var(--ease);
@@ -154,5 +157,19 @@
 @media (prefers-reduced-motion: reduce) {
   .overlayLink {
     transform: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .logoImg {
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+  }
+  .logoText {
+    font-size: 20px;
+  }
+  .logoWrap {
+    gap: 8px;
   }
 }

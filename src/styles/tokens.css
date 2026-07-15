@@ -28,7 +28,7 @@
   --fs-label: 11px;                          /* labels / tags / stats */
 
   /* font-family vars are bound to next/font in layout.tsx */
-  --font-display: var(--font-anton), "Arial Black", sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-subhead: var(--font-space-grotesk), system-ui, sans-serif;
   --font-body: var(--font-inter), system-ui, sans-serif;
 

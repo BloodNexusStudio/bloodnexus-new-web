@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type PointerEvent, type MouseEvent } from "react";
+import { useEffect, useRef, useState, type PointerEvent, type MouseEvent } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
 import { GAMES } from "@/data/games";
@@ -16,7 +16,6 @@ const ANGLE_SLICE = 360 / N;
 // .stage perspective is raised alongside this so the radius doesn't
 // reintroduce the off-center wobble a too-large radius causes (world-space
 // offset ≈ radius × sin(angle), amplified by the perspective projection).
-const RADIUS = 520; // px — orbit depth
 const ROTATION_PER_SCROLL_THROUGH = 70; // deg of spin across one section-height of scroll
 const IDLE_ROTATE_DEG_PER_FRAME = 0.035;
 const SCROLL_IDLE_DEBOUNCE = 150; // ms
@@ -60,6 +59,25 @@ export default function OrbitCarousel() {
   const dragStartXRef = useRef(0);
   const dragStartRotationRef = useRef(0);
   const dragMovedRef = useRef(0);
+
+  const [radius, setRadius] = useState(520);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 480) {
+        setRadius(240); // close grouping on mobile screens
+      } else if (window.innerWidth < 768) {
+        setRadius(340); // small tablet
+      } else if (window.innerWidth < 1024) {
+        setRadius(440); // laptop / large tablet
+      } else {
+        setRadius(520); // desktop default
+      }
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     reducedRef.current = window.matchMedia(
@@ -213,7 +231,7 @@ export default function OrbitCarousel() {
                 key={game.slug}
                 className={styles.slot}
                 style={{
-                  transform: `rotateY(${itemAngle}deg) translateZ(${RADIUS}px)`,
+                  transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
                 }}
               >
                 <Link
