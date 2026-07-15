@@ -225,13 +225,25 @@ export default function OrbitCarousel() {
                   aria-label={`${game.title} — ${game.status}`}
                 >
                   <span className={styles.face}>
-                    <img
-                      src={game.keyArt}
-                      alt=""
-                      aria-hidden="true"
-                      className={styles.art}
-                      draggable={false}
-                    />
+                    {game.previewClip ? (
+                      <video
+                        src={game.previewClip}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className={styles.art}
+                        style={{ objectFit: "cover" }}
+                      />
+                    ) : (
+                      <img
+                        src={game.keyArt}
+                        alt=""
+                        aria-hidden="true"
+                        className={styles.art}
+                        draggable={false}
+                      />
+                    )}
                     <span className={styles.cardTag}>{game.status}</span>
                     <span className={styles.caption}>
                       <span className={styles.captionTitle}>{game.title}</span>

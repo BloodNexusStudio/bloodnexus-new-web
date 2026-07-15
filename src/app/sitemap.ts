@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/games",
     "/services",
     "/careers",
-    "/about",
   ].map((path) => ({
     url: `${BASE}${path}`,
     changeFrequency: "monthly" as const,

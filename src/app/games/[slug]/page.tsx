@@ -66,7 +66,19 @@ export default async function GameDetail({
 
       {/* Hero */}
       <header className={styles.hero}>
-        <img className={styles.heroArt} src={game.keyArt} alt="" aria-hidden />
+        {game.previewClip ? (
+          <video
+            className={styles.heroArt}
+            src={game.previewClip}
+            autoPlay
+            muted
+            loop
+            playsInline
+            style={{ objectFit: "cover" }}
+          />
+        ) : (
+          <img className={styles.heroArt} src={game.keyArt} alt="" aria-hidden />
+        )}
         <div className={styles.heroOverlay} aria-hidden />
         <div className={`container ${styles.heroInner}`}>
           <div className={styles.pills}>

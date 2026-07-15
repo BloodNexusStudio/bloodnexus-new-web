@@ -35,12 +35,24 @@ function buildUnits(games: Game[]): Unit[] {
 function Tile({ game }: { game: Game }) {
   return (
     <Link href={`/games/${game.slug}`} className={styles.tile}>
-      <img
-        src={game.keyArt}
-        alt={`${game.title} key art`}
-        loading="lazy"
-        className={styles.tileArt}
-      />
+      {game.previewClip ? (
+        <video
+          src={game.previewClip}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={styles.tileArt}
+          style={{ objectFit: "cover" }}
+        />
+      ) : (
+        <img
+          src={game.keyArt}
+          alt={`${game.title} key art`}
+          loading="lazy"
+          className={styles.tileArt}
+        />
+      )}
       <div className={styles.tileScrim} />
       <div className={styles.tileBody}>
         {game.genre && <span className={styles.tileTag}>{game.genre}</span>}

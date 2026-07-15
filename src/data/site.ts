@@ -4,7 +4,6 @@ export const NAV_LINKS = [
   { label: "Games", href: "/games" },
   { label: "Services", href: "/services" },
   { label: "Careers", href: "/careers" },
-  { label: "About", href: "/about" },
 ] as const;
 
 export const CAPSULE_LINKS = [

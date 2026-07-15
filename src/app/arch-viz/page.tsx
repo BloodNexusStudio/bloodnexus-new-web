@@ -19,6 +19,9 @@ const TOOLS = [
   "CAD-TO-FBX",
 ];
 
+const ARCHVIZ_SHOWCASE_VIDEO =
+  "https://res.cloudinary.com/oglqwvqq/video/upload/v1784022265/ARCHVIZ_2_wgkmbk.mp4";
+
 const DELIVERABLES = [
   {
     index: "01",
@@ -84,6 +87,8 @@ export default function ArchVizPage() {
             className={styles.heroVideo}
           />
           <div className={styles.heroOverlay} />
+          {/* Shield overlay blocks right-click on hero video */}
+          <div className={styles.videoShield} />
         </div>
         <div className={styles.scanlines} />
         <div className={`container ${styles.heroContent}`}>
@@ -177,6 +182,70 @@ export default function ArchVizPage() {
           </div>
         </div>
       </Reveal>
+
+      {/* ── Real-Time Walkthrough Showcase Section ───────────────────── */}
+      <section className={styles.showcaseSection}>
+        <video
+          className={styles.showcaseVideo}
+          src={ARCHVIZ_SHOWCASE_VIDEO}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+        <div className={styles.showcaseOverlay} />
+        <div className={styles.videoShield} />
+
+        <div className={`container ${styles.showcaseContent}`}>
+          <div className={styles.showcaseLeft}>
+            <p className={styles.systemTag}>{"// "} REAL-TIME WALKTHROUGH</p>
+            <h2 className={styles.showcaseTitle}>Vibrant Spaces</h2>
+            <p className={styles.showcaseDesc}>
+              Experience interactive walkthroughs with fully dynamic lighting, physically accurate materials, and seamless frame-rates powered by Unreal Engine 5.
+            </p>
+            <a
+              href="/video/archviz"
+              target="_blank"
+              className={styles.viewFullBtn}
+            >
+              <span className={styles.viewFullIcon}>▶</span>
+              View Full Walkthrough
+            </a>
+          </div>
+
+          <div className={styles.showcaseRight}>
+            <div className={styles.showcaseStats}>
+              <div className={styles.showcaseStat}>
+                <span className={styles.statLabel}>Resolution</span>
+                <span className={styles.statValue}>4K Ultra HD</span>
+              </div>
+              <div className={styles.showcaseStat}>
+                <span className={styles.statLabel}>Illumination</span>
+                <span className={styles.statValue}>Lumen Global Illumination</span>
+              </div>
+              <div className={styles.showcaseStat}>
+                <span className={styles.statLabel}>Interactivity</span>
+                <span className={styles.statValue}>Real-Time Sandbox Walkthrough</span>
+              </div>
+              <div className={styles.showcaseStat}>
+                <span className={styles.statLabel}>Render Time</span>
+                <span className={styles.statValue}>Instant (60 FPS Real-time)</span>
+              </div>
+            </div>
+            <div className={styles.showcaseHighlights}>
+              <p className={styles.highlightItem}>
+                <span className={styles.highlightDot} /> Dynamic day/night cycle simulation
+              </p>
+              <p className={styles.highlightItem}>
+                <span className={styles.highlightDot} /> Custom material shaders (PBR)
+              </p>
+              <p className={styles.highlightItem}>
+                <span className={styles.highlightDot} /> Detailed architectural models
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Selected Works Section */}
       <Reveal as="section" y={40} className={styles.portfolioSection}>

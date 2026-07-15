@@ -11,11 +11,10 @@ const ICONS: Record<string, React.ReactNode> = {
       <circle cx="17.5" cy="13.5" r="1" />
     </svg>
   ),
-  cinematics: (
+  "3d-art": (
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <path d="M4 10h16v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8Z" />
-      <path d="M4 10 5 6h14l1 4" />
-      <path d="M8 6l1.5 4M13 6l1.5 4" />
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12" />
     </svg>
   ),
   "vr-3d": (
@@ -28,6 +27,12 @@ const ICONS: Record<string, React.ReactNode> = {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
       <path d="M4 21V9l8-5 8 5v12" />
       <path d="M9 21v-6h6v6M4 21h16" />
+    </svg>
+  ),
+  "web-apps": (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="2" y="3" width="20" height="14" rx="2" />
+      <path d="M8 21h8M12 17v4" />
     </svg>
   ),
 };

@@ -59,13 +59,6 @@ export default function Header() {
               {link.label}
             </RollLink>
           ))}
-          <RollLink
-            href="/about"
-            accent
-            active={isActive("/about")}
-          >
-            About
-          </RollLink>
           <Link
             href="/#contact"
             className="pill pill--outline"
@@ -101,16 +94,6 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/about"
-            className={`${styles.overlayLink} ${
-              isActive("/about") ? styles.overlayLinkActive : ""
-            }`}
-            style={{ transitionDelay: `${0.07 * (CAPSULE_LINKS.length + 1)}s` }}
-            onClick={() => setOpen(false)}
-          >
-            About
-          </Link>
           <Link
             href="/#contact"
             className={styles.overlayLink}

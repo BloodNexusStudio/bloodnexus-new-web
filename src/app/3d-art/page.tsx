@@ -42,8 +42,93 @@ const GALLERY = [
 const SPOTLIGHT = GALLERY.slice(0, 3);
 // Feature image for vision section
 const FEATURE_IMG = GALLERY[3];
-// Remaining gallery images
-const MASONRY = GALLERY.slice(4);
+// Remaining gallery images — structured with titles and tags for a proper portfolio
+const MASONRY = [
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007690/3dart-10_ziywet.png",
+    alt: "3D render — vintage motorcycle",
+    title: "Vintage Garage",
+    category: "Environment Art",
+    tools: "Unreal Engine 5 · Substance Painter",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007692/3dart-9_op3xza.png",
+    alt: "3D art — classic ambassador taxi",
+    title: "Classic Ambassador",
+    category: "Automotive Art",
+    tools: "3ds Max · V-Ray · Substance Painter",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007687/3dart-13_obplkd.png",
+    alt: "3D model — warrior portrait sculpt",
+    title: "Warrior Portrait",
+    category: "Character Sculpt",
+    tools: "ZBrush · Marvelous Designer",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007693/3dart-2_ke6lp1.jpg",
+    alt: "3D art — winter outpost scene",
+    title: "Winter Outpost",
+    category: "Environment Design",
+    tools: "Unreal Engine 5 · Megascans",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007695/3dart-18_ubrxbt.png",
+    alt: "3D render — trench sentinel character",
+    title: "Trench Sentinel",
+    category: "Character Concept",
+    tools: "Blender · Substance Painter",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007594/3dart-21_n8kdvh.jpg",
+    alt: "3D art — heavy gunner character pose",
+    title: "Heavy Gunner Pose",
+    category: "Character Rigging",
+    tools: "Maya · Substance Painter",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007592/3dart-23_1_a0fdxs.png",
+    alt: "3D render — cyberpunk streets environment",
+    title: "Neon Streets",
+    category: "Concept Art",
+    tools: "Blender · Photoshop",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007592/3dart-20_1_uifghl.png",
+    alt: "3D art — tactical gear detail render",
+    title: "Tactical Gear",
+    category: "PBR Material Study",
+    tools: "Substance Painter · ZBrush",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007590/3dart-22_1_uetcav.png",
+    alt: "3D model — hangar bay scifi interior",
+    title: "Hangar Bay",
+    category: "Hard-Surface Design",
+    tools: "Fusion 360 · Blender",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007589/3dart-12_1_uhpc9i.png",
+    alt: "3D art — power substation lighting",
+    title: "Power Substation",
+    category: "Environment Art",
+    tools: "Unreal Engine 5 · Lumen",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007587/3dart-19_1_zsz5ri.png",
+    alt: "3D render — recon operative back view",
+    title: "Recon Operative",
+    category: "Character Modeling",
+    tools: "Blender · Marvelous Designer",
+  },
+  {
+    src: "https://res.cloudinary.com/oglqwvqq/image/upload/v1784007586/3dart-7_1_ri14o4.png",
+    alt: "3D art — node reactor prop close up",
+    title: "Node Reactor",
+    category: "Hard-Surface Prop",
+    tools: "Marmoset Toolbag · Substance Painter",
+  },
+];
 
 export default function ThreeDArtPage() {
   return (
@@ -272,14 +357,22 @@ export default function ThreeDArtPage() {
             <h2 className={styles.galleryTitle}>Our 3D Portfolio</h2>
           </div>
           <div className={styles.masonryGrid}>
-            {MASONRY.map((img) => (
-              <div key={img.src} className={styles.masonryItem}>
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className={styles.masonryImg}
-                  loading="lazy"
-                />
+            {MASONRY.map((item) => (
+              <div key={item.src} className={styles.masonryItem}>
+                <div className={styles.cardFrame}>
+                  <img
+                    src={item.src}
+                    alt={item.alt}
+                    className={styles.masonryImg}
+                    loading="lazy"
+                  />
+                  <div className={styles.cardOverlay}>
+                    <span className={styles.cardCategory}>{item.category}</span>
+                    <h3 className={styles.cardTitle}>{item.title}</h3>
+                    <span className={styles.cardDivider} />
+                    <p className={styles.cardTools}>{item.tools}</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

@@ -1,18 +1,49 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
 import type { Game } from "@/data/games";
 import styles from "./GameCard.module.css";
 
 /**
  * Game card (§6.2) — 16:9 key art, status pill, title, hook, VIEW GAME CTA.
  * Hover (§8.5): art scales 1.06, card lifts -4px, red glow shadow.
- * Reused by the home carousel and the /games grid.
+ * Plays muted video preview loop on hover.
  */
 export default function GameCard({ game }: { game: Game }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
-    <article className={styles.card}>
+    <article
+      className={styles.card}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <Link href={`/games/${game.slug}`} className={styles.media}>
         <span className={styles.status}>{game.status}</span>
-        {/* [CONTENT] real key art; optional preview clip crossfades in on hover */}
+        {game.previewClip && (
+          <video
+            ref={videoRef}
+            src={game.previewClip}
+            loop
+            muted
+            playsInline
+            className={styles.previewClip}
+          />
+        )}
         <img
           src={game.keyArt}
           alt={`${game.title} key art`}
