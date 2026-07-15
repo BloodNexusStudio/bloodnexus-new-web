@@ -126,6 +126,19 @@
   height: 100%;
   object-fit: cover;
 }
+.artVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+  z-index: 1;
+}
+.card:hover .artVideo {
+  opacity: 1;
+}
 
 .cardTag {
   position: absolute;
@@ -141,6 +154,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-ink);
+  z-index: 2;
 }
 
 /* Persistent per-card caption — burned onto every card, not hover-gated,
@@ -155,6 +169,7 @@
   padding: clamp(14px, 2vw, 30px);
   background: linear-gradient(to top, rgba(8, 4, 5, 0.88), transparent 65%);
   pointer-events: none;
+  z-index: 2;
 }
 .captionTitle {
   font-family: var(--font-display);

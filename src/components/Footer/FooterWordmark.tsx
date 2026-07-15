@@ -129,7 +129,7 @@ export default function FooterWordmark() {
     const drawText = () => {
       ctx.clearRect(0, 0, TEX_W, TEX_H);
       const fontFamily = getComputedStyle(document.documentElement)
-        .getPropertyValue("--font-display")
+        .getPropertyValue("--font-anton")
         .trim();
       ctx.fillStyle = "#ffffff";
       ctx.textAlign = "center";

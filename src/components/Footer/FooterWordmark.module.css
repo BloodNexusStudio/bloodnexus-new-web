@@ -30,7 +30,7 @@
   pointer-events: none;
 }
 .staticWordmark {
-  font-family: var(--font-display);
+  font-family: var(--font-anton), "Arial Black", sans-serif;
   font-size: clamp(45px, 18.2vw, 360px);
   line-height: 1;
   letter-spacing: 0.06em;

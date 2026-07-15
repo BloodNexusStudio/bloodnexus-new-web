@@ -41,6 +41,7 @@ export default function GameCard({ game }: { game: Game }) {
             loop
             muted
             playsInline
+            preload="none"
             className={styles.previewClip}
           />
         )}

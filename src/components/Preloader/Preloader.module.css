@@ -11,7 +11,7 @@
 
 .word {
   display: flex;
-  font-family: var(--font-display);
+  font-family: var(--font-anton), "Arial Black", sans-serif;
   color: var(--color-ink);
   font-size: clamp(44px, 10vw, 150px);
   line-height: 1;
