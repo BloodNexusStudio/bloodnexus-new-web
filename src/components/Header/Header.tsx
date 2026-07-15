@@ -42,9 +42,12 @@ export default function Header() {
       data-open={open}
     >
       <div className={`container ${styles.bar}`}>
-        <Link href="/" className={styles.logo} onClick={() => setOpen(false)}>
-          {SITE_NAME}
-          <span className={styles.logoDot}>.</span>
+        <Link href="/" className={styles.logoWrap} onClick={() => setOpen(false)}>
+          <img src="/logo.jpg" alt="BloodNexus Logo" className={styles.logoImg} />
+          <span className={styles.logoText}>
+            {SITE_NAME}
+            <span className={styles.logoDot}>.</span>
+          </span>
         </Link>
 
         {/* Desktop navigation */}
