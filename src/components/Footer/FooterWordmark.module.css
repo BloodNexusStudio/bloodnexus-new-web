@@ -2,9 +2,12 @@
    the legal row, so it can never overlap either. Its own overflow:hidden
    crops the mesh cleanly at this band's own edges. */
 .zone {
-  position: relative;
-  z-index: 3;
-  height: clamp(280px, 28vw, 440px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: clamp(300px, 32vw, 600px);
+  z-index: 1; /* sits behind columns (z-index 2) but above bg overlays */
   overflow: visible;
   pointer-events: none;
 }
@@ -63,6 +66,6 @@
 
 @media (max-width: 640px) {
   .zone {
-    height: clamp(180px, 44vw, 300px);
+    height: clamp(200px, 44vw, 360px);
   }
 }

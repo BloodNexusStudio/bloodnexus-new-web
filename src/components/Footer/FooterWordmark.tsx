@@ -231,8 +231,8 @@ export default function FooterWordmark() {
       baseWidth * (TEX_H / TEX_W)
     );
     const mesh = new THREE.Mesh(textGeo, textMat);
-    // Shift letters down in the zone — negative Y = down in THREE.js
-    const SHIFT_Y = -0.10;
+    // Position mesh close to bottom of absolute container
+    const SHIFT_Y = -0.08;
     mesh.position.y = SHIFT_Y;
     scene.add(mesh);
 
@@ -252,16 +252,18 @@ export default function FooterWordmark() {
       // Height: scale so mesh fills the zone height completely
       // meshBaseH = 0.65 (baseWidth * TEX_H/TEX_W), camera height = 2 (top=1 to bottom=-1)
       // We want mesh.scale.y * 0.65 = camera height
+      // Height: scale Y to perfect aspect ratio to fit camera viewport exactly without stretching or clipping
       const scaleY = 2.0 / 0.65;
 
       camera.left = -aspect;
       camera.right = aspect;
       // Camera tracks the shifted mesh exactly — no clipping on any edge
-      // Mesh center at SHIFT_Y=-0.18, half-height=1.0 → spans [-1.18, +0.82]
+      // Mesh center at SHIFT_Y=-0.08, half-height=1.0, and moves up to ±0.15 via scroll parallax.
       const halfH = 1.0;
       const PAD = 0.03; // tiny breathing room so edges don't hard-clip
-      camera.top    =  halfH + SHIFT_Y + PAD;   //  0.85
-      camera.bottom = -halfH + SHIFT_Y - PAD;   // -1.21
+      const maxParallaxOffset = 0.18; // safe margin for scroll offset
+      camera.top    =  halfH + SHIFT_Y + maxParallaxOffset + PAD;   // ~1.13
+      camera.bottom = -halfH + SHIFT_Y - maxParallaxOffset - PAD;   // ~-1.29
       camera.updateProjectionMatrix();
 
       mesh.scale.set(currentScale, scaleY, 1.0);
@@ -295,7 +297,7 @@ export default function FooterWordmark() {
       qy(rawUV.y);
       pointerActive = true;
 
-      // ── Smoke Spawner ───────────────────────────────────────────────────
+      // ── Smoke Spawner (Increased Density) ────────────────────────────────
       const smokeContainer = smokeContainerRef.current;
       if (smokeContainer) {
         const rect = smokeContainer.getBoundingClientRect();
@@ -307,8 +309,10 @@ export default function FooterWordmark() {
           mouseY - lastSpawnPos.current.y
         );
 
-        if (dist > 8) {
-          for (let i = 0; i < 2; i++) {
+        // Spawn more frequently (threshold 4px instead of 8px)
+        if (dist > 4) {
+          // Spawn 5 particles instead of 2 for maximum smoke density
+          for (let i = 0; i < 5; i++) {
             const particle = document.createElement("div");
             particle.className = styles.smokeParticle;
 
@@ -323,20 +327,21 @@ export default function FooterWordmark() {
             particle.style.borderRadius = `${r1}% ${r2}% ${r3}% ${r4}% / ${r5}% ${r6}% ${r7}% ${r8}%`;
             particle.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-            const offsetX = (Math.random() - 0.5) * 8;
-            const offsetY = (Math.random() - 0.5) * 8;
+            const offsetX = (Math.random() - 0.5) * 12;
+            const offsetY = (Math.random() - 0.5) * 12;
             particle.style.left = `${mouseX + offsetX}px`;
             particle.style.top = `${mouseY + offsetY}px`;
             smokeContainer.appendChild(particle);
 
+            // Richer initial opacity (0.28 instead of 0.16) and larger scales
             gsap.fromTo(particle,
-              { opacity: 0.16, scale: 0.5 },
+              { opacity: 0.28, scale: 0.5 },
               {
-                x: "random(-24, 24)",
-                y: "random(-70, -40)",
-                scale: "random(1.1, 1.8)",
+                x: "random(-32, 32)",
+                y: "random(-85, -50)",
+                scale: "random(1.4, 2.4)",
                 opacity: 0,
-                duration: "random(0.9, 1.4)",
+                duration: "random(1.0, 1.6)",
                 ease: "power1.out",
                 onComplete: () => {
                   particle.remove();

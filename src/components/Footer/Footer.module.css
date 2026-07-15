@@ -4,8 +4,12 @@
   background:
     radial-gradient(120% 80% at 50% 0%, #7a0d17 0%, transparent 60%),
     var(--color-bg-deep);
-  padding-top: clamp(32px, 4vw, 56px);
+  padding-top: clamp(60px, 6vw, 100px);
   padding-bottom: 0;
+  min-height: 100svh; /* takes full viewport height like Apechain */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .overlay {
