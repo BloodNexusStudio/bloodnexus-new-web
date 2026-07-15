@@ -1,0 +1,221 @@
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 120px var(--pad-x) 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero {
+  text-align: left;
+  margin-bottom: 60px;
+  border-bottom: 1px solid var(--color-line);
+  padding-bottom: 40px;
+}
+
+.badge {
+  display: inline-flex;
+  font-family: var(--font-subhead);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.badgeDark {
+  background: var(--color-surface);
+  color: var(--color-ink-muted);
+  padding: 0.5em 1em;
+}
+
+.badgeAccent {
+  background: var(--color-primary);
+  color: var(--color-ink);
+  padding: 0.5em 1em;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 72px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 24px;
+  max-width: 900px;
+}
+
+.introText {
+  font-family: var(--font-subhead);
+  font-size: clamp(16px, 1.5vw, 22px);
+  color: var(--color-ink-muted);
+  line-height: 1.5;
+  max-width: 800px;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+
+.subTitle {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 42px);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 24px;
+  border-left: 3px solid var(--color-primary);
+  padding-left: 16px;
+}
+
+.richText {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  color: var(--color-ink-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.richText p {
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-block: 40px;
+}
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  padding: 32px;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease);
+}
+
+.card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.cardTitle {
+  font-family: var(--font-subhead);
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardPrice {
+  color: var(--color-accent);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.cardList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-ink-muted);
+}
+
+.cardList li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.cardList li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+}
+
+.tableWrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-block: 40px;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.table th,
+.table td {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.table th {
+  background: rgba(255, 255, 255, 0.02);
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.highlightRow {
+  background: rgba(193, 18, 31, 0.05);
+}
+
+.ctaCard {
+  background: linear-gradient(135deg, var(--color-surface) 0%, rgba(193, 18, 31, 0.08) 100%);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  padding: clamp(32px, 5vw, 64px);
+  text-align: center;
+  margin-top: 80px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 48px);
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 16px;
+}
+
+.ctaText {
+  font-family: var(--font-body);
+  color: var(--color-ink-muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto 32px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 100px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

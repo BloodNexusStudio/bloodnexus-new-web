@@ -12,6 +12,7 @@ export const CAPSULE_LINKS = [
   { label: "VR", href: "/vr" },
   { label: "Web & Apps", href: "/web-apps" },
   { label: "3D Art", href: "/3d-art" },
+  { label: "Blog", href: "/blog/3d-game-art-outsourcing-costs-studios" },
 ] as const;
 
 

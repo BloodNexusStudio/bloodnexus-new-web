@@ -66,24 +66,23 @@ export default function Spotlight() {
         <div className={styles.copy}>
           <div className={styles.badge}>
             <span className={styles.badgeDark}>BloodNexus</span>
-            <span className={styles.badgeAccent}>Spotlight</span>
+            <span className={styles.badgeAccent}>Studio Services</span>
           </div>
-          <h2 className={styles.headline}>Worlds Worth Getting Lost In</h2>
+          <h2 className={styles.headline}>
+            <strong>Game Dev & 3D Art Outsourcing Company</strong>
+          </h2>
           <p className={styles.text}>
-            From early prototype to full production, we&apos;re currently
-            building our next immersive title — bringing narrative depth and
-            real-time craft together.
+            We are a premier game development and 3D art outsourcing partner, delivering high-fidelity real-time assets, cinematics, and full-cycle development services.
           </p>
           <p className={styles.text}>
-            Built by the same core team that ships cinematics, systems, and
-            worlds end to end.
+            Our team integrates seamlessly into your pipeline, providing AAA-grade characters, environment blocks, and engine-ready optimization for Unreal Engine and Unity.
           </p>
           <div className={styles.ctas}>
-            <Link href="/games" className="pill pill--primary">
-              Our Games
+            <Link href="/services" className="pill pill--primary">
+              Our Services
             </Link>
-            <Link href="/#contact" className="pill pill--outline">
-              Work With Us
+            <Link href="/blog/3d-game-art-outsourcing-costs-studios" className="pill pill--outline">
+              Outsourcing Cost Guide
             </Link>
           </div>
         </div>
