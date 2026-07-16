@@ -60,11 +60,11 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         sender: {
           name: "BloodNexus Web Inquiries",
-          email: "hello@bloodnexusstudio.in", // Verified Brevo sender domain email
+          email: "bloodnexusstudio@gmail.com", // Verified Brevo sender domain email
         },
         to: [
           {
-            email: "hello@bloodnexusstudio.in",
+            email: "bloodnexusstudio@gmail.com",
             name: "BloodNexus Admin",
           },
         ],
