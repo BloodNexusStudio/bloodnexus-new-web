@@ -135,15 +135,17 @@ export default function FooterWordmark() {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // 80% of TEX_H — leaves safe room for capital ascenders at top/bottom of canvas
-      const fontSize = TEX_H * 0.80;
-      const family = `${fontFamily || ""}, "Arial Black", sans-serif`;
-      ctx.font = `900 ${fontSize}px ${family}`;
+      // 85% of TEX_H — leaves safe room for capital ascenders at top/bottom of canvas
+      const fontSize = TEX_H * 0.85;
+      // Anton is weight 400! Set weight 400 so the browser matches the Anton font instead of falling back.
+      const family = `${fontFamily || "Anton"}, "Arial Black", Impact, sans-serif`;
+      ctx.font = `400 ${fontSize}px ${family}`;
 
       // Measure actual text width and compute scale to fill full canvas width
       const measured = ctx.measureText(WORD);
       const textW = measured.width;
-      const scaleX = (TEX_W * 0.92) / textW; // 92% fill — breathing room on left/right
+      // Use 80% fill instead of 92% to give ~10% safety margins on left/right, preventing horizontal viewport clipping
+      const scaleX = (TEX_W * 0.80) / textW;
 
       ctx.save();
       ctx.translate(TEX_W / 2, TEX_H / 2);
@@ -163,6 +165,15 @@ export default function FooterWordmark() {
         texture.needsUpdate = true;
       });
     }
+
+    // Retries at 200ms, 800ms, and 2000ms to guarantee late-loading webfonts are redrawn
+    const fontTimers = [200, 800, 2000].map((delay) =>
+      setTimeout(() => {
+        if (unmounted) return;
+        drawText();
+        texture.needsUpdate = true;
+      }, delay)
+    );
 
     // ── Trail buffer ─────────────────────────────────────────────────────
     const trailTarget = new THREE.WebGLRenderTarget(TRAIL_SIZE, TRAIL_SIZE, {
@@ -433,6 +444,7 @@ export default function FooterWordmark() {
       unmounted = true;
       cancelAnimationFrame(raf);
       window.clearTimeout(pointerIdleTimer);
+      fontTimers.forEach(clearTimeout);
       ro.disconnect();
       io.disconnect();
       st.kill();

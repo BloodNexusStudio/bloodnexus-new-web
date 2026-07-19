@@ -151,7 +151,9 @@
   gap: 12px;
 }
 .workIcon {
-  font-size: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .workCategory {
   font-family: var(--font-subhead);

@@ -20,6 +20,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
 }
 
 .logoWrap {

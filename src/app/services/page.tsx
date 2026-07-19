@@ -91,7 +91,7 @@ export default function ServicesPage() {
         {/* Subtle scanline overlay for the hero */}
         <div className={styles.scanlines} />
         <div className="container">
-          <p className={styles.systemTag}>{"//"} CORE SYSTEM CAPABILITIES</p>
+          <p className={styles.systemTag}>CORE SYSTEM CAPABILITIES</p>
           <MaskText as="h1" className={styles.title} text="Services" />
           <p className={styles.intro}>
             {/* [CONTENT] services intro */}
@@ -149,9 +149,9 @@ export default function ServicesPage() {
                 </div>
               </div>
 
-              <Link href="/#contact" className={styles.actionBtn}>
+              <Link href="/contact" className={styles.actionBtn}>
                 <span className={styles.actionBtnText}>INITIATE PROJECT</span>
-                <span className={styles.actionBtnArrow}>{"//"} &rarr;</span>
+                <span className={styles.actionBtnArrow}>&rarr;</span>
               </Link>
             </div>
           </Reveal>
@@ -160,11 +160,11 @@ export default function ServicesPage() {
 
       <section className={styles.cta}>
         <div className="container">
-          <p className={styles.systemTag}>{"//"} SECURE CHANNEL CONNECT</p>
+          <p className={styles.systemTag}>SECURE CHANNEL CONNECT</p>
           <h2 className={styles.ctaTitle}>Ready to begin production?</h2>
-          <a href={`mailto:${CONTACT.email}`} className="pill pill--primary">
+          <Link href="/contact" className="pill pill--primary">
             ESTABLISH CONNECTION
-          </a>
+          </Link>
         </div>
       </section>
     </>

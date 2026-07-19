@@ -136,7 +136,7 @@
   transition: opacity 0.4s var(--ease);
   z-index: 1;
 }
-.card:hover .artVideo {
+.artVideoPlaying {
   opacity: 1;
 }
 

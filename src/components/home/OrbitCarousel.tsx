@@ -49,7 +49,6 @@ export default function OrbitCarousel() {
   const sectionRef = useRef<HTMLElement>(null);
   const groupRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const rotationRef = useRef(0);
   const scrollTargetRef = useRef(0);
   const isScrollingRef = useRef(false);
@@ -61,20 +60,7 @@ export default function OrbitCarousel() {
   const dragStartRotationRef = useRef(0);
   const dragMovedRef = useRef(0);
 
-  const handleCardMouseEnter = (index: number) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.play().catch(() => {});
-    }
-  };
-
-  const handleCardMouseLeave = (index: number) => {
-    const video = videoRefs.current[index];
-    if (video) {
-      video.pause();
-      video.currentTime = 0;
-    }
-  };
+  // Hover play handlers removed to optimize performance and play only active card videos.
 
   const [radius, setRadius] = useState(520);
 
@@ -249,8 +235,7 @@ export default function OrbitCarousel() {
                 style={{
                   transform: `rotateY(${itemAngle}deg) translateZ(${radius}px)`,
                 }}
-                onMouseEnter={() => handleCardMouseEnter(i)}
-                onMouseLeave={() => handleCardMouseLeave(i)}
+                // Hover play triggers removed. Active card plays video automatically.
               >
                 <Link
                   href={`/games/${game.slug}`}
@@ -261,19 +246,7 @@ export default function OrbitCarousel() {
                   aria-label={`${game.title} — ${game.status}`}
                 >
                   <span className={styles.face}>
-                    {game.previewClip && (
-                      <video
-                        ref={(el) => {
-                          videoRefs.current[i] = el;
-                        }}
-                        src={game.previewClip}
-                        loop
-                        muted
-                        playsInline
-                        preload="none"
-                        className={styles.artVideo}
-                      />
-                    )}
+
                     <img
                       src={game.keyArt}
                       alt=""

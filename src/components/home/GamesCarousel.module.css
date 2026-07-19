@@ -119,7 +119,7 @@
   transition: opacity 0.4s var(--ease);
   z-index: 1;
 }
-.tile:hover .tileArtVideo {
+.tileArtVideoPlaying {
   opacity: 1;
 }
 

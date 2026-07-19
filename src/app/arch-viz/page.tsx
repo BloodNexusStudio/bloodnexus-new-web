@@ -2,6 +2,7 @@ import Link from "next/link";
 import MaskText from "@/components/motion/MaskText";
 import Reveal from "@/components/motion/Reveal";
 import { CONTACT } from "@/data/site";
+import WalkthroughShowcase from "@/components/showcase/WalkthroughShowcase";
 import styles from "./arch-viz.module.css";
 
 export const metadata = {
@@ -20,56 +21,56 @@ const TOOLS = [
 ];
 
 const ARCHVIZ_SHOWCASE_VIDEO =
-  "https://res.cloudinary.com/oglqwvqq/video/upload/v1784022265/ARCHVIZ_2_wgkmbk.mp4";
+  "/cloudinary-assets/videos/ARCHVIZ_2_wgkmbk.mp4";
 
 const DELIVERABLES = [
   {
     index: "01",
     title: "Exterior Rendering",
     desc: "Photorealistic structural facades, architectural contours, and natural landscape integration.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-1_hsyoti.jpg",
+    image: "/cloudinary-assets/images/archviz-1_hsyoti.jpg",
   },
   {
     index: "02",
     title: "Interior Design & Mood",
     desc: "Hyper-detailed indoor environments capturing authentic lighting, furniture arrangement, and physical materials.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-2_mrptom.jpg",
+    image: "/cloudinary-assets/images/archviz-2_mrptom.jpg",
   },
   {
     index: "03",
     title: "Interactive Property Walkthroughs",
     desc: "Cinematic fluid tours designed in real-time engine to show property layouts and room flow.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-3_mf7hgz.jpg",
+    image: "/cloudinary-assets/images/archviz-3_mf7hgz.jpg",
   },
   {
     index: "04",
     title: "Commercial & Office Spaces",
     desc: "Spacious commercial complex designs customized for retail, enterprise offices, and modern working hubs.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-5_ncybew.jpg",
+    image: "/cloudinary-assets/images/archviz-5_ncybew.jpg",
   },
   {
     index: "05",
     title: "Township & High-Rise Renders",
     desc: "Stunning masterplans and realistic aerial captures designed for massive cityscapes and apartments.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-6_zzem07.jpg",
+    image: "/cloudinary-assets/images/archviz-6_zzem07.jpg",
   },
   {
     index: "06",
     title: "Dynamic Ambient Lighting",
     desc: "Accurate daylight simulation, architectural mood lighting, and shadow studies to capture dawn to dusk vibes.",
-    image: "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-7_gewhjs.jpg",
+    image: "/cloudinary-assets/images/archviz-7_gewhjs.jpg",
   },
 ];
 
 const WORKS = [
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-1_hsyoti.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-2_mrptom.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934510/archviz-3_mf7hgz.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934511/archviz-4_pjsj9p.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-5_ncybew.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-6_zzem07.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-7_gewhjs.jpg",
-  "https://res.cloudinary.com/oglqwvqq/image/upload/v1783934509/archviz-8_wqhnsu.jpg",
+  "/cloudinary-assets/images/archviz-1_hsyoti.jpg",
+  "/cloudinary-assets/images/archviz-2_mrptom.jpg",
+  "/cloudinary-assets/images/archviz-3_mf7hgz.jpg",
+  "/cloudinary-assets/images/archviz-4_pjsj9p.jpg",
+  "/cloudinary-assets/images/archviz-5_ncybew.jpg",
+  "/cloudinary-assets/images/archviz-6_zzem07.jpg",
+  "/cloudinary-assets/images/archviz-7_gewhjs.jpg",
+  "/cloudinary-assets/images/archviz-8_wqhnsu.jpg",
 ];
 
 export default function ArchVizPage() {
@@ -79,7 +80,7 @@ export default function ArchVizPage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <video
-            src="https://res.cloudinary.com/oglqwvqq/video/upload/v1783934528/archviz-9_jkk6cl.mp4"
+            src="/cloudinary-assets/videos/archviz-9_jkk6cl.mp4"
             autoPlay
             loop
             muted
@@ -92,7 +93,7 @@ export default function ArchVizPage() {
         </div>
         <div className={styles.scanlines} />
         <div className={`container ${styles.heroContent}`}>
-          <p className={styles.systemTag}>{"//"} REALISTIC ARCHITECTURE VISUALS IN REAL-TIME</p>
+          <p className={styles.systemTag}>REALISTIC ARCHITECTURE VISUALS IN REAL-TIME</p>
           <MaskText as="h1" className={styles.heroTitle} text="Reshaping Perspective" />
           <p className={styles.heroDesc}>
             We bring real-estate ideas to life with detailed interior and exterior
@@ -110,7 +111,7 @@ export default function ArchVizPage() {
       <Reveal as="section" y={40} className={styles.atmosphereSection}>
         <div className={`container ${styles.atmosphereGrid}`}>
           <div className={styles.atmosphereCopy}>
-            <p className={styles.sectionLabel}>{"//"} VISUAL IDENTITY</p>
+            <p className={styles.sectionLabel}>VISUAL IDENTITY</p>
             <h2 className={styles.sectionTitle}>More Than Renders</h2>
             <h3 className={styles.sectionSub}>Atmospheres</h3>
             <p className={styles.text}>
@@ -147,7 +148,7 @@ export default function ArchVizPage() {
             <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
             <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
             <img
-              src="https://res.cloudinary.com/oglqwvqq/image/upload/v1783934511/archviz-4_pjsj9p.jpg"
+              src="/cloudinary-assets/images/archviz-4_pjsj9p.jpg"
               alt="Luxury interior architecture render"
             />
           </div>
@@ -159,7 +160,7 @@ export default function ArchVizPage() {
         <div className="container">
           <div className={styles.centerHead}>
             <span className={styles.bgWord}>CAPABILITIES</span>
-            <p className={styles.systemTag}>{"//"} WHAT WE DELIVER</p>
+            <p className={styles.systemTag}>WHAT WE DELIVER</p>
             <h2 className={styles.centerTitle}>Visual Capabilities</h2>
           </div>
 
@@ -184,74 +185,30 @@ export default function ArchVizPage() {
       </Reveal>
 
       {/* ── Real-Time Walkthrough Showcase Section ───────────────────── */}
-      <section className={styles.showcaseSection}>
-        <video
-          className={styles.showcaseVideo}
-          src={ARCHVIZ_SHOWCASE_VIDEO}
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-        <div className={styles.showcaseOverlay} />
-        <div className={styles.videoShield} />
-
-        <div className={`container ${styles.showcaseContent}`}>
-          <div className={styles.showcaseLeft}>
-            <p className={styles.systemTag}>{"// "} REAL-TIME WALKTHROUGH</p>
-            <h2 className={styles.showcaseTitle}>Vibrant Spaces</h2>
-            <p className={styles.showcaseDesc}>
-              Experience interactive walkthroughs with fully dynamic lighting, physically accurate materials, and seamless frame-rates powered by Unreal Engine 5.
-            </p>
-            <a
-              href="/video/archviz"
-              target="_blank"
-              className={styles.viewFullBtn}
-            >
-              <span className={styles.viewFullIcon}>▶</span>
-              View Full Walkthrough
-            </a>
-          </div>
-
-          <div className={styles.showcaseRight}>
-            <div className={styles.showcaseStats}>
-              <div className={styles.showcaseStat}>
-                <span className={styles.statLabel}>Resolution</span>
-                <span className={styles.statValue}>4K Ultra HD</span>
-              </div>
-              <div className={styles.showcaseStat}>
-                <span className={styles.statLabel}>Illumination</span>
-                <span className={styles.statValue}>Lumen Global Illumination</span>
-              </div>
-              <div className={styles.showcaseStat}>
-                <span className={styles.statLabel}>Interactivity</span>
-                <span className={styles.statValue}>Real-Time Sandbox Walkthrough</span>
-              </div>
-              <div className={styles.showcaseStat}>
-                <span className={styles.statLabel}>Render Time</span>
-                <span className={styles.statValue}>Instant (60 FPS Real-time)</span>
-              </div>
-            </div>
-            <div className={styles.showcaseHighlights}>
-              <p className={styles.highlightItem}>
-                <span className={styles.highlightDot} /> Dynamic day/night cycle simulation
-              </p>
-              <p className={styles.highlightItem}>
-                <span className={styles.highlightDot} /> Custom material shaders (PBR)
-              </p>
-              <p className={styles.highlightItem}>
-                <span className={styles.highlightDot} /> Detailed architectural models
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <WalkthroughShowcase
+        videoSrc={ARCHVIZ_SHOWCASE_VIDEO}
+        tag="REAL-TIME WALKTHROUGH"
+        title="Vibrant Spaces"
+        desc="Experience interactive walkthroughs with fully dynamic lighting, physically accurate materials, and seamless frame-rates powered by Unreal Engine 5."
+        ctaText="View Full Walkthrough"
+        stats={[
+          { label: "Resolution", value: "4K Ultra HD" },
+          { label: "Illumination", value: "Lumen Global Illumination" },
+          { label: "Interactivity", value: "Real-Time Sandbox Walkthrough" },
+          { label: "Render Time", value: "Instant (60 FPS Real-time)" },
+        ]}
+        highlights={[
+          "Dynamic day/night cycle simulation",
+          "Custom material shaders (PBR)",
+          "Detailed architectural models",
+        ]}
+      />
 
       {/* Selected Works Section */}
       <Reveal as="section" y={40} className={styles.portfolioSection}>
         <div className="container">
           <div className={styles.centerHead}>
-            <p className={styles.systemTag}>{"//"} PORTFOLIO</p>
+            <p className={styles.systemTag}>PORTFOLIO</p>
             <h2 className={styles.centerTitle}>Selected Works</h2>
           </div>
 
@@ -268,7 +225,7 @@ export default function ArchVizPage() {
       {/* Secure CTA */}
       <section className={styles.cta}>
         <div className="container">
-          <p className={styles.systemTag}>{"//"} SECURE CHANNEL CONNECT</p>
+          <p className={styles.systemTag}>SECURE CHANNEL CONNECT</p>
           <h2 className={styles.ctaTitle}>Ready to begin production?</h2>
           <a href={`mailto:${CONTACT.email}`} className="pill pill--primary">
             ESTABLISH CONNECTION

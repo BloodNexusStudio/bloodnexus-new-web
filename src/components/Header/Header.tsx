@@ -63,7 +63,7 @@ export default function Header() {
             </RollLink>
           ))}
           <Link
-            href="/#contact"
+            href="/contact"
             className="pill pill--outline"
           >
             Contact Us
@@ -98,7 +98,7 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/#contact"
+            href="/contact"
             className={styles.overlayLink}
             style={{ transitionDelay: `${0.07 * (CAPSULE_LINKS.length + 2)}s` }}
             onClick={() => setOpen(false)}

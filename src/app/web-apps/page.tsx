@@ -15,71 +15,89 @@ const WORKS = [
     title: "Odyssey Travels",
     category: "Web • Travel",
     desc: "Immersive booking experience for luxury world tours and expeditions.",
-    img: "https://bloodnexusstudio.in/otassets/48c6bc10-99a6-46cb-9621-39e34ee5beb6.png",
+    img: "/web-apps/odyssey_travels.png",
     tags: ["Next.js", "Mapbox", "Stripe"],
-    icon: "💻",
+    icon: "web",
   },
   {
     title: "Fintech Dashboard",
     category: "App • Finance",
     desc: "Secure, real-time banking dashboard handling millions of transactions.",
-    img: "https://bloodnexusstudio.in/otassets/71b176a7-2f8a-498b-b060-2d0fd3ed13d9.png",
+    img: "/web-apps/fintech_dashboard.png",
     tags: ["AES-256", "Sockets", "Biometrics"],
-    icon: "📱",
+    icon: "mobile",
   },
   {
     title: "Aura Studios",
     category: "Web • Agency",
     desc: "Minimalist portfolio showcasing award-winning brand identities.",
-    img: "https://bloodnexusstudio.in/otassets/e997db8e-f93f-4118-8dbe-1f3bc12f2d9f.png",
+    img: "/web-apps/aura_studios.png",
     tags: ["Vue.js", "GSAP", "WebGL"],
-    icon: "💻",
+    icon: "web",
   },
   {
     title: "Social Connect",
     category: "App • Social",
     desc: "Community platform with live feeds, chat, and rich media support.",
-    img: "https://bloodnexusstudio.in/otassets/0c009dba-c4fc-48a5-8cd2-d5cf446c833b.png",
+    img: "/web-apps/social_connect.png",
     tags: ["WebRTC", "Push", "Content Algo"],
-    icon: "📱",
+    icon: "mobile",
   },
   {
     title: "Lumina Vision",
     category: "Web • Portfolio",
     desc: "High-performance gallery for a professional photography agency.",
-    img: "https://bloodnexusstudio.in/otassets/81c500d3-c6f1-40a1-b821-368f4e11f491.png",
+    img: "/web-apps/lumina_vision.png",
     tags: ["Next.js", "Cloudinary", "LazyLoad"],
-    icon: "💻",
+    icon: "web",
   },
 ];
+
+function getIcon(type: string) {
+  if (type === "web") {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+        <line x1="2" y1="20" x2="22" y2="20" />
+        <line x1="12" y1="17" x2="12" y2="20" />
+      </svg>
+    );
+  }
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ display: 'block' }}>
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+      <line x1="12" y1="18" x2="12.01" y2="18" />
+    </svg>
+  );
+}
 
 const CAPABILITIES = [
   {
     title: "High-Performance Websites",
     subtitle: "Speed & SEO First",
     desc: "From corporate platforms to creative portfolios. We build fast, clean, and highly polished websites that make your brand stand out.",
-    img: "https://bloodnexusstudio.in/otassets/25cf4ea0-5ad9-4869-b7fb-1c33e631b55e.png",
+    img: "/web-apps/websites.png",
     tags: ["Next.js", "SEO", "Analytics"],
   },
   {
     title: "Native & Mobile Apps",
     subtitle: "iOS & Android",
     desc: "Fluid, responsive applications built for the modern mobile user. Offline support, push notifications, and native device integration.",
-    img: "https://bloodnexusstudio.in/otassets/3a02916d-831e-4ccd-9ccd-e607810671ae.png",
+    img: "/web-apps/mobile_apps.png",
     tags: ["React Native", "Flutter", "HealthKit"],
   },
   {
     title: "E-Commerce Solutions",
     subtitle: "Scale Your Sales",
     desc: "Custom shopping experiences that convert. Secure payments, inventory management, and seamless checkout flows.",
-    img: "https://bloodnexusstudio.in/otassets/48707790-3cf9-4b45-afd1-f35dbe11fc7e.png",
+    img: "/web-apps/ecommerce.png",
     tags: ["Shopify", "Stripe", "Dashboard"],
   },
   {
     title: "Enterprise Platforms",
     subtitle: "Streamline Operations",
     desc: "Internal tools that eliminate bottlenecks. Automated workflows, data visualization, and role-based access control.",
-    img: "https://bloodnexusstudio.in/otassets/cea3d78a-fae7-4717-b884-1732f3082662.png",
+    img: "/web-apps/enterprise.png",
     tags: ["SaaS", "Cloud", "Security"],
   },
 ];
@@ -106,7 +124,7 @@ export default function WebAppsPage() {
       <section className={styles.hero}>
         <div className={styles.scanlines} />
         <div className={`container ${styles.heroContent}`}>
-          <span className={styles.topBadge}>{"//"} WEB & MOBILE EXCELLENCE</span>
+          <span className={styles.topBadge}>WEB & MOBILE EXCELLENCE</span>
           <MaskText
             as="h1"
             className={styles.heroTitle}
@@ -116,7 +134,7 @@ export default function WebAppsPage() {
             We engineer high-performance websites and native apps that look stunning, load instantly, and drive real business growth.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/#contact" className="pill pill--primary">
+            <Link href="/contact" className="pill pill--primary">
               START YOUR PROJECT
             </Link>
           </div>
@@ -127,7 +145,7 @@ export default function WebAppsPage() {
       <Reveal as="section" y={40} className={styles.worksSection}>
         <div className="container">
           <div className={styles.centerHead}>
-            <p className={styles.systemTag}>{"//"} WORK HISTORY</p>
+            <p className={styles.systemTag}>WORK HISTORY</p>
             <h2 className={styles.centerTitle}>Selected Works</h2>
           </div>
 
@@ -149,7 +167,7 @@ export default function WebAppsPage() {
                 </div>
                 <div className={styles.workCopy}>
                   <div className={styles.workMeta}>
-                    <span className={styles.workIcon}>{w.icon}</span>
+                    <span className={styles.workIcon}>{getIcon(w.icon)}</span>
                     <span className={styles.workCategory}>{w.category}</span>
                   </div>
                   <h3 className={styles.workTitle}>{w.title}</h3>
@@ -173,7 +191,7 @@ export default function WebAppsPage() {
         <div className="container">
           <div className={styles.centerHead}>
             <span className={styles.bgWord}>SERVICES</span>
-            <p className={styles.systemTag}>{"//"} PRODUCTION CAPABILITIES</p>
+            <p className={styles.systemTag}>PRODUCTION CAPABILITIES</p>
             <h2 className={styles.centerTitle}>What We Deliver</h2>
           </div>
 
@@ -210,7 +228,7 @@ export default function WebAppsPage() {
       <Reveal as="section" y={40} className={styles.backboneSection}>
         <div className="container">
           <div className={styles.centerHead}>
-            <p className={styles.systemTag}>{"//"} INFRASTRUCTURE STACK</p>
+            <p className={styles.systemTag}>INFRASTRUCTURE STACK</p>
             <h2 className={styles.centerTitle}>Technological Backbone</h2>
           </div>
 
@@ -229,7 +247,7 @@ export default function WebAppsPage() {
       <Reveal as="section" y={40} className={styles.speedSection}>
         <div className="container">
           <div className={styles.centerHead}>
-            <p className={styles.systemTag}>{"//"} PERFORMANCE METRICS</p>
+            <p className={styles.systemTag}>PERFORMANCE METRICS</p>
             <h2 className={styles.centerTitle}>Built for Speed & Design</h2>
           </div>
 
@@ -267,11 +285,11 @@ export default function WebAppsPage() {
       {/* Secure CTA */}
       <section className={styles.cta}>
         <div className="container">
-          <p className={styles.systemTag}>{"//"} SECURE CHANNEL CONNECT</p>
+          <p className={styles.systemTag}>SECURE CHANNEL CONNECT</p>
           <h2 className={styles.ctaTitle}>Ready to begin production?</h2>
-          <a href={`mailto:${CONTACT.email}`} className="pill pill--primary">
+          <Link href="/contact" className="pill pill--primary">
             ESTABLISH CONNECTION
-          </a>
+          </Link>
         </div>
       </section>
     </>

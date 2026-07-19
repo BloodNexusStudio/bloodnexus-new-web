@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 const WARSAW_VIDEO =
-  "https://res.cloudinary.com/oglqwvqq/video/upload/v1784016507/WARSAW_z4miiu.mp4";
+  "/cloudinary-assets/videos/WARSAW_z4miiu.mp4";
 
 export default function WarsawViewerPage() {
   return (

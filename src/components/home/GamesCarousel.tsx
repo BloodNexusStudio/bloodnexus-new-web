@@ -33,39 +33,11 @@ function buildUnits(games: Game[]): Unit[] {
 }
 
 function Tile({ game }: { game: Game }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  const handleMouseEnter = () => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (videoRef.current) {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
-    }
-  };
-
   return (
     <Link
       href={`/games/${game.slug}`}
       className={styles.tile}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
-      {game.previewClip && (
-        <video
-          ref={videoRef}
-          src={game.previewClip}
-          loop
-          muted
-          playsInline
-          preload="none"
-          className={styles.tileArtVideo}
-        />
-      )}
       <img
         src={game.keyArt}
         alt={`${game.title} key art`}

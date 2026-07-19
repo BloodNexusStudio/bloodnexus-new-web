@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 const ARCHVIZ_VIDEO =
-  "https://res.cloudinary.com/oglqwvqq/video/upload/v1784022265/ARCHVIZ_2_wgkmbk.mp4";
+  "/cloudinary-assets/videos/ARCHVIZ_2_wgkmbk.mp4";
 
 export default function ArchVizViewerPage() {
   return (

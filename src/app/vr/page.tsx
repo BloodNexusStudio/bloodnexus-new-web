@@ -11,12 +11,12 @@ export const metadata = {
 };
 
 const GALLERY = [
-  "https://bloodnexusstudio.in/otassets/FamilyRoom_-_Copy_fcqzbg.jpg",
-  "https://bloodnexusstudio.in/otassets/IMG-20250421-WA0025_mu7mlq.jpg",
-  "https://bloodnexusstudio.in/otassets/IMG-20250421-WA0026_ubm637.jpg",
-  "https://bloodnexusstudio.in/otassets/IMG-20250421-WA0024_kobxdb.jpg",
-  "https://bloodnexusstudio.in/otassets/IMG-20250421-WA0022_mmd1oy.jpg",
-  "https://bloodnexusstudio.in/otassets/IMG-20250421-WA0019_dydete.jpg",
+  "/vr/gallery_1.png",
+  "/vr/gallery_2.png",
+  "/cloudinary-assets/images/archviz-2_mrptom.jpg",
+  "/cloudinary-assets/images/archviz-3_mf7hgz.jpg",
+  "/cloudinary-assets/images/archviz-5_ncybew.jpg",
+  "/cloudinary-assets/images/archviz-6_zzem07.jpg",
 ];
 
 export default function VRPage() {
@@ -26,20 +26,20 @@ export default function VRPage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <img
-            src="https://bloodnexusstudio.in/otassets/VR-bg_uqw3k8.png"
+            src="/vr/vr_hero_bg.png"
             alt="VR banner"
           />
           <div className={styles.heroOverlay} />
         </div>
         <div className={styles.scanlines} />
         <div className={`container ${styles.heroContent}`}>
-          <p className={styles.systemTag}>{"//"} IMMERSIVE VR BUILT FOR NATURAL INTERACTION</p>
+          <p className={styles.systemTag}>IMMERSIVE VR BUILT FOR NATURAL INTERACTION</p>
           <MaskText as="h1" className={styles.heroTitle} text="Beyond Perception" />
           <p className={styles.heroDesc}>
             We design VR experiences that are comfortable, intuitive, and realistic—built for Quest, SteamVR, and Vision Pro.
           </p>
           <div className={styles.heroCtas}>
-            <Link href="/#contact" className="pill pill--primary">
+            <Link href="/contact" className="pill pill--primary">
               START YOUR VR EXPERIENCE
             </Link>
           </div>
@@ -58,12 +58,12 @@ export default function VRPage() {
               <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
               <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
               <img
-                src="https://bloodnexusstudio.in/otassets/cbaec4f1-d8a7-402f-84cc-424f62491a24.png"
+                src="/vr/vr_solutions.png"
                 alt="VR Solutions Banner"
               />
             </div>
             <div className={styles.bannerContent}>
-              <p className={styles.systemTag}>{"//"} OPERATIONAL PROTOCOL</p>
+              <p className={styles.systemTag}>OPERATIONAL PROTOCOL</p>
               <h2 className={styles.bannerTitle}>Virtual Reality (VR) Solutions</h2>
               <p className={styles.bannerDesc}>
                 Perfect for businesses that need to wow their audience or train their staff safely.
@@ -78,7 +78,7 @@ export default function VRPage() {
         <div className="container">
           <div className={styles.sectionHead}>
             <div className={styles.sectionTitles}>
-              <p className={styles.systemTag}>{"//"} CURATED VIRTUAL ENVIRONMENTS</p>
+              <p className={styles.systemTag}>CURATED VIRTUAL ENVIRONMENTS</p>
               <h2 className={styles.sectionTitle}>Visual Odyssey</h2>
             </div>
             <p className={styles.headDesc}>
@@ -110,7 +110,7 @@ export default function VRPage() {
         <div className="container">
           <div className={styles.centerHead}>
             <span className={styles.bgWord}>STANDARDS</span>
-            <p className={styles.systemTag}>{"//"} PRODUCTION SYSTEMS</p>
+            <p className={styles.systemTag}>PRODUCTION SYSTEMS</p>
             <h2 className={styles.centerTitle}>Power-Ups, Not Mark-Ups</h2>
           </div>
 
@@ -118,7 +118,7 @@ export default function VRPage() {
             <div className={styles.powerCard}>
               <div className={styles.cardMedia}>
                 <img
-                  src="https://bloodnexusstudio.in/otassets/6dc2726f-447c-40fd-9184-69d9f3dbe147.png"
+                  src="/cloudinary-assets/images/archviz-7_gewhjs.jpg"
                   alt="VR Training & Simulation"
                 />
               </div>
@@ -133,7 +133,7 @@ export default function VRPage() {
             <div className={styles.powerCard}>
               <div className={styles.cardMedia}>
                 <img
-                  src="https://bloodnexusstudio.in/otassets/ac1b28f6-bc0b-4660-b0c9-55e106966887.png"
+                  src="/cloudinary-assets/images/new-3_toofsl.png"
                   alt="VR Gaming"
                 />
               </div>
@@ -153,12 +153,12 @@ export default function VRPage() {
         <div className="container">
           <div className={styles.arGrid}>
             <div className={styles.arContent}>
-              <p className={styles.systemTag}>{"//"} AUGMENTED REALITY (AR)</p>
+              <p className={styles.systemTag}>AUGMENTED REALITY (AR)</p>
               <h2 className={styles.arTitle}>Augmented Reality</h2>
               <p className={styles.arDesc}>
                 Let customers scan a product package to see it come to life.
               </p>
-              <Link href="/#contact" className="pill pill--primary">
+              <Link href="/contact" className="pill pill--primary">
                 LETS INNOVATE
               </Link>
             </div>
@@ -169,7 +169,7 @@ export default function VRPage() {
               <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
               <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
               <img
-                src="https://bloodnexusstudio.in/otassets/cbf57e62-e045-42a0-b6d9-2060b4a0d454.png"
+                src="/cloudinary-assets/images/3dart-10_ziywet.png"
                 alt="Augmented Reality experience"
               />
             </div>
@@ -180,11 +180,11 @@ export default function VRPage() {
       {/* Secure CTA */}
       <section className={styles.cta}>
         <div className="container">
-          <p className={styles.systemTag}>{"//"} SECURE CHANNEL CONNECT</p>
+          <p className={styles.systemTag}>SECURE CHANNEL CONNECT</p>
           <h2 className={styles.ctaTitle}>Ready to begin production?</h2>
-          <a href={`mailto:${CONTACT.email}`} className="pill pill--primary">
+          <Link href="/contact" className="pill pill--primary">
             ESTABLISH CONNECTION
-          </a>
+          </Link>
         </div>
       </section>
     </>

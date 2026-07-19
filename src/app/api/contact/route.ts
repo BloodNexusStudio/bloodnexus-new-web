@@ -50,6 +50,9 @@ export async function POST(request: Request) {
       .replace("{{ budget }}", budget || "N/A")
       .replace("{{ briefing }}", briefing || "N/A");
 
+    const senderEmail = process.env.BREVO_SENDER_EMAIL || "bloodnexusstudio@gmail.com";
+    const receiverEmail = process.env.BREVO_RECEIVER_EMAIL || "bloodnexusstudio@gmail.com";
+
     // Send via Brevo HTTP API
     const response = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
@@ -60,11 +63,11 @@ export async function POST(request: Request) {
       body: JSON.stringify({
         sender: {
           name: "BloodNexus Web Inquiries",
-          email: "bloodnexusstudio@gmail.com", // Verified Brevo sender domain email
+          email: senderEmail,
         },
         to: [
           {
-            email: "bloodnexusstudio@gmail.com",
+            email: receiverEmail,
             name: "BloodNexus Admin",
           },
         ],
@@ -81,6 +84,66 @@ export async function POST(request: Request) {
       const errorText = await response.text();
       console.error("Brevo API error response:", errorText);
       return NextResponse.json({ error: "Failed to transmit via Brevo" }, { status: response.status });
+    }
+
+    // Send auto-responder thank-you email directly to the user
+    try {
+      const currentYear = new Date().getFullYear();
+      const autoResponderHtml = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Thank You for Contacting BloodNexus</title>
+        </head>
+        <body style="font-family: sans-serif; background-color: #0b0b0d; color: #f2efe9; padding: 40px; margin: 0;">
+          <div style="max-width: 600px; margin: 0 auto; background: #141418; border: 1px solid rgba(193, 18, 31, 0.25); border-radius: 8px; padding: 40px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);">
+            <div style="text-align: center; margin-bottom: 30px;">
+              <h1 style="color: #ffffff; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 900; margin: 0; font-size: 24px; border-bottom: 2px solid #c1121f; display: inline-block; padding-bottom: 10px;">BLOODNEXUS</h1>
+            </div>
+            <h2 style="color: #ffffff; font-size: 20px; font-weight: 700; margin-top: 0; text-transform: uppercase; letter-spacing: 0.05em;">Transmission Acknowledged</h2>
+            <p style="font-size: 15px; line-height: 1.6; color: rgba(242, 239, 233, 0.8);">
+              Hello <strong>${name}</strong>,
+            </p>
+            <p style="font-size: 15px; line-height: 1.6; color: rgba(242, 239, 233, 0.8);">
+              Thank you for contacting BloodNexus Studio. We have successfully received your inquiry and project parameters.
+            </p>
+            <p style="font-size: 15px; line-height: 1.6; color: rgba(242, 239, 233, 0.8);">
+              Our team is reviewing your briefing, and we will get back to you shortly.
+            </p>
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(242, 239, 233, 0.1); font-size: 12px; color: rgba(242, 239, 233, 0.5); text-align: center;">
+              <p style="margin: 0;">© ${currentYear} BloodNexus Studio. All Rights Reserved.</p>
+              <p style="margin: 5px 0 0 0;">Thane, India</p>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+
+      await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify({
+          sender: {
+            name: "BloodNexus Studio",
+            email: senderEmail,
+          },
+          to: [
+            {
+              email: email,
+              name: name,
+            },
+          ],
+          subject: `Thank you for contacting BloodNexus Studio`,
+          htmlContent: autoResponderHtml,
+        }),
+      });
+    } catch (err) {
+      console.error("Failed to send auto-responder to user:", err);
+      // Fail silently to avoid interrupting the main inquiry transmission flow
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
