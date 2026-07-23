@@ -57,7 +57,6 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     caseStudies: [
       {
         title: "RPG Cinematic Project",
-        title: "10 Characters Rigged in 4 Weeks",
         metric: "10 Characters Rigged in 4 Weeks"
       }
     ],
