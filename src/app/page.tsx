@@ -1,25 +1,25 @@
+import HomeHero from "@/components/home/HomeHero";
 import OrbitCarousel from "@/components/home/OrbitCarousel";
-import Spotlight from "@/components/home/Spotlight";
-import CategoryMarquee from "@/components/home/CategoryMarquee";
+import TechStackMarquee from "@/components/home/TechStackMarquee";
 import GamesCarousel from "@/components/home/GamesCarousel";
-import ServicesTicker from "@/components/home/ServicesTicker";
-import ServicesBand from "@/components/home/ServicesBand";
+import OurProcess from "@/components/home/OurProcess";
+import PerformanceSolutions from "@/components/home/PerformanceSolutions";
 import StatsStrip from "@/components/home/StatsStrip";
-import CareersTeaser from "@/components/home/CareersTeaser";
+import Testimonials from "@/components/home/Testimonials";
 import MissionControlForm from "@/components/home/MissionControlForm";
 
 // Home page — wordmark plays as the site preloader (layout); the carousel is the hero.
 export default function Home() {
   return (
     <>
+      <HomeHero />
       <OrbitCarousel />
-      <Spotlight />
-      <CategoryMarquee />
+      <TechStackMarquee />
       <GamesCarousel />
-      <ServicesTicker />
-      <ServicesBand />
+      <OurProcess />
+      <PerformanceSolutions />
       <StatsStrip />
-      <CareersTeaser />
+      <Testimonials />
       <MissionControlForm />
       {/* Footer (§6.6) is rendered globally in layout.tsx */}
     </>

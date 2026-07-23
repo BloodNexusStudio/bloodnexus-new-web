@@ -1,0 +1,138 @@
+.section {
+  background-color: #0B0B0E;
+  padding-block: clamp(60px, 8vw, 100px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  margin-bottom: 48px;
+}
+
+.topLabel {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D32F2F;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.heading {
+  font-family: var(--font-anton);
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* Process Flow */
+.processFlow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  .processFlow {
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .processFlow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Step Card */
+.stepCard {
+  display: flex;
+  gap: 16px;
+  flex: 1;
+  min-width: 250px;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+.stepCard:hover .iconBox {
+  border-color: rgba(211, 47, 47, 0.5);
+  color: #D32F2F;
+}
+
+.iconBox svg {
+  width: 32px;
+  height: 32px;
+}
+
+.contentBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepNum {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 4px;
+}
+
+.stepTitle {
+  font-family: var(--font-inter);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.stepDesc {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Arrow */
+.arrowBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  padding-top: 24px; /* Align roughly with the icon box */
+}
+
+.arrowBox svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 1024px) {
+  .arrowBox {
+    display: none;
+  }
+}

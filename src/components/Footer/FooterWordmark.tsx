@@ -51,12 +51,13 @@ const TEXT_FRAG = /* glsl */ `
     // Smooth Gaussian influence envelope (radius 0.13 in screen space)
     float influence = exp(-(dist * dist) / (0.13 * 0.13 * 0.5));
     
-    // Drag warp: pull coordinates along the velocity vector modulated by influence (increased stretch)
-    vec2 dragWarp = uVelocity * influence * 5.2;
+    // Drag warp: pull coordinates along the velocity vector modulated by influence
+    // Increased multipliers for a highly pronounced "Apechain" rubber/fluid stretch
+    vec2 dragWarp = uVelocity * influence * 15.0;
     
-    // Clamp warp to prevent extreme stretching
+    // Clamp warp to prevent extreme stretching tearing
     float dragLen = length(dragWarp);
-    float maxDrag = 0.048; // increased maximum stretch
+    float maxDrag = 0.25; 
     if (dragLen > maxDrag) {
       dragWarp *= maxDrag / dragLen;
     }
@@ -149,7 +150,8 @@ export default function FooterWordmark() {
 
       ctx.save();
       ctx.translate(TEX_W / 2, TEX_H / 2);
-      ctx.scale(scaleX, 1.0);
+      // Scale X to fit, Scale Y to make it incredibly tall and imposing like Apechain
+      ctx.scale(scaleX, 1.6);
       ctx.fillText(WORD, 0, 0);
       ctx.restore();
     };
@@ -288,12 +290,12 @@ export default function FooterWordmark() {
     const rawUV = new THREE.Vector2(0.5, 0.5);
     const smoothPos = { x: 0.5, y: 0.5 };
     const qx = gsap.quickTo(smoothPos, "x", {
-      duration: 1.4,
-      ease: "elastic.out(1.2, 0.75)",
+      duration: 1.8,
+      ease: "elastic.out(1.0, 0.4)", // Bouncier rubber band return
     });
     const qy = gsap.quickTo(smoothPos, "y", {
-      duration: 1.4,
-      ease: "elastic.out(1.2, 0.75)",
+      duration: 1.8,
+      ease: "elastic.out(1.0, 0.4)", // Bouncier rubber band return
     });
 
     const onMove = (e: PointerEvent) => {
@@ -320,10 +322,10 @@ export default function FooterWordmark() {
           mouseY - lastSpawnPos.current.y
         );
 
-        // Spawn more frequently (threshold 4px instead of 8px)
-        if (dist > 4) {
-          // Spawn 5 particles instead of 2 for maximum smoke density
-          for (let i = 0; i < 5; i++) {
+        // Spawn more frequently for extreme density
+        if (dist > 2) {
+          // Spawn dense cluster
+          for (let i = 0; i < 6; i++) {
             const particle = document.createElement("div");
             particle.className = styles.smokeParticle;
 
@@ -338,21 +340,22 @@ export default function FooterWordmark() {
             particle.style.borderRadius = `${r1}% ${r2}% ${r3}% ${r4}% / ${r5}% ${r6}% ${r7}% ${r8}%`;
             particle.style.transform = `rotate(${Math.random() * 360}deg)`;
 
-            const offsetX = (Math.random() - 0.5) * 12;
-            const offsetY = (Math.random() - 0.5) * 12;
+            // Narrow starting cluster
+            const offsetX = (Math.random() - 0.5) * 6;
+            const offsetY = (Math.random() - 0.5) * 6;
             particle.style.left = `${mouseX + offsetX}px`;
             particle.style.top = `${mouseY + offsetY}px`;
             smokeContainer.appendChild(particle);
 
-            // Richer initial opacity (0.28 instead of 0.16) and larger scales
+            // Narrow drift, higher opacity for density
             gsap.fromTo(particle,
-              { opacity: 0.28, scale: 0.5 },
+              { opacity: 0.35, scale: 0.4 },
               {
-                x: "random(-32, 32)",
-                y: "random(-85, -50)",
-                scale: "random(1.4, 2.4)",
+                x: "random(-12, 12)",
+                y: "random(-80, -40)",
+                scale: "random(1.2, 1.8)",
                 opacity: 0,
-                duration: "random(1.0, 1.6)",
+                duration: "random(0.8, 1.4)",
                 ease: "power1.out",
                 onComplete: () => {
                   particle.remove();

@@ -4,10 +4,11 @@ import { useState } from "react";
 import styles from "./MissionControlForm.module.css";
 
 const MISSION_TYPES = [
-  "GAME DEVELOPMENT",
-  "VR / XR",
-  "ARCHVIZ",
-  "ART & ANIMATION",
+  "NANITE OPTIMIZATION",
+  "ANIMATION RIGGING",
+  "PLATFORM PORTING",
+  "VR PERFORMANCE",
+  "SHADER OPTIMIZATION",
 ];
 
 const COUNTRY_CODES = [
@@ -31,7 +32,7 @@ export default function MissionControlForm() {
   const [email, setEmail] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRY_CODES[0]);
   const [phone, setPhone] = useState("");
-  const [missionTypes, setMissionTypes] = useState<string[]>(["GAME DEVELOPMENT"]);
+  const [missionTypes, setMissionTypes] = useState<string[]>(["NANITE OPTIMIZATION"]);
   
   // Custom budget Option and slider states
   const [budgetOption, setBudgetOption] = useState("< $5K");
@@ -205,11 +206,13 @@ export default function MissionControlForm() {
         <div className={styles.header}>
           <div className={styles.titleWrap}>
             <span className={styles.titleLine} />
-            <h2 className={styles.title}>Contact Us</h2>
+            <h2 className={styles.title}>Book Your Free 1-Hour Audit</h2>
             <span className={styles.titleLine} />
           </div>
           <p className={styles.subtitle}>
-            Initialize your project with Blood Nexus Studio
+            You need this solved in weeks. Not months. That's our specialty.
+            <br />
+            We've done this exact fix before. Dozens of times. It's actually easy for us.
           </p>
         </div>
 
@@ -388,7 +391,7 @@ export default function MissionControlForm() {
                 "Transmitting..."
               ) : (
                 <>
-                  Initiate Launch Sequence <span style={{ fontSize: "10px" }}>▲</span>
+                  BOOK FREE 1-HOUR AUDIT <span style={{ fontSize: "10px" }}>▲</span>
                 </>
               )}
             </button>

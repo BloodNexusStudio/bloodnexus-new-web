@@ -1,46 +1,104 @@
 .section {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(70px, 10vw, 140px);
+  padding-block: clamp(70px, 10vw, 120px);
+  background-color: var(--color-surface-bg);
 }
 
-/* Giant faint background word behind the cards (handoff §6.2) */
-.bgWord {
+/* Decorative Background Elements */
+.decoGridLeft, .decoGridRight {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -46%);
-  z-index: 0;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: var(--fs-hero);
-  line-height: 0.8;
-  color: var(--color-ink);
-  opacity: 0.045;
-  white-space: nowrap;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background-image: radial-gradient(#D32F2F 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.15;
   pointer-events: none;
 }
+.decoGridLeft { left: 20px; }
+.decoGridRight { right: 20px; }
 
 .head {
   position: relative;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 2rem;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: clamp(28px, 4vw, 48px);
+  margin-bottom: clamp(40px, 5vw, 64px);
 }
-.heading {
-  font-size: var(--fs-h2);
-  margin-top: 0.5rem;
+
+.headLeft {
+  display: flex;
+  flex-direction: column;
 }
-.seeAll {
-  font-family: var(--font-subhead);
-  font-weight: 500;
-  font-size: 13px;
-  letter-spacing: 0.08em;
+
+.topLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D32F2F;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.decoLine {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background-color: #D32F2F;
+  transform: skewX(-45deg);
+}
+
+.heading {
+  font-family: var(--font-anton);
+  font-size: clamp(3rem, 5vw, 5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.headingRed {
+  color: #D32F2F;
+}
+
+.subhead {
+  font-family: var(--font-inter);
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+}
+
+.seeAllBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 24px;
+  border: 1px solid rgba(211, 47, 47, 0.3);
+  border-radius: 4px;
+  font-family: var(--font-space-grotesk);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+  transition: all 0.3s var(--ease);
+}
+
+.seeAllBtn:hover {
+  background-color: rgba(211, 47, 47, 0.1);
+  border-color: #D32F2F;
+}
+
+.seeAllBtn .actionArrow {
+  color: #D32F2F;
 }
 
 /* Full-bleed drag viewport — cards peek off the right edge (handoff: 15% peek) */
@@ -58,18 +116,18 @@
 .track {
   display: flex;
   align-items: stretch;
-  gap: clamp(16px, 2vw, 24px);
-  height: clamp(440px, 52vw, 620px);
+  gap: clamp(12px, 1.5vw, 20px);
+  height: clamp(480px, 60vw, 680px);
   padding-left: var(--pad-x);
   padding-right: var(--pad-x);
 }
 
 .slideStack {
   flex: 0 0 auto;
-  width: min(320px, 62vw);
+  width: min(280px, 60vw);
   display: flex;
   flex-direction: column;
-  gap: clamp(16px, 2vw, 24px);
+  gap: clamp(12px, 1.5vw, 20px);
 }
 .slideStack > * {
   flex: 1 1 0;
@@ -78,24 +136,23 @@
 
 .slideLarge {
   flex: 0 0 auto;
-  width: min(660px, 86vw);
+  width: min(340px, 75vw);
 }
 
-/* --- Tile: full-bleed image, tag + title + hook overlaid on top --- */
+/* --- Tile --- */
 .tile {
   display: block;
   position: relative;
   height: 100%;
-  border-radius: var(--radius-card);
+  border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--color-line);
-  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease),
-    border-color 0.35s var(--ease);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: #0E0E12;
+  transition: transform 0.35s var(--ease), border-color 0.35s var(--ease);
 }
 .tile:hover {
   transform: translateY(-4px);
-  box-shadow: var(--shadow-glow);
-  border-color: rgba(255, 59, 48, 0.45);
+  border-color: rgba(211, 47, 47, 0.4);
 }
 
 .tileArt {
@@ -126,8 +183,28 @@
 .tileScrim {
   position: absolute;
   inset: 0;
-  background: var(--color-overlay);
+  background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 40%, transparent 100%);
   z-index: 2;
+}
+
+.tileTagWrapper {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 3;
+}
+
+.tileTag {
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: rgba(211, 47, 47, 0.15);
+  border: 1px solid rgba(211, 47, 47, 0.3);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #D32F2F;
 }
 
 .tileBody {
@@ -136,40 +213,74 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(16px, 2vw, 32px);
+  padding: 24px;
   z-index: 3;
 }
-.tileTag {
-  padding: 0.4em 0.9em;
-  border-radius: var(--radius-pill);
-  background: rgba(20, 20, 24, 0.72);
-  backdrop-filter: blur(4px);
-  border: 1px solid var(--color-line);
-  font-family: var(--font-subhead);
-  font-weight: 500;
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-ink);
-}
+
 .tileTitle {
-  font-family: var(--font-display);
+  font-family: var(--font-anton);
   text-transform: uppercase;
-  line-height: 0.92;
-  font-size: clamp(18px, 1.7vw, 30px);
-  color: var(--color-ink);
+  line-height: 1;
+  font-size: clamp(20px, 2vw, 28px);
+  color: #fff;
+  margin-bottom: 8px;
 }
+
 .tileHook {
-  color: rgba(242, 239, 233, 0.85);
-  font-size: 13px;
-  max-width: 34ch;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-inter);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-bottom: 16px;
 }
 
 .slideLarge .tileTitle {
-  font-size: clamp(26px, 2.6vw, 44px);
+  font-size: clamp(28px, 2.5vw, 36px);
 }
 .slideLarge .tileHook {
-  font-size: 15px;
+  font-size: 0.9rem;
+}
+
+.exploreBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.actionArrow {
+  width: 14px;
+  height: 14px;
+  color: #D32F2F;
+  transition: transform 0.3s var(--ease);
+}
+
+.tile:hover .actionArrow {
+  transform: translateX(4px);
+}
+
+.bottomGlow {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40%;
+  height: 2px;
+  background-color: #D32F2F;
+  opacity: 0.2;
+  box-shadow: 0 -4px 12px rgba(211, 47, 47, 0.8);
+  transition: opacity 0.3s var(--ease), width 0.3s var(--ease);
+  z-index: 4;
+}
+
+.tile:hover .bottomGlow {
+  opacity: 1;
+  width: 80%;
 }
 
 @media (max-width: 640px) {

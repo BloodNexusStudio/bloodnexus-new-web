@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState, type PointerEvent, type MouseEvent } from "react";
 import { gsap } from "gsap";
 import Link from "next/link";
+import Image from "next/image";
 import { GAMES } from "@/data/games";
 import styles from "./OrbitCarousel.module.css";
 
-// Back to a small curated set — cards are near-screen-size now, so only a
-// handful fit the "one dominant card, slivers of neighbors" look.
-const FEATURED = GAMES.slice(0, 5);
+// Increased to 8 cards to create a tighter, fuller circle 
+// which reduces the empty gap between adjacent cards without causing them to overlap.
+const FEATURED = GAMES.slice(0, 8);
 const N = FEATURED.length;
 const ANGLE_SLICE = 360 / N;
 // Tight enough that neighboring cards sit close with only a small gap, but
@@ -67,13 +68,13 @@ export default function OrbitCarousel() {
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
-        setRadius(240); // close grouping on mobile screens
+        setRadius(450); // mobile
       } else if (window.innerWidth < 768) {
-        setRadius(340); // small tablet
+        setRadius(600); // tablet
       } else if (window.innerWidth < 1024) {
-        setRadius(440); // laptop / large tablet
+        setRadius(850); // laptop
       } else {
-        setRadius(520); // desktop default
+        setRadius(1150); // desktop
       }
     };
     handleResize();
@@ -119,8 +120,24 @@ export default function OrbitCarousel() {
   // set once in JSX.
   useEffect(() => {
     let raf = 0;
+    let running = false;
+    let unmounted = false;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        running = entry.isIntersecting;
+        if (running && !raf && !unmounted) tick();
+      },
+      { rootMargin: "200px 0px" }
+    );
+    if (sectionRef.current) io.observe(sectionRef.current);
 
     const tick = () => {
+      if (!running || unmounted) {
+        raf = 0;
+        return;
+      }
+
       if (isDraggingRef.current) {
         // rotationRef is being written directly by the pointermove handler.
       } else if (isScrollingRef.current) {
@@ -130,7 +147,7 @@ export default function OrbitCarousel() {
       }
       const rotation = rotationRef.current;
 
-      if (groupRef.current) gsap.set(groupRef.current, { rotateY: rotation });
+      if (groupRef.current) gsap.set(groupRef.current, { z: -radius, rotateY: rotation });
 
       let nearestIndex = -1;
       let nearestDist = Infinity;
@@ -159,9 +176,12 @@ export default function OrbitCarousel() {
       raf = requestAnimationFrame(tick);
     };
 
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
+    return () => {
+      unmounted = true;
+      cancelAnimationFrame(raf);
+      io.disconnect();
+    };
+  }, [radius]);
 
   // Drag-to-rotate — grabbing the ring and moving the pointer spins it
   // directly; scroll/idle rotation both stand down for the duration (the
@@ -247,12 +267,14 @@ export default function OrbitCarousel() {
                 >
                   <span className={styles.face}>
 
-                    <img
+                    <Image
                       src={game.keyArt}
                       alt=""
                       aria-hidden="true"
                       className={styles.art}
                       draggable={false}
+                      fill
+                      sizes="(max-width: 768px) 80vw, (max-width: 1200px) 65vw, 1100px"
                     />
                     <span className={styles.cardTag}>{game.status}</span>
                     <span className={styles.caption}>

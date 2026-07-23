@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Link from "next/link";
-import RollLink from "@/components/motion/RollLink";
+import Image from "next/image";
 import { GAMES, type Game } from "@/data/games";
 import styles from "./GamesCarousel.module.css";
 
@@ -18,7 +18,8 @@ type Unit =
 function buildUnits(games: Game[]): Unit[] {
   const units: Unit[] = [];
   let i = 0;
-  let stackNext = true;
+  // Start with a large card (Tall) instead of a stack
+  let stackNext = false;
   while (i < games.length) {
     if (stackNext && i + 1 < games.length) {
       units.push({ type: "stack", games: [games[i], games[i + 1]] });
@@ -32,24 +33,43 @@ function buildUnits(games: Game[]): Unit[] {
   return units;
 }
 
+const ArrowRightIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={styles.actionArrow}>
+    <line x1="5" y1="12" x2="19" y2="12"></line>
+    <polyline points="12 5 19 12 12 19"></polyline>
+  </svg>
+);
+
 function Tile({ game }: { game: Game }) {
   return (
-    <Link
-      href={`/games/${game.slug}`}
-      className={styles.tile}
-    >
-      <img
+    <Link href={`/games/${game.slug}`} className={styles.tile}>
+      <Image
         src={game.keyArt}
         alt={`${game.title} key art`}
-        loading="lazy"
+        fill
+        sizes="(max-width: 640px) 100vw, 33vw"
         className={styles.tileArt}
       />
       <div className={styles.tileScrim} />
+      
+      {/* Top Left Tag */}
+      {game.genre && (
+        <div className={styles.tileTagWrapper}>
+          <span className={styles.tileTag}>{game.genre}</span>
+        </div>
+      )}
+
+      {/* Bottom Content */}
       <div className={styles.tileBody}>
-        {game.genre && <span className={styles.tileTag}>{game.genre}</span>}
         <h3 className={styles.tileTitle}>{game.title}</h3>
         <p className={styles.tileHook}>{game.hook}</p>
+        
+        <div className={styles.exploreBtn}>
+          EXPLORE GAME <ArrowRightIcon />
+        </div>
       </div>
+
+      <div className={styles.bottomGlow} />
     </Link>
   );
 }
@@ -92,18 +112,26 @@ export default function GamesCarousel() {
 
   return (
     <section className={styles.section}>
-      <span className={styles.bgWord} aria-hidden="true">
-        Games
-      </span>
+      {/* Decorative Grid Dots */}
+      <div className={styles.decoGridLeft} />
+      <div className={styles.decoGridRight} />
 
       <div className={`container ${styles.head}`}>
-        <div>
-          <p className="label">Our Work</p>
-          <h2 className={styles.heading}>All Games</h2>
+        <div className={styles.headLeft}>
+          <div className={styles.topLabel}>
+            <span className={styles.decoLine} /> OUR WORK
+          </div>
+          <h2 className={styles.heading}>
+            ALL <span className={styles.headingRed}>GAMES</span>
+          </h2>
+          <p className={styles.subhead}>
+            Explore immersive worlds crafted with<br />
+            cutting-edge technology and passion.
+          </p>
         </div>
-        <RollLink href="/games" accent className={styles.seeAll}>
-          See All Games
-        </RollLink>
+        <Link href="/games" className={styles.seeAllBtn}>
+          SEE ALL GAMES <ArrowRightIcon />
+        </Link>
       </div>
 
       <div

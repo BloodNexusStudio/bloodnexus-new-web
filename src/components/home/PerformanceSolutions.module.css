@@ -1,0 +1,333 @@
+.section {
+  position: relative;
+  background-color: #0E0E12;
+  padding-bottom: clamp(60px, 8vw, 120px);
+}
+
+.heroBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80%; /* Covers top portion behind header and cards */
+  z-index: 0;
+}
+
+.heroImage {
+  object-fit: cover;
+  opacity: 0.25;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #0E0E12 0%, rgba(14,14,18,0.7) 40%, rgba(14,14,18,0) 100%);
+}
+
+.heroGradientBottom {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 60%;
+  background: linear-gradient(to top, #0E0E12 0%, transparent 100%);
+}
+
+.contentContainer {
+  position: relative;
+  z-index: 1;
+  padding-top: clamp(80px, 10vw, 140px);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: clamp(60px, 8vw, 100px);
+  position: relative;
+}
+
+/* Red polygon decoration on left edge of header */
+.header::before {
+  content: "";
+  position: absolute;
+  left: -20px;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background-color: #D32F2F;
+  clip-path: polygon(100% 0, 100% 90%, 0 100%, 0 0);
+  opacity: 0.8;
+}
+
+.topLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #D32F2F;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.decoLine {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background-color: #D32F2F;
+  transform: skewX(-45deg);
+}
+
+.heading {
+  font-family: var(--font-anton);
+  font-size: clamp(2.5rem, 5vw, 5.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+
+.headingRed {
+  color: #D32F2F;
+}
+
+.subhead {
+  font-family: var(--font-inter);
+  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 650px;
+}
+
+/* 6-Column Grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-bottom: clamp(60px, 8vw, 100px);
+}
+
+@media (max-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(20, 20, 25, 0.85);
+  backdrop-filter: blur(8px);
+  overflow: hidden;
+  transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.card:hover {
+  border-color: rgba(211, 47, 47, 0.5);
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(211, 47, 47, 0.1);
+}
+
+.cardNumber {
+  padding: 24px 24px 0 24px;
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 1rem;
+  color: #D32F2F;
+}
+
+.cardIconBox {
+  padding: 32px 24px 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D32F2F;
+}
+
+.cardIconBox svg {
+  width: 56px;
+  height: 56px;
+  opacity: 0.9;
+  transition: transform 0.4s var(--ease);
+}
+
+.card:hover .cardIconBox svg {
+  transform: scale(1.1);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 24px 24px;
+  flex-grow: 1;
+}
+
+.cardTitle {
+  font-family: var(--font-anton);
+  font-size: clamp(1.1rem, 1.3vw, 1.4rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.cardDesc {
+  font-family: var(--font-inter);
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.pointList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pointItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+.pointCheck {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(211, 47, 47, 0.5);
+  color: #D32F2F;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.checkIcon {
+  width: 8px;
+  height: 8px;
+}
+
+.exploreLink {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 24px;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: #D32F2F;
+  text-transform: uppercase;
+  transition: color 0.3s var(--ease);
+}
+
+.exploreLink:hover {
+  color: #ff4d4d;
+}
+
+.actionArrow {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.3s var(--ease);
+}
+
+.exploreLink:hover .actionArrow {
+  transform: translateX(4px);
+}
+
+/* Bottom Stats Banner */
+.statsBanner {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  padding: 40px;
+  background-color: #141419;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 1024px) {
+  .statsBanner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .statsBanner {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.statIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D32F2F;
+}
+
+.statIcon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.statText {
+  display: flex;
+  flex-direction: column;
+}
+
+.statValue {
+  font-family: var(--font-anton);
+  font-size: 2rem;
+  color: #D32F2F;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.statTitle {
+  font-family: var(--font-inter);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  color: #fff;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.statDesc {
+  font-family: var(--font-inter);
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+}

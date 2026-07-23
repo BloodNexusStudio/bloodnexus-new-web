@@ -7,8 +7,6 @@ export type Stat = {
 };
 
 export const STATS: Stat[] = [
-  { value: 12, suffix: "+", label: "Team Members" }, // [CONTENT]
-  { value: 5, suffix: "+", label: "Years Building" }, // [CONTENT]
-  { value: 8, suffix: "+", label: "Projects Shipped" }, // [CONTENT]
-  { value: 2, suffix: "+", label: "Engines Mastered" }, // [CONTENT] Unreal + Unity
+  { value: 3, suffix: "+", label: "Years Building" },
+  { value: 100, suffix: "+", label: "Projects" },
 ];

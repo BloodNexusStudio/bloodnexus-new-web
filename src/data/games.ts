@@ -233,7 +233,7 @@ export const GAMES: Game[] = [
     title: "Rogue Core",
     hook: "A sci-fi action roguelike built around high-risk hacking and extraction runs.",
     status: "COMING SOON",
-    keyArt: KEY_ART[11],
+    keyArt: KEY_ART[0],
     previewClip: PREVIEW_CLIPS[2],
     engine: "Unreal Engine 5",
     platforms: ["PC", "Console"],
