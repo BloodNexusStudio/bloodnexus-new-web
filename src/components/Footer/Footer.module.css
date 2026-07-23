@@ -36,8 +36,8 @@
 /* Add the red dot from the design */
 .redDot {
   position: absolute;
-  right: clamp(10px, 5vw, 60px);
-  bottom: clamp(10px, 3vw, 30px);
+  right: clamp(10px, 4vw, 60px);
+  bottom: 22%; /* Align with the text baseline drawn inside the centered WebGL plane */
   width: clamp(16px, 2.5vw, 24px);
   height: clamp(16px, 2.5vw, 24px);
   background-color: #D32F2F;

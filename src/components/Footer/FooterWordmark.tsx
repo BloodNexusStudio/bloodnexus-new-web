@@ -136,9 +136,11 @@ export default function FooterWordmark() {
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
-      // 85% of TEX_H — leaves safe room for capital ascenders at top/bottom of canvas
-      const fontSize = TEX_H * 0.85;
-      // Anton is weight 400! Set weight 400 so the browser matches the Anton font instead of falling back.
+      // Scale X to fit, Scale Y to make it incredibly tall and imposing like Apechain
+      const stretchY = 1.6;
+      // Reduce font size proportionally so the stretched text never exceeds safe canvas bounds
+      const fontSize = (TEX_H * 0.85) / stretchY;
+      
       const family = `${fontFamily || "Anton"}, "Arial Black", Impact, sans-serif`;
       ctx.font = `400 ${fontSize}px ${family}`;
 
@@ -150,8 +152,7 @@ export default function FooterWordmark() {
 
       ctx.save();
       ctx.translate(TEX_W / 2, TEX_H / 2);
-      // Scale X to fit, Scale Y to make it incredibly tall and imposing like Apechain
-      ctx.scale(scaleX, 1.6);
+      ctx.scale(scaleX, stretchY);
       ctx.fillText(WORD, 0, 0);
       ctx.restore();
     };
