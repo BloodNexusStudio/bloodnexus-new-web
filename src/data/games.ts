@@ -23,27 +23,27 @@ export type Game = {
   trailerYouTubeId?: string; // embedded trailer id
 };
 
-// Real 3D art portfolio images
+// Real 3D art portfolio images (Unique subset 18-33)
 const SHOTS = [
-  "/portfolio-assets/3dart-13.png",
-  "/portfolio-assets/3dart-14.png",
-  "/portfolio-assets/3dart-15.png",
-  "/portfolio-assets/3dart-16.png",
+  "/portfolio-assets/3dart-30.png",
+  "/portfolio-assets/3dart-31.png",
+  "/portfolio-assets/3dart-32.png",
+  "/portfolio-assets/3dart-33.png",
 ];
 
 const KEY_ART = [
-  "/portfolio-assets/3dart-1.png",
-  "/portfolio-assets/3dart-2.png",
-  "/portfolio-assets/3dart-3.png",
-  "/portfolio-assets/3dart-4.png",
-  "/portfolio-assets/3dart-5.png",
-  "/portfolio-assets/3dart-6.png",
-  "/portfolio-assets/3dart-7.png",
-  "/portfolio-assets/3dart-8.png",
-  "/portfolio-assets/3dart-9.png",
-  "/portfolio-assets/3dart-10.png",
-  "/portfolio-assets/3dart-11.png",
-  "/portfolio-assets/3dart-12.png",
+  "/portfolio-assets/3dart-18.png",
+  "/portfolio-assets/3dart-19.png",
+  "/portfolio-assets/3dart-20.png",
+  "/portfolio-assets/3dart-21.png",
+  "/portfolio-assets/3dart-22.png",
+  "/portfolio-assets/3dart-23.png",
+  "/portfolio-assets/3dart-24.png",
+  "/portfolio-assets/3dart-25.png",
+  "/portfolio-assets/3dart-26.png",
+  "/portfolio-assets/3dart-27.png",
+  "/portfolio-assets/3dart-28.png",
+  "/portfolio-assets/3dart-29.png",
 ];
 
 const PREVIEW_CLIPS = [

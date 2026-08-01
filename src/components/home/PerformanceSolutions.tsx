@@ -161,7 +161,7 @@ export default function PerformanceSolutions() {
       {/* Background Image Hero Area */}
       <div className={styles.heroBackground}>
         <Image 
-          src="/cloudinary-assets/images/new-1_q5vqzv.png" 
+          src="/portfolio-assets/3dart-39.png" 
           alt="Services Hero" 
           fill 
           className={styles.heroImage} 
