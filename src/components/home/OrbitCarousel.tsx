@@ -49,7 +49,7 @@ const DRAG_CLICK_THRESHOLD = 5; // px — below this, a pointer-up still counts 
 export default function OrbitCarousel() {
   const sectionRef = useRef<HTMLElement>(null);
   const groupRef = useRef<HTMLDivElement>(null);
-  const cardRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const rotationRef = useRef(0);
   const scrollTargetRef = useRef(0);
   const isScrollingRef = useRef(false);
@@ -257,8 +257,7 @@ export default function OrbitCarousel() {
                 }}
                 // Hover play triggers removed. Active card plays video automatically.
               >
-                <Link
-                  href={`/games/${game.slug}`}
+                <div
                   className={styles.card}
                   ref={(el) => {
                     cardRefs.current[i] = el;
@@ -282,7 +281,7 @@ export default function OrbitCarousel() {
                       <span className={styles.captionHook}>{game.hook}</span>
                     </span>
                   </span>
-                </Link>
+                </div>
               </div>
             );
           })}

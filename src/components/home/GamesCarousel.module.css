@@ -218,24 +218,26 @@
 }
 
 .tileTitle {
-  font-family: var(--font-anton);
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  line-height: 1;
-  font-size: clamp(20px, 2vw, 28px);
+  line-height: 1.1;
+  font-size: clamp(18px, 1.8vw, 24px);
   color: #fff;
   margin-bottom: 8px;
 }
 
 .tileHook {
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.7);
   font-family: var(--font-inter);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   line-height: 1.5;
   margin-bottom: 16px;
 }
 
 .slideLarge .tileTitle {
-  font-size: clamp(28px, 2.5vw, 36px);
+  font-size: clamp(22px, 2.2vw, 30px);
 }
 .slideLarge .tileHook {
   font-size: 0.9rem;

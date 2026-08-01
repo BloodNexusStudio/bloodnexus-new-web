@@ -6,10 +6,12 @@
 /* Hero Section */
 .hero {
   position: relative;
-  height: clamp(400px, 50vh, 600px);
+  min-height: clamp(480px, 55vh, 640px);
   display: flex;
-  align-items: flex-end;
-  padding-bottom: clamp(60px, 8vw, 100px);
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: calc(var(--header-h, 90px) + clamp(30px, 4vw, 60px));
+  padding-bottom: clamp(40px, 6vw, 80px);
   overflow: hidden;
 }
 
@@ -46,7 +48,7 @@
   color: #D32F2F;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .decoLine {
@@ -58,8 +60,9 @@
 }
 
 .headline {
-  font-family: var(--font-anton);
-  font-size: clamp(3rem, 6vw, 6rem);
+  font-family: var(--font-subhead);
+  font-weight: 800;
+  font-size: clamp(2rem, 3.8vw, 3.8rem);
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #fff;
@@ -144,8 +147,9 @@
 }
 
 .caseMetric {
-  font-family: var(--font-anton);
-  font-size: clamp(1.5rem, 2vw, 2.5rem);
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 1.8vw, 2.2rem);
   color: #D32F2F;
   line-height: 1.2;
 }
@@ -168,8 +172,9 @@
 }
 
 .ctaTitle {
-  font-family: var(--font-anton);
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-family: var(--font-subhead);
+  font-weight: 800;
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
   color: #fff;
   letter-spacing: 0.02em;
   text-transform: uppercase;

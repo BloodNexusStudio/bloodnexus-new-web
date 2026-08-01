@@ -2,7 +2,6 @@ import Link from "next/link";
 import Image from "next/image";
 import MaskText from "@/components/motion/MaskText";
 import Reveal from "@/components/motion/Reveal";
-import { withWatermark } from "@/lib/cloudinary";
 import styles from "./3d-art.module.css";
 
 export const metadata = {
@@ -11,180 +10,123 @@ export const metadata = {
     "High-fidelity 3D modeling, texturing, rendering, and animation. BloodNexus Studio crafts visuals that push the boundaries of real-time and cinematic production.",
 };
 
-// ── Real assets ────────────────────────────────────────────────────────────
-const HERO_VIDEO =
-  "/cloudinary-assets/videos/3dart-1_1_vaugim.mp4";
+// ── Hero & Feature Renders ──────────────────────────────────────────────────
+const HERO_IMAGE = "/portfolio-assets/3dart-1.png";
 
-
-// Gallery — all 16 images with pixel-level watermarks via Cloudinary transform
-const GALLERY = [
-  { src: "/portfolio-assets/bible.jpg", alt: "3D model — high fidelity bible prop" },
-  { src: "/portfolio-assets/leader_cam.png", alt: "3D render — Unreal Engine 5 leader cinematic camera view" },
-  { src: "/portfolio-assets/fly_1.png", alt: "3D model — sci-fi flyer vehicle design" },
-  { src: "/portfolio-assets/zombie_varek.png", alt: "3D character render — post processed zombie varek" },
-  { src: "/portfolio-assets/fly_3.png", alt: "3D render — hard-surface flying prop model" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-16_nrx6d1.png"), alt: "3D character render — detailed sculpt" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-11_uceyn2.png"), alt: "3D art render — stylised character" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-17_jeiim7.jpg"), alt: "3D scene — environment lighting" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-6_lgcx5k.png"), alt: "3D model — high poly asset" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-10_ziywet.png"), alt: "3D render — cinematic composition" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-9_op3xza.png"), alt: "3D art — creature concept" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-13_obplkd.png"), alt: "3D model — organic sculpt" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-2_ke6lp1.jpg"), alt: "3D art — character portrait" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-18_ubrxbt.png"), alt: "3D render — materials and shading" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-21_n8kdvh.jpg"), alt: "3D art — stylised scene" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-23_1_a0fdxs.png"), alt: "3D render — detailed environment" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-20_1_uifghl.png"), alt: "3D art — character rigging pose" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-22_1_uetcav.png"), alt: "3D model — texture work" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-12_1_uhpc9i.png"), alt: "3D art — cinematic lighting" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-19_1_zsz5ri.png"), alt: "3D render — hard surface model" },
-  { src: withWatermark("/cloudinary-assets/images/3dart-7_1_ri14o4.png"), alt: "3D art — stylised character render" },
+const SPOTLIGHT = [
+  { src: "/portfolio-assets/3dart-2.png", alt: "3D Art — High Fidelity Character Modeling" },
+  { src: "/portfolio-assets/3dart-3.png", alt: "3D Art — PBR Texturing & Surface Shading" },
+  { src: "/portfolio-assets/3dart-4.png", alt: "3D Art — Cinematic Lighting & Animation" },
 ];
 
-// Spotlight images for the services section (first 3 original)
-const SPOTLIGHT = GALLERY.slice(5, 8);
-// Feature image for vision section
-const FEATURE_IMG = GALLERY[8];
-// Remaining gallery images — structured with titles and tags for a proper portfolio
+const FEATURE_IMG = {
+  src: "/portfolio-assets/3dart-5.png",
+  alt: "3D Art — Engine Ready Asset Production",
+};
+
+// ── Curated Limited Portfolio Gallery (12 Pristine Full-Bleed Renders) ─────
 const MASONRY = [
   {
-    src: "/portfolio-assets/bible.jpg",
-    alt: "3D model — high fidelity bible prop",
-    title: "The Lost Bible",
-    category: "Prop Modeling",
-    tools: "ZBrush · Substance Painter · Blender",
-  },
-  {
-    src: "/portfolio-assets/leader_cam.png",
-    alt: "3D render — Unreal Engine 5 leader cinematic camera view",
-    title: "Leader Cam Render",
-    category: "Cinematic Environment",
-    tools: "Unreal Engine 5 · Lumen · Quixel",
-  },
-  {
-    src: "/portfolio-assets/fly_1.png",
-    alt: "3D model — sci-fi flyer vehicle design",
-    title: "Sci-Fi Flyer Alpha",
-    category: "Vehicle Concept",
-    tools: "Fusion 360 · Keyshot · Photoshop",
-  },
-  {
-    src: "/portfolio-assets/zombie_varek.png",
-    alt: "3D character render — post processed zombie varek",
-    title: "Zombie Varek",
+    src: "/portfolio-assets/3dart-6.png",
+    alt: "3D Character Sculpt — Post Processed Creature Design",
+    title: "Varek Sentinel",
     category: "Character Sculpt",
-    tools: "ZBrush · Substance Painter · UE5",
+    tools: "ZBrush · Substance Painter · Unreal Engine 5",
   },
   {
-    src: "/portfolio-assets/fly_3.png",
-    alt: "3D render — hard-surface flying prop model",
-    title: "Sci-Fi Flyer Beta",
+    src: "/portfolio-assets/3dart-7.png",
+    alt: "3D Hard-Surface Model — Sci-Fi Vehicle Concept",
+    title: "Aegis Flyer",
     category: "Hard-Surface Design",
     tools: "Blender · Marmoset Toolbag",
   },
   {
-    src: "/cloudinary-assets/images/3dart-10_ziywet.png",
-    alt: "3D render — vintage motorcycle",
-    title: "Vintage Garage",
-    category: "Environment Art",
-    tools: "Unreal Engine 5 · Substance Painter",
+    src: "/portfolio-assets/3dart-8.png",
+    alt: "3D Environment Render — Cinematic Scene Lighting",
+    title: "Neo-Tokyo Alley",
+    category: "Cinematic Environment",
+    tools: "Unreal Engine 5 · Lumen · Quixel",
   },
   {
-    src: "/cloudinary-assets/images/3dart-9_op3xza.png",
-    alt: "3D art — classic ambassador taxi",
-    title: "Classic Ambassador",
-    category: "Automotive Art",
-    tools: "3ds Max · V-Ray · Substance Painter",
+    src: "/portfolio-assets/3dart-9.png",
+    alt: "3D Prop Model — High Fidelity Artifact",
+    title: "Ancient Relic",
+    category: "Prop Modeling",
+    tools: "ZBrush · Substance Painter",
   },
   {
-    src: "/cloudinary-assets/images/3dart-13_obplkd.png",
-    alt: "3D model — warrior portrait sculpt",
-    title: "Warrior Portrait",
-    category: "Character Sculpt",
+    src: "/portfolio-assets/3dart-10.png",
+    alt: "3D Character Portrait — High-Poly Cybernetic Operative",
+    title: "Cyber Operative",
+    category: "Character Concept",
     tools: "ZBrush · Marvelous Designer",
   },
   {
-    src: "/cloudinary-assets/images/3dart-2_ke6lp1.jpg",
-    alt: "3D art — winter outpost scene",
-    title: "Winter Outpost",
+    src: "/portfolio-assets/3dart-11.png",
+    alt: "3D Vehicle Art — Heavy Armor Mech",
+    title: "Titan Vanguard",
+    category: "Vehicle Concept",
+    tools: "Fusion 360 · Keyshot · Photoshop",
+  },
+  {
+    src: "/portfolio-assets/3dart-12.png",
+    alt: "3D Environment — Outpost Hangar",
+    title: "Orbital Hangar",
     category: "Environment Design",
     tools: "Unreal Engine 5 · Megascans",
   },
   {
-    src: "/cloudinary-assets/images/3dart-18_ubrxbt.png",
-    alt: "3D render — trench sentinel character",
-    title: "Trench Sentinel",
-    category: "Character Concept",
+    src: "/portfolio-assets/3dart-13.png",
+    alt: "3D Creature Render — Bio-Mechanical Beast",
+    title: "Corridors Beast",
+    category: "Creature Sculpt",
+    tools: "ZBrush · Substance Painter",
+  },
+  {
+    src: "/portfolio-assets/3dart-14.png",
+    alt: "3D Material Study — Tactical Surface Shading",
+    title: "Tactical Exosuit",
+    category: "PBR Material Study",
+    tools: "Substance Painter · Maya",
+  },
+  {
+    src: "/portfolio-assets/3dart-15.png",
+    alt: "3D Hard Surface — Weapon Concept",
+    title: "Plasma Lancer",
+    category: "Hard-Surface Design",
     tools: "Blender · Substance Painter",
   },
   {
-    src: "/cloudinary-assets/images/3dart-21_n8kdvh.jpg",
-    alt: "3D art — heavy gunner character pose",
-    title: "Heavy Gunner Pose",
+    src: "/portfolio-assets/3dart-16.png",
+    alt: "3D Character Rig — Action Battle Pose",
+    title: "Iron Guardian",
     category: "Character Rigging",
-    tools: "Maya · Substance Painter",
+    tools: "Maya · ZBrush",
   },
   {
-    src: "/cloudinary-assets/images/3dart-23_1_a0fdxs.png",
-    alt: "3D render — cyberpunk streets environment",
-    title: "Neon Streets",
-    category: "Concept Art",
-    tools: "Blender · Photoshop",
-  },
-  {
-    src: "/cloudinary-assets/images/3dart-20_1_uifghl.png",
-    alt: "3D art — tactical gear detail render",
-    title: "Tactical Gear",
-    category: "PBR Material Study",
-    tools: "Substance Painter · ZBrush",
-  },
-  {
-    src: "/cloudinary-assets/images/3dart-22_1_uetcav.png",
-    alt: "3D model — hangar bay scifi interior",
-    title: "Hangar Bay",
-    category: "Hard-Surface Design",
-    tools: "Fusion 360 · Blender",
-  },
-  {
-    src: "/cloudinary-assets/images/3dart-12_1_uhpc9i.png",
-    alt: "3D art — power substation lighting",
-    title: "Power Substation",
+    src: "/portfolio-assets/3dart-17.png",
+    alt: "3D Environment — Industrial Power Core",
+    title: "Reactor Substation",
     category: "Environment Art",
     tools: "Unreal Engine 5 · Lumen",
-  },
-  {
-    src: "/cloudinary-assets/images/3dart-19_1_zsz5ri.png",
-    alt: "3D render — recon operative back view",
-    title: "Recon Operative",
-    category: "Character Modeling",
-    tools: "Blender · Marvelous Designer",
-  },
-  {
-    src: "/cloudinary-assets/images/3dart-7_1_ri14o4.png",
-    alt: "3D art — node reactor prop close up",
-    title: "Node Reactor",
-    category: "Hard-Surface Prop",
-    tools: "Marmoset Toolbag · Substance Painter",
   },
 ];
 
 export default function ThreeDArtPage() {
   return (
     <>
-      {/* ── Hero — full-screen video ──────────────────────────────────────── */}
+      {/* ── Hero — Full-bleed High Fidelity Render Image ───────────────────── */}
       <section className={styles.hero}>
         <div className={styles.heroBg}>
-          <video
+          <Image
+            src={HERO_IMAGE}
+            alt="3D Art & Animation Hero Render"
+            fill
+            priority
+            sizes="100vw"
             className={styles.heroVideo}
-            src={HERO_VIDEO}
-            autoPlay
-            muted
-            loop
-            playsInline
           />
           <div className={styles.heroOverlay} />
-          {/* Shield blocks right-click on hero video */}
-          <div className={styles.videoShield} />
         </div>
         <div className={styles.scanlines} />
         <div className={`container ${styles.heroContent}`}>
@@ -236,24 +178,12 @@ export default function ThreeDArtPage() {
                 num: "03",
                 title: "Physics & Animation",
                 desc: "Fluid character motion, real-time cloth simulations, and complex physics rigs that bring assets to life.",
-                video: "/cloudinary-assets/videos/All_three_Cloth_Simulated_hzr7ek.mp4",
+                img: SPOTLIGHT[2],
               },
             ].map((s) => (
               <div key={s.num} className={styles.serviceCard}>
                 <div className={styles.serviceCardMedia}>
-                  {s.video ? (
-                    <>
-                      <video
-                        src={s.video}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        className={styles.serviceCardVideo}
-                      />
-                      <div className={styles.videoShield} />
-                    </>
-                  ) : s.img ? (
+                  {s.img ? (
                     <Image
                       src={s.img.src}
                       alt={s.img.alt}
@@ -310,11 +240,7 @@ export default function ThreeDArtPage() {
         </div>
       </Reveal>
 
-
-
-
-
-      {/* ── Masonry Gallery ───────────────────────────────────────────────── */}
+      {/* ── Masonry Gallery (Curated Limited Selection) ────────────────────── */}
       <Reveal as="section" y={40} className={styles.gallerySection}>
         <div className="container">
           <div className={styles.galleryHead}>

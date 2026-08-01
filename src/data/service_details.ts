@@ -18,7 +18,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     slug: "nanite-optimization",
     metaTitle: "Nanite Performance Optimization | Fix Frame Rate Collapse | BloodNexus",
     heroHeadline: "Fix Your Nanite Frame Rate Collapse in 18 Days",
-    heroImage: "/cloudinary-assets/images/new-1_q5vqzv.png",
+    heroImage: "/portfolio-assets/3dart-1.png",
     content: [
       "Unreal Engine 5’s Nanite virtualized geometry system is revolutionary, but improperly authored dense meshes can rapidly bottleneck even high-end GPUs. When triangle clusters fail to cull correctly, or material complexity overwhelms the rasterizer, frame times spike and overall stability collapses. We diagnose these exact pipeline failures.",
       "Our optimization process begins with deep GPU profiling using RenderDoc and Unreal Insights to isolate rendering bottlenecks. We analyze cluster generation, evaluating how efficiently Nanite builds its internal hierarchies and identifying assets that defeat occlusion culling due to oversized bounds or intersecting geometry.",
@@ -44,7 +44,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     slug: "animation-rigging",
     metaTitle: "Game Animation Rigging & Mocap Cleanup | BloodNexus Studio",
     heroHeadline: "Stop Losing 12 Weeks on Animation Rigging",
-    heroImage: "/cloudinary-assets/images/3dart-10_ziywet.png",
+    heroImage: "/portfolio-assets/3dart-2.png",
     content: [
       "Rigging is often the quiet bottleneck of game development. A poorly constructed rig not only slows down your animation team but creates a massive technical debt when transitioning to engine. Complex weighting errors, gimbal lock, and inefficient bone hierarchies can entirely stall production.",
       "We specialize in rapid, highly technical skeletal mesh rigging. Our approach focuses on building modular, scalable rigs that are engine-ready from day one. We ensure perfect root bone alignment, streamlined hierarchies, and proper twist bone implementations to preserve volume during extreme deformations.",
@@ -66,7 +66,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     slug: "platform-porting",
     metaTitle: "Game Platform Porting Expert | Mobile/Console Optimization | BloodNexus",
     heroHeadline: "Port Your Game to Mobile in 4 Weeks, Not 12",
-    heroImage: "/web-apps/odyssey_travels.png",
+    heroImage: "/portfolio-assets/3dart-3.png",
     content: [
       "Porting a PC or Console title to Mobile hardware is not a simple translation—it requires a fundamental restructuring of memory management, rendering pipelines, and asset loading. The extreme thermal constraints and varied hardware profiles of iOS and Android devices demand aggressive optimization strategies.",
       "Memory is the primary killer in mobile porting. We begin by overhauling your texture streaming pools, compressing high-res assets using ASTC formats, and significantly lowering audio bitrates. We implement strict budget tracking to ensure the app never triggers the OS out-of-memory (OOM) killer.",
@@ -88,7 +88,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     slug: "vr-performance",
     metaTitle: "VR Performance Optimization | Fix Motion Sickness & Frame Drops | BloodNexus",
     heroHeadline: "Fix VR Motion Sickness in 3 Weeks",
-    heroImage: "/vr/vr_hero_bg.png",
+    heroImage: "/portfolio-assets/3dart-4.png",
     content: [
       "In Virtual Reality, performance is not just a technical metric—it is a physiological requirement. Even momentary frame drops or high latency can induce severe motion sickness, completely ruining the user experience. A locked 72, 90, or 120 FPS is non-negotiable.",
       "The core of VR optimization is minimizing motion-to-photon latency. We utilize deep profiling tools like the Oculus OVR Metrics Tool and SteamVR Frame Timing to dissect your render thread and game thread. We identify exactly where the pipeline stalls and implement immediate structural fixes.",
@@ -109,7 +109,7 @@ export const SERVICE_DETAILS: ServiceDetail[] = [
     slug: "shader-optimization",
     metaTitle: "Custom Shader Optimization | Game Rendering Consulting | BloodNexus",
     heroHeadline: "Your GPU Is Bottlenecked. Let’s Fix It.",
-    heroImage: "/cloudinary-assets/images/archviz-1_hsyoti.jpg",
+    heroImage: "/portfolio-assets/3dart-5.png",
     content: [
       "Shader complexity is often the silent killer of GPU performance. As technical artists push for greater visual fidelity, the number of instructions and texture samplers in a single material can easily spiral out of control, leading to massive fill-rate bottlenecks and thermal throttling.",
       "Our optimization pipeline starts with a complete audit of your shader instructions using tools like RenderDoc, PIX, and Unreal’s Shader Complexity view. We analyze exactly how many ALU (Arithmetic Logic Unit) instructions are executed per pixel and where texture bandwidth is being wasted.",

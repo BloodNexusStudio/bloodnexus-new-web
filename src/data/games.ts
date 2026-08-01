@@ -23,26 +23,27 @@ export type Game = {
   trailerYouTubeId?: string; // embedded trailer id
 };
 
-// Real Unreal Engine work images and looping preview clips from Cloudinary
+// Real 3D art portfolio images
 const SHOTS = [
-  "/cloudinary-assets/images/new-5_vg2rfe.png",
-  "/cloudinary-assets/images/new-6_1_pmlcur.png",
-  "/cloudinary-assets/images/new-7_1_nj1vc1.png",
-  "/cloudinary-assets/images/new-8_1_q6akdj.png",
+  "/portfolio-assets/3dart-13.png",
+  "/portfolio-assets/3dart-14.png",
+  "/portfolio-assets/3dart-15.png",
+  "/portfolio-assets/3dart-16.png",
 ];
 
 const KEY_ART = [
-  "/cloudinary-assets/images/new-1_q5vqzv.png",
-  "/cloudinary-assets/images/new-2_nusgoh.png",
-  "/cloudinary-assets/images/new-3_toofsl.png",
-  "/cloudinary-assets/images/new-4_mtnbv2.png",
-  "/cloudinary-assets/images/new-5_vg2rfe.png",
-  "/cloudinary-assets/images/new-6_1_pmlcur.png",
-  "/cloudinary-assets/images/new-7_1_nj1vc1.png",
-  "/cloudinary-assets/images/new-8_1_q6akdj.png",
-  "/cloudinary-assets/images/3dart-9_op3xza.png",
-  "/cloudinary-assets/images/3dart-23_1_a0fdxs.png",
-  "/cloudinary-assets/images/3dart-22_1_uetcav.png",
+  "/portfolio-assets/3dart-1.png",
+  "/portfolio-assets/3dart-2.png",
+  "/portfolio-assets/3dart-3.png",
+  "/portfolio-assets/3dart-4.png",
+  "/portfolio-assets/3dart-5.png",
+  "/portfolio-assets/3dart-6.png",
+  "/portfolio-assets/3dart-7.png",
+  "/portfolio-assets/3dart-8.png",
+  "/portfolio-assets/3dart-9.png",
+  "/portfolio-assets/3dart-10.png",
+  "/portfolio-assets/3dart-11.png",
+  "/portfolio-assets/3dart-12.png",
 ];
 
 const PREVIEW_CLIPS = [

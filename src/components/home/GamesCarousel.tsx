@@ -42,7 +42,7 @@ const ArrowRightIcon = () => (
 
 function Tile({ game }: { game: Game }) {
   return (
-    <Link href={`/games/${game.slug}`} className={styles.tile}>
+    <div className={styles.tile}>
       <Image
         src={game.keyArt}
         alt={`${game.title} key art`}
@@ -65,12 +65,12 @@ function Tile({ game }: { game: Game }) {
         <p className={styles.tileHook}>{game.hook}</p>
         
         <div className={styles.exploreBtn}>
-          EXPLORE GAME <ArrowRightIcon />
+          FEATURED GAME <ArrowRightIcon />
         </div>
       </div>
 
       <div className={styles.bottomGlow} />
-    </Link>
+    </div>
   );
 }
 
