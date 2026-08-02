@@ -12,6 +12,15 @@ export const metadata = {
 
 const WORKS = [
   {
+    title: "The Offside",
+    category: "Web • E-commerce",
+    desc: "Premium streetwear brand website with a minimal, timeless, and unapologetic design. Built for high performance and seamless shopping experience.",
+    img: "/web-apps/theoffside.png",
+    tags: ["Next.js", "Shopify", "TailwindCSS"],
+    icon: "web",
+    link: "https://www.theoffside.in/"
+  },
+  {
     title: "Odyssey Travels",
     category: "Web • Travel",
     desc: "Immersive booking experience for luxury world tours and expeditions.",
@@ -179,6 +188,12 @@ export default function WebAppsPage() {
                       </span>
                     ))}
                   </div>
+                  {/* @ts-ignore - link property is optional */}
+                  {w.link && (
+                    <a href={w.link} target="_blank" rel="noreferrer" className="pill pill--outline" style={{ marginTop: '24px', display: 'inline-flex' }}>
+                      Visit Live Site ↗
+                    </a>
+                  )}
                 </div>
               </div>
             ))}
