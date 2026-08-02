@@ -54,9 +54,13 @@ export default function OutsourcingGuidePage() {
         {/* Pricing Cards Grid */}
         <div className={styles.grid}>
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>
-              Props & Weapons <span className={styles.cardPrice}>$800 – $5,000</span>
-            </h3>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>Props & Weapons</h3>
+              <div className={styles.pricingBlock}>
+                <span className={styles.marketPrice}>$800 – $5,000</span>
+                <span className={styles.ourPrice}>Starting from $400</span>
+              </div>
+            </div>
             <ul className={styles.cardList}>
               <li>LOD variants (Level of Detail)</li>
               <li>PBR texture sets (Albedo, Normal, Roughness, Metalness)</li>
@@ -65,9 +69,13 @@ export default function OutsourcingGuidePage() {
           </div>
 
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>
-              Stylized Characters <span className={styles.cardPrice}>$3,000 – $6,000</span>
-            </h3>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>Stylized Characters</h3>
+              <div className={styles.pricingBlock}>
+                <span className={styles.marketPrice}>$3,000 – $6,000</span>
+                <span className={styles.ourPrice}>Starting from $1,500</span>
+              </div>
+            </div>
             <ul className={styles.cardList}>
               <li>Hand-painted or stylized texture maps</li>
               <li>Clean quad-based topology</li>
@@ -76,9 +84,13 @@ export default function OutsourcingGuidePage() {
           </div>
 
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>
-              AAA / Realistic Characters <span className={styles.cardPrice}>$6,000 – $15,000+</span>
-            </h3>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>AAA / Realistic Characters</h3>
+              <div className={styles.pricingBlock}>
+                <span className={styles.marketPrice}>$6,000 – $15,000+</span>
+                <span className={styles.ourPrice}>Starting from $3,500</span>
+              </div>
+            </div>
             <ul className={styles.cardList}>
               <li>Cinematic-level sculpting & micro-skin detailing</li>
               <li>Facial blendshape systems (ARKit compatible)</li>
@@ -87,9 +99,13 @@ export default function OutsourcingGuidePage() {
           </div>
 
           <div className={styles.card}>
-            <h3 className={styles.cardTitle}>
-              Modular Environments <span className={styles.cardPrice}>$10,000+</span>
-            </h3>
+            <div className={styles.cardHeader}>
+              <h3 className={styles.cardTitle}>Modular Environments</h3>
+              <div className={styles.pricingBlock}>
+                <span className={styles.marketPrice}>$10,000+</span>
+                <span className={styles.ourPrice}>Starting from $5,000</span>
+              </div>
+            </div>
             <ul className={styles.cardList}>
               <li>Custom trim sheets & seamless tileable materials</li>
               <li>Structural snap-to-grid collision setups</li>

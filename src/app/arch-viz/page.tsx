@@ -26,37 +26,37 @@ const ARCHVIZ_SHOWCASE_VIDEO =
 const DELIVERABLES = [
   {
     index: "01",
-    title: "Exterior Rendering",
+    title: "Outside Building Views",
     desc: "Photorealistic structural facades, architectural contours, and natural landscape integration.",
     image: "/cloudinary-assets/images/archviz-1_hsyoti.jpg",
   },
   {
     index: "02",
-    title: "Interior Design & Mood",
+    title: "Inside Room Designs",
     desc: "Hyper-detailed indoor environments capturing authentic lighting, furniture arrangement, and physical materials.",
     image: "/cloudinary-assets/images/archviz-2_mrptom.jpg",
   },
   {
     index: "03",
-    title: "Interactive Property Walkthroughs",
+    title: "Interactive House Tours",
     desc: "Cinematic fluid tours designed in real-time engine to show property layouts and room flow.",
     image: "/cloudinary-assets/images/archviz-3_mf7hgz.jpg",
   },
   {
     index: "04",
-    title: "Commercial & Office Spaces",
+    title: "Office and Shop Designs",
     desc: "Spacious commercial complex designs customized for retail, enterprise offices, and modern working hubs.",
     image: "/cloudinary-assets/images/archviz-5_ncybew.jpg",
   },
   {
     index: "05",
-    title: "Township & High-Rise Renders",
+    title: "Large Building & City Views",
     desc: "Stunning masterplans and realistic aerial captures designed for massive cityscapes and apartments.",
     image: "/cloudinary-assets/images/archviz-6_zzem07.jpg",
   },
   {
     index: "06",
-    title: "Dynamic Ambient Lighting",
+    title: "Realistic Lighting Effects",
     desc: "Accurate daylight simulation, architectural mood lighting, and shadow studies to capture dawn to dusk vibes.",
     image: "/cloudinary-assets/images/archviz-7_gewhjs.jpg",
   },

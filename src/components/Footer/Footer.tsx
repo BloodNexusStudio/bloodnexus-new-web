@@ -69,7 +69,6 @@ export default function Footer() {
           <div className={styles.col}>
             <h3 className={styles.colTitle}>STUDIO</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/careers">CAREERS</Link></li>
               <li><Link href="#contact">CONTACT</Link></li>
             </ul>
           </div>
@@ -78,8 +77,10 @@ export default function Footer() {
           <div className={styles.col}>
             <h3 className={styles.colTitle}>WORK</h3>
             <ul className={styles.linkList}>
-              <li><Link href="/games">GAMES</Link></li>
-              <li><Link href="/services">SERVICES</Link></li>
+              <li><Link href="/3d-art">3D ART</Link></li>
+              <li><Link href="/arch-viz">ARCH VIZ</Link></li>
+              <li><Link href="/vr">VR</Link></li>
+              <li><Link href="/web-apps">WEB & APPS</Link></li>
             </ul>
           </div>
 

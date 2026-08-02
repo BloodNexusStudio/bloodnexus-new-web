@@ -16,19 +16,19 @@ export const SERVICES: Service[] = [
   },
   {
     key: "archviz",
-    title: "Archviz",
+    title: "3D Architecture",
     copy: "Architectural visualization that turns blueprints into photoreal, real-time walkthroughs and rendered stills — powered by game-engine tech, letting clients explore a space long before it's built.",
     image: "/cloudinary-assets/images/archviz-1_hsyoti.jpg",
   },
   {
     key: "vr-3d",
-    title: "VR / XR Experiences",
+    title: "Virtual Reality",
     copy: "Immersive VR and real-time 3D experiences for training, product visualization, and location-based entertainment — combining performant real-time pipelines with intuitive, hands-on interaction design.",
     image: "/vr/vr_hero_bg.png",
   },
   {
     key: "web-apps",
-    title: "Web & Apps",
+    title: "Websites & Apps",
     copy: "High-performance web applications and custom digital platforms built for scale, security, and premium user experience, powered by modern React, Next.js, and real-time backend systems.",
     image: "/web-apps/odyssey_travels.png",
   },

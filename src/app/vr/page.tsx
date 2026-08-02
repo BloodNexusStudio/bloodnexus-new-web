@@ -11,12 +11,12 @@ export const metadata = {
 };
 
 const GALLERY = [
-  "/vr/gallery_1.png",
-  "/vr/gallery_2.png",
-  "/cloudinary-assets/images/archviz-2_mrptom.jpg",
-  "/cloudinary-assets/images/archviz-3_mf7hgz.jpg",
-  "/cloudinary-assets/images/archviz-5_ncybew.jpg",
-  "/cloudinary-assets/images/archviz-6_zzem07.jpg",
+  "/vr/gallery_new_1.png",
+  "/vr/gallery_new_2.png",
+  "/vr/gallery_new_3.png",
+  "/vr/gallery_new_4.png",
+  "/vr/gallery_new_5.png",
+  "/vr/gallery_new_6.png",
 ];
 
 export default function VRPage() {
@@ -26,7 +26,7 @@ export default function VRPage() {
       <section className={styles.hero}>
         <div className={styles.heroBg}>
           <img
-            src="/vr/vr_hero_bg.png"
+            src="/vr/vr_hero_new.png"
             alt="VR banner"
           />
           <div className={styles.heroOverlay} />
@@ -58,7 +58,7 @@ export default function VRPage() {
               <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
               <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
               <img
-                src="/vr/vr_solutions.png"
+                src="/vr/vr_solutions_new.png"
                 alt="VR Solutions Banner"
               />
             </div>
@@ -118,7 +118,7 @@ export default function VRPage() {
             <div className={styles.powerCard}>
               <div className={styles.cardMedia}>
                 <img
-                  src="/cloudinary-assets/images/archviz-7_gewhjs.jpg"
+                  src="/vr/powerup_1.png"
                   alt="VR Training & Simulation"
                 />
               </div>
@@ -133,7 +133,7 @@ export default function VRPage() {
             <div className={styles.powerCard}>
               <div className={styles.cardMedia}>
                 <img
-                  src="/cloudinary-assets/images/new-3_toofsl.png"
+                  src="/vr/powerup_2.png"
                   alt="VR Gaming"
                 />
               </div>
@@ -169,7 +169,7 @@ export default function VRPage() {
               <div className={`${styles.hudCorner} ${styles.bottomLeft}`} />
               <div className={`${styles.hudCorner} ${styles.bottomRight}`} />
               <img
-                src="/cloudinary-assets/images/3dart-10_ziywet.png"
+                src="/vr/ar_new.png"
                 alt="Augmented Reality experience"
               />
             </div>

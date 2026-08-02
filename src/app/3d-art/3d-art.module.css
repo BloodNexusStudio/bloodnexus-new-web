@@ -358,6 +358,14 @@
   overflow: hidden;
 }
 
+.portraitMedia {
+  aspect-ratio: 2 / 3 !important;
+}
+
+.portraitMedia img {
+  object-fit: cover !important;
+}
+
 .serviceCardImg,
 .serviceCardVideo {
   width: 100%;
@@ -525,21 +533,21 @@
   z-index: 1;
 }
 
-/* CSS-columns masonry — images show at their true natural aspect ratio */
+/* CSS Grid — perfectly uniform alignment */
 .masonryGrid {
-  columns: 3;
-  column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .masonryItem {
-  break-inside: avoid;
-  margin-bottom: 20px;
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(242, 239, 233, 0.08);
   background: #111115;
   transition: transform 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
 .masonryItem:hover {
@@ -557,10 +565,11 @@
   overflow: hidden;
 }
 
-/* Natural-size image — fills column width, height follows intrinsic ratio */
+/* Uniform size image */
 .masonryImg {
   width: 100% !important;
-  height: auto !important;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
   display: block;
   transition: transform 0.6s var(--ease);
 }
@@ -695,12 +704,12 @@
     aspect-ratio: 16 / 9;
   }
   .masonryGrid {
-    columns: 2;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .masonryGrid {
-    columns: 1;
+    grid-template-columns: 1fr;
   }
 }

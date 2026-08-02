@@ -1,10 +1,6 @@
 /** Global site config — nav, socials, contact. [CONTENT] = fill from live site / Anky's sheet. */
 
-export const NAV_LINKS = [
-  { label: "Games", href: "/games" },
-  { label: "Services", href: "/services" },
-  { label: "Careers", href: "/careers" },
-] as const;
+
 
 export const CAPSULE_LINKS = [
   { label: "Arch Viz", href: "/arch-viz" },

@@ -33,7 +33,7 @@ export default function GameCard({ game }: { game: Game }) {
       onMouseLeave={handleMouseLeave}
     >
       <Link href={`/games/${game.slug}`} className={styles.media}>
-        <span className={styles.status}>{game.status}</span>
+
         {game.previewClip && (
           <video
             ref={videoRef}

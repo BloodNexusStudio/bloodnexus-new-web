@@ -20,7 +20,7 @@ const WORKS = [
     icon: "web",
   },
   {
-    title: "Fintech Dashboard",
+    title: "Banking App",
     category: "App • Finance",
     desc: "Secure, real-time banking dashboard handling millions of transactions.",
     img: "/web-apps/fintech_dashboard.png",
@@ -36,7 +36,7 @@ const WORKS = [
     icon: "web",
   },
   {
-    title: "Social Connect",
+    title: "Social Media App",
     category: "App • Social",
     desc: "Community platform with live feeds, chat, and rich media support.",
     img: "/web-apps/social_connect.png",
@@ -73,28 +73,28 @@ function getIcon(type: string) {
 
 const CAPABILITIES = [
   {
-    title: "High-Performance Websites",
+    title: "Fast Websites",
     subtitle: "Speed & SEO First",
     desc: "From corporate platforms to creative portfolios. We build fast, clean, and highly polished websites that make your brand stand out.",
     img: "/web-apps/websites.png",
     tags: ["Next.js", "SEO", "Analytics"],
   },
   {
-    title: "Native & Mobile Apps",
+    title: "Mobile Apps",
     subtitle: "iOS & Android",
     desc: "Fluid, responsive applications built for the modern mobile user. Offline support, push notifications, and native device integration.",
     img: "/web-apps/mobile_apps.png",
     tags: ["React Native", "Flutter", "HealthKit"],
   },
   {
-    title: "E-Commerce Solutions",
+    title: "Online Stores",
     subtitle: "Scale Your Sales",
     desc: "Custom shopping experiences that convert. Secure payments, inventory management, and seamless checkout flows.",
     img: "/web-apps/ecommerce.png",
     tags: ["Shopify", "Stripe", "Dashboard"],
   },
   {
-    title: "Enterprise Platforms",
+    title: "Business Software",
     subtitle: "Streamline Operations",
     desc: "Internal tools that eliminate bottlenecks. Automated workflows, data visualization, and role-based access control.",
     img: "/web-apps/enterprise.png",

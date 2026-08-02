@@ -15,7 +15,7 @@ export default function Home() {
       <HomeHero />
       <OrbitCarousel />
       <TechStackMarquee />
-      <GamesCarousel />
+      {/* <GamesCarousel /> */}
       <OurProcess />
       <PerformanceSolutions />
       <StatsStrip />

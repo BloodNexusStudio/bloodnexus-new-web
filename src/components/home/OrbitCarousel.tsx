@@ -275,7 +275,6 @@ export default function OrbitCarousel() {
                       fill
                       sizes="(max-width: 768px) 80vw, (max-width: 1200px) 65vw, 1100px"
                     />
-                    <span className={styles.cardTag}>{game.status}</span>
                     <span className={styles.caption}>
                       <span className={styles.captionTitle}>{game.title}</span>
                       <span className={styles.captionHook}>{game.hook}</span>
@@ -286,12 +285,6 @@ export default function OrbitCarousel() {
             );
           })}
         </div>
-      </div>
-
-      <div className={styles.side}>
-        <Link href="/games" className={styles.seeAll}>
-          See All Games <span aria-hidden="true">→</span>
-        </Link>
       </div>
     </section>
   );

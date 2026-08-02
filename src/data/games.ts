@@ -32,7 +32,7 @@ const SHOTS = [
 ];
 
 const KEY_ART = [
-  "/portfolio-assets/3dart-18.png",
+  "/portfolio-assets/3dart-18-cropped.png",
   "/portfolio-assets/3dart-19.png",
   "/portfolio-assets/3dart-20.png",
   "/portfolio-assets/3dart-21.png",
@@ -66,7 +66,7 @@ const overviewFor = (title: string) => [
 export const GAMES: Game[] = [
   {
     slug: "game-one",
-    title: "Trench Sentinel",
+    title: "Robot Battle Zone",
     hook: "A story-driven sci-fi shooter set across war-torn mechanical zones.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[0],
@@ -81,7 +81,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-two",
-    title: "Classic Speed",
+    title: "Classic Car Racing",
     hook: "An immersive open-world sim featuring realistic period vehicles.",
     status: "COMING SOON",
     keyArt: KEY_ART[1],
@@ -96,7 +96,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-three",
-    title: "Frostbound",
+    title: "Arctic Survival",
     hook: "A survival VR experience set in an abandoned sub-zero arctic outpost.",
     status: "RELEASED",
     keyArt: KEY_ART[2],
@@ -111,7 +111,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-four",
-    title: "Neo-Warsaw 2099",
+    title: "Cyberpunk Action",
     hook: "A tactical real-time cybernetic thriller navigating neon-lit city corridors.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[3],
@@ -126,7 +126,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-five",
-    title: "Vanguard Sector",
+    title: "Multiplayer Shooter",
     hook: "A physics-driven multiplayer shooter built around tactical combat momentum.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[4],
@@ -141,7 +141,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-six",
-    title: "Iron Aegis",
+    title: "Mech Strategy",
     hook: "A mecha assembly and defensive strategy title set inside high-tech hangars.",
     status: "COMING SOON",
     keyArt: KEY_ART[5],
@@ -156,7 +156,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-seven",
-    title: "Singularity Reactor",
+    title: "Space Horror",
     hook: "A slow-burn sci-fi horror experience navigating a failing reactor core.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[6],
@@ -171,7 +171,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-eight",
-    title: "Relic Corridor",
+    title: "Dungeon Explorer",
     hook: "A fast-paced dungeon explorer running through dark, ancient environments.",
     status: "RELEASED",
     keyArt: KEY_ART[7],
@@ -186,7 +186,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-nine",
-    title: "Mythos Realm",
+    title: "Fantasy RPG",
     hook: "A narrative RPG set in a highly stylized fantasy world with dynamic combat.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[8],
@@ -201,7 +201,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-ten",
-    title: "Sector Echo",
+    title: "Tactical Combat",
     hook: "A competitive multiplayer shooter currently in early combat sandbox testing.",
     status: "COMING SOON",
     keyArt: KEY_ART[9],
@@ -216,7 +216,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-eleven",
-    title: "Quantum Forge",
+    title: "Physics Simulator",
     hook: "A simulation built around complex energy grids and physics systems.",
     status: "IN DEVELOPMENT",
     keyArt: KEY_ART[10],
@@ -231,7 +231,7 @@ export const GAMES: Game[] = [
   },
   {
     slug: "game-twelve",
-    title: "Rogue Core",
+    title: "Sci-Fi Action",
     hook: "A sci-fi action roguelike built around high-risk hacking and extraction runs.",
     status: "COMING SOON",
     keyArt: KEY_ART[0],
