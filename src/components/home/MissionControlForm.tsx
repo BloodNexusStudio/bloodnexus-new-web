@@ -4,11 +4,14 @@ import { useState } from "react";
 import styles from "./MissionControlForm.module.css";
 
 const MISSION_TYPES = [
-  "NANITE OPTIMIZATION",
-  "ANIMATION RIGGING",
-  "PLATFORM PORTING",
-  "VR PERFORMANCE",
-  "SHADER OPTIMIZATION",
+  "GAME OPTIMIZATION",
+  "GAME ART",
+  "GAME DEVELOPMENT",
+  "APP DEVELOPMENT",
+  "VR DEVELOPMENT",
+  "BRAND MARKETING",
+  "ARCHVIZ",
+  "OTHER (CUSTOM)",
 ];
 
 const COUNTRY_CODES = [
@@ -32,7 +35,8 @@ export default function MissionControlForm() {
   const [email, setEmail] = useState("");
   const [selectedCountry, setSelectedCountry] = useState(COUNTRY_CODES[0]);
   const [phone, setPhone] = useState("");
-  const [missionTypes, setMissionTypes] = useState<string[]>(["NANITE OPTIMIZATION"]);
+  const [missionTypes, setMissionTypes] = useState<string[]>(["GAME OPTIMIZATION"]);
+  const [customMission, setCustomMission] = useState("");
   
   // Custom budget Option and slider states
   const [budgetOption, setBudgetOption] = useState("< $5K");
@@ -137,7 +141,7 @@ export default function MissionControlForm() {
       name,
       email,
       phone: `${selectedCountry.code} ${phone}`,
-      missionType: missionTypes.join(", "),
+      missionType: missionTypes.map(t => t === "OTHER (CUSTOM)" && customMission ? `OTHER: ${customMission}` : t).join(", "),
       budget: budgetDisplay,
       briefing,
     };
@@ -309,6 +313,17 @@ export default function MissionControlForm() {
                 );
               })}
             </div>
+            {missionTypes.includes("OTHER (CUSTOM)") && (
+              <div className={styles.field} style={{ marginTop: "16px" }}>
+                <input
+                  type="text"
+                  className={styles.input}
+                  placeholder="Specify custom mission type..."
+                  value={customMission}
+                  onChange={(e) => setCustomMission(e.target.value)}
+                />
+              </div>
+            )}
           </div>
 
           <div className={styles.group}>
